@@ -1,19 +1,12 @@
 import React from "react"
 
-import { Layout } from "components/generic/ui"
-import { GoogleMap } from "components/generic/GoogleMap"
-
+import Sider from "./Sider"
 import * as Styled from "./MainLayout.styled"
-
-const { Content, Sider } = Layout
+import Content from "./Content"
 
 export const MainLayout: React.FC = () => (
   <Styled.Container>
-    <Sider>text</Sider>
-    <Layout>
-      <Content>
-        <GoogleMap containerElement={<Styled.MapContainer />} mapElement={<Styled.Map />} />
-      </Content>
-    </Layout>
+    <Sider />
+    <Content />
   </Styled.Container>
 )

@@ -3,6 +3,7 @@ import { persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 
 import { reducer as filters } from "./filters"
+import { reducer as points } from "./locations"
 
 const persistConfig = {
   key: "root",
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const appReducers = combineReducers({
   filters,
+  points,
 })
 
 export const reducers = persistReducer(persistConfig, appReducers)

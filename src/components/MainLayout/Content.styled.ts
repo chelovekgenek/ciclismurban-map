@@ -7,3 +7,13 @@ export const MapContainer = styled.div`
   height: 100%;
   width: 100%;
 `
+
+export const MarkerContent = styled.div`
+  p {
+    font-weight: bold;
+  }
+  img {
+    height: 8rem;
+    width: auto;
+  }
+`

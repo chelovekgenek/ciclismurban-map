@@ -1,14 +1,15 @@
 import { createSelector } from "reselect"
 import { union } from "lodash-es"
 
-import * as filters from "../filters/selectors"
 import { TAppState } from "../reducers"
 
-export const getRoot = (state: TAppState) => state.points
+export const getRoot = (state: TAppState) => state.locations
+export const getFilters = (state: TAppState) => state.locations.filters
+export const getCurrentData = (state: TAppState) => state.locations.current.data
 
 export const getFilteredLocations = createSelector(
   getRoot,
-  filters.getRoot,
+  getFilters,
   (locations, filters) => ({
     parkings: filters.parkings ? locations.parkings.data : [],
     services: filters.services ? locations.services.data : [],

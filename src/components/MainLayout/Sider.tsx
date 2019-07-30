@@ -3,14 +3,14 @@ import { connect } from "react-redux"
 
 import { Layout, Checkbox, Grid } from "components/generic/ui"
 import { TAppState } from "store/entities"
-import { getRoot, toggle } from "store/entities/filters"
+import { toggle, getFilters } from "store/entities/locations"
 
 import * as Styled from "./Sider.styled"
 
 const { Row } = Grid
 
 interface IStateProps {
-  filters: ReturnType<typeof getRoot>
+  filters: ReturnType<typeof getFilters>
 }
 interface IDispatchProps {
   toggle: typeof toggle
@@ -19,6 +19,9 @@ interface IDispatchProps {
 interface IProps extends IStateProps, IDispatchProps {}
 
 export const Sider: React.FC<IProps> = ({ filters, toggle }) => {
+  const toggleCurrent = useCallback(() => {
+    toggle("current")
+  }, [toggle])
   const toggleServices = useCallback(() => {
     toggle("services")
   }, [toggle])
@@ -32,18 +35,24 @@ export const Sider: React.FC<IProps> = ({ filters, toggle }) => {
     <Layout.Sider width="14rem" theme="light">
       <Styled.Col>
         <Row>
+          <Checkbox checked={filters.current} onChange={toggleCurrent}>
+            Мое местоположение
+          </Checkbox>
+        </Row>
+        <br />
+        <Row>
           <Checkbox checked={filters.services} onChange={toggleServices}>
-            Services
+            Сервисы
           </Checkbox>
         </Row>
         <Row>
           <Checkbox checked={filters.parkings} onChange={toggleParkings}>
-            Parkings
+            Парковки
           </Checkbox>
         </Row>
         <Row>
           <Checkbox checked={filters.shops} onChange={toggleShops}>
-            Shops
+            Магазины
           </Checkbox>
         </Row>
       </Styled.Col>
@@ -53,7 +62,7 @@ export const Sider: React.FC<IProps> = ({ filters, toggle }) => {
 
 export default connect<IStateProps, IDispatchProps, null, TAppState>(
   state => ({
-    filters: getRoot(state),
+    filters: getFilters(state),
   }),
   {
     toggle,

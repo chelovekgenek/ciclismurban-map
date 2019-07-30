@@ -2,18 +2,16 @@ import { combineReducers } from "redux"
 import { persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 
-import { reducer as filters } from "./filters"
-import { reducer as points } from "./locations"
+import { reducer as locations } from "./locations"
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["filters"],
+  whitelist: ["locations"],
 }
 
 const appReducers = combineReducers({
-  filters,
-  points,
+  locations,
 })
 
 export const reducers = persistReducer(persistConfig, appReducers)

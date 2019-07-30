@@ -4,7 +4,7 @@ import { clamp } from "lodash-es"
 
 import { Layout } from "components/generic/ui"
 import { GoogleMap } from "components/generic/GoogleMap"
-import { getFilteredLocations, getFilteredLocationsCount } from "store/entities/locations"
+import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
 import { TAppState } from "store/entities"
 
 import ParkingIcon from "assets/parking.png"
@@ -16,14 +16,15 @@ import * as Styled from "./Content.styled"
 interface IStateProps {
   locations: ReturnType<typeof getFilteredLocations>
   locationsCount: ReturnType<typeof getFilteredLocationsCount>
+  current: ReturnType<typeof getCurrentData>
 }
 
 interface IProps extends IStateProps {}
 
-export const Content: React.FC<IProps> = ({ locations, locationsCount }) => {
+export const Content: React.FC<IProps> = ({ locations, locationsCount, current }) => {
   const [infoKey, setInfoKey] = useState<null | number>(null)
   const renderMarker = useCallback(
-    (dataset: ILocation[], icon: string) =>
+    (dataset: ILocation[], icon?: string) =>
       dataset.map(({ point, title, image }) => {
         const key = clamp(point.lat, point.lng)
         return (
@@ -31,7 +32,7 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount }) => {
             key={key}
             position={point}
             onClick={() => setInfoKey(key === infoKey ? null : key)}
-            icon={{ url: icon }}
+            icon={icon ? { url: icon } : undefined}
           >
             {infoKey === key && title && (
               <GoogleMap.InfoWindow onCloseClick={() => setInfoKey(null)}>
@@ -46,9 +47,16 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount }) => {
       }),
     [infoKey],
   )
-  const parkings = useMemo(() => renderMarker(locations.parkings, ParkingIcon), [renderMarker, locations.parkings])
-  const services = useMemo(() => renderMarker(locations.services, ServiceIcon), [renderMarker, locations.services])
-  const shops = useMemo(() => renderMarker(locations.shops, ShopIcon), [renderMarker, locations.shops])
+  const parkingsMarkers = useMemo(() => renderMarker(locations.parkings, ParkingIcon), [
+    renderMarker,
+    locations.parkings,
+  ])
+  const servicesMarkers = useMemo(() => renderMarker(locations.services, ServiceIcon), [
+    renderMarker,
+    locations.services,
+  ])
+  const shopsMarkers = useMemo(() => renderMarker(locations.shops, ShopIcon), [renderMarker, locations.shops])
+  const currentMarker = useMemo(() => current && renderMarker([{ point: current }]), [renderMarker, current])
   const additionalMapProps = useMemo(
     () => (locationsCount ? {} : { zoom: 14, center: { lat: 47.0203966, lng: 28.829422 } }),
     [locationsCount],
@@ -57,9 +65,10 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount }) => {
     <Layout>
       <Layout.Content>
         <GoogleMap containerElement={<Styled.MapContainer />} mapElement={<Styled.Map />} {...additionalMapProps}>
-          {parkings}
-          {services}
-          {shops}
+          {parkingsMarkers}
+          {servicesMarkers}
+          {shopsMarkers}
+          {currentMarker}
         </GoogleMap>
       </Layout.Content>
     </Layout>
@@ -67,6 +76,7 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount }) => {
 }
 
 export default connect<IStateProps, null, null, TAppState>(state => ({
+  current: getCurrentData(state),
   locations: getFilteredLocations(state),
   locationsCount: getFilteredLocationsCount(state),
 }))(Content)

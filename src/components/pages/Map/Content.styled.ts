@@ -8,7 +8,7 @@ export const MapContainer = styled.div`
   width: 100%;
 `
 
-export const MarkerContent = styled.div`
+export const MarkerInfoContainer = styled.div`
   p {
     font-weight: bold;
   }

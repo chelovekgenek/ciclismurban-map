@@ -2,8 +2,7 @@ import React, { useMemo, useState, useCallback } from "react"
 import { connect } from "react-redux"
 import { clamp } from "lodash-es"
 
-import { Layout } from "components/generic/ui"
-import { GoogleMap } from "components/generic/GoogleMap"
+import { GoogleMap } from "components/generic/ui"
 import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
 import { TAppState } from "store/entities"
 
@@ -36,10 +35,10 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
           >
             {infoKey === key && title && (
               <GoogleMap.InfoWindow onCloseClick={() => setInfoKey(null)}>
-                <Styled.MarkerContent>
+                <Styled.MarkerInfoContainer>
                   <p>{title}</p>
                   {image && <img src={image} alt={title} />}
-                </Styled.MarkerContent>
+                </Styled.MarkerInfoContainer>
               </GoogleMap.InfoWindow>
             )}
           </GoogleMap.Marker>
@@ -62,16 +61,17 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
     [locationsCount],
   )
   return (
-    <Layout>
-      <Layout.Content>
-        <GoogleMap containerElement={<Styled.MapContainer />} mapElement={<Styled.Map />} {...additionalMapProps}>
-          {parkingsMarkers}
-          {servicesMarkers}
-          {shopsMarkers}
-          {currentMarker}
-        </GoogleMap>
-      </Layout.Content>
-    </Layout>
+    <GoogleMap
+      options={{ disableDefaultUI: true }}
+      containerElement={<Styled.MapContainer />}
+      mapElement={<Styled.Map />}
+      {...additionalMapProps}
+    >
+      {parkingsMarkers}
+      {servicesMarkers}
+      {shopsMarkers}
+      {currentMarker}
+    </GoogleMap>
   )
 }
 

@@ -10,8 +10,16 @@ import {
   requestGetCurrent,
   failureGetCurrent,
   successGetCurrent,
+  successGetParkings,
+  successGetServices,
+  failureGetParkings,
+  failureGetServices,
+  successGetShops,
+  failureGetShops,
 } from "./actions"
 import { getFilters } from "./selectors"
+import { getParkings, getServices, getShops } from "./api"
+import { AxiosResponse } from "axios"
 
 function* handleToggle({ payload }: ReturnType<typeof toggle>) {
   const filters: ReturnType<typeof getFilters> = yield select(getFilters)
@@ -20,6 +28,13 @@ function* handleToggle({ payload }: ReturnType<typeof toggle>) {
   }
   if (payload === "current" && !filters.current) {
     yield put(pollingCurrentStop())
+  }
+}
+
+function* handlePollingCurrent() {
+  while (true) {
+    yield put(requestGetCurrent())
+    yield delay(10000)
   }
 }
 
@@ -37,16 +52,39 @@ function* handleGetCurrent() {
   }
 }
 
-function* handlePollingCurrent() {
-  while (true) {
-    yield put(requestGetCurrent())
-    yield delay(10000)
+function* handleGetParkings() {
+  try {
+    const { data }: AxiosResponse<ILocation[]> = yield call(getParkings)
+    yield put(successGetParkings(data))
+  } catch (e) {
+    yield put(failureGetParkings(e))
+  }
+}
+
+function* handleGetServices() {
+  try {
+    const { data }: AxiosResponse<ILocation[]> = yield call(getServices)
+    yield put(successGetServices(data))
+  } catch (e) {
+    yield put(failureGetServices(e))
+  }
+}
+
+function* handleGetShops() {
+  try {
+    const { data }: AxiosResponse<ILocation[]> = yield call(getShops)
+    yield put(successGetShops(data))
+  } catch (e) {
+    yield put(failureGetShops(e))
   }
 }
 
 export function* watcher() {
   yield takeLatest(types.TOGGLE, handleToggle)
   yield takeLatest(types.CURRENT__GET__REQUEST, handleGetCurrent)
+  yield takeLatest(types.PARKINGS__GET__REQUEST, handleGetParkings)
+  yield takeLatest(types.SERVICES__GET__REQUEST, handleGetServices)
+  yield takeLatest(types.SHOPS__GET__REQUEST, handleGetShops)
 
   while (true) {
     yield take(types.CURRENT__POLLING__START)

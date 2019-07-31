@@ -1,15 +1,21 @@
-import { reducer } from "ts-action"
+import { reducer, on } from "ts-action"
 
-import shops from "mocks/shops.json"
+import { requestGetShops, successGetShops, failureGetShops } from "../actions"
 
 export interface IState {
   data: ILocation[]
   fetching: boolean
+  error?: Error
 }
 
 const initialState: IState = {
-  data: shops,
+  data: [],
   fetching: false,
 }
 
-export default reducer(initialState)
+export default reducer(
+  initialState,
+  on(requestGetShops, state => ({ ...state, fetching: true })),
+  on(successGetShops, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
+  on(failureGetShops, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
+)

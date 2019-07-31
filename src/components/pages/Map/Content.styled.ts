@@ -9,9 +9,7 @@ export const MapContainer = styled.div`
 `
 
 export const MarkerInfoContainer = styled.div`
-  p {
-    font-weight: bold;
-  }
+  max-width: 12rem;
   img {
     height: 8rem;
     width: auto;

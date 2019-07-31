@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useCallback } from "react"
 import { connect } from "react-redux"
-import { clamp } from "lodash-es"
+import { clamp, truncate } from "lodash-es"
 
 import { GoogleMap } from "components/generic/ui"
 import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
@@ -11,6 +11,7 @@ import ServiceIcon from "assets/service.png"
 import ShopIcon from "assets/shop.png"
 
 import * as Styled from "./Content.styled"
+import { Link } from "react-router-dom"
 
 interface IStateProps {
   locations: ReturnType<typeof getFilteredLocations>
@@ -24,7 +25,7 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
   const [infoKey, setInfoKey] = useState<null | number>(null)
   const renderMarker = useCallback(
     (dataset: ILocation[], icon?: string) =>
-      dataset.map(({ point, title, image }) => {
+      dataset.map(({ uuid, point, title, image, description }) => {
         const key = clamp(point.lat, point.lng)
         return (
           <GoogleMap.Marker
@@ -36,8 +37,9 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
             {infoKey === key && title && (
               <GoogleMap.InfoWindow onCloseClick={() => setInfoKey(null)}>
                 <Styled.MarkerInfoContainer>
-                  <p>{title}</p>
-                  {image && <img src={image} alt={title} />}
+                  <Link to={`/locations/${uuid}`}>{title}</Link>
+                  <p>{truncate(description, { length: 100 })}</p>
+                  <img src={image} alt={title} />
                 </Styled.MarkerInfoContainer>
               </GoogleMap.InfoWindow>
             )}

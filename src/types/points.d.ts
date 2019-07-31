@@ -4,7 +4,9 @@ declare interface IPoint {
 }
 
 declare interface ILocation {
+  uuid?: string
   title?: string
   image?: string
   point: IPoint
+  description?: string
 }

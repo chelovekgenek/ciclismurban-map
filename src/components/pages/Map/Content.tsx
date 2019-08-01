@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { clamp, truncate } from "lodash-es"
 
 import { GoogleMap } from "components/generic/ui"
-import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
+import { getFilteredLocations, getFilteredLocationsCount, getCurrentData, ILocation } from "store/entities/locations"
 import { TAppState } from "store/entities"
 
 import ParkingIcon from "assets/parking.png"
@@ -12,6 +12,11 @@ import ShopIcon from "assets/shop.png"
 
 import * as Styled from "./Content.styled"
 import { Link } from "react-router-dom"
+
+const MapOptions = {
+  zoom: 14,
+  position: { lat: 47.0203966, lng: 28.829422 },
+}
 
 interface IStateProps {
   locations: ReturnType<typeof getFilteredLocations>
@@ -23,21 +28,23 @@ interface IProps extends IStateProps {}
 
 export const Content: React.FC<IProps> = ({ locations, locationsCount, current }) => {
   const [infoKey, setInfoKey] = useState<null | number>(null)
-  const renderMarker = useCallback(
-    (dataset: ILocation[], icon?: string) =>
+
+  const renderMarkers = useCallback(
+    (dataset: ILocation[], entity: string, icon?: string) =>
       dataset.map(({ uuid, point, title, image, description }) => {
         const key = clamp(point.lat, point.lng)
         return (
           <GoogleMap.Marker
+            useInFitBounds
             key={key}
             position={point}
             onClick={() => setInfoKey(key === infoKey ? null : key)}
             icon={icon ? { url: icon } : undefined}
           >
-            {infoKey === key && title && (
+            {infoKey === key && entity && (
               <GoogleMap.InfoWindow onCloseClick={() => setInfoKey(null)}>
                 <Styled.MarkerInfoContainer>
-                  <Link to={`/locations/${uuid}`}>{title}</Link>
+                  <Link to={`/locations/${entity}/${uuid}`}>{title}</Link>
                   <p>{truncate(description, { length: 100 })}</p>
                   <img src={image} alt={title} />
                 </Styled.MarkerInfoContainer>
@@ -48,31 +55,27 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
       }),
     [infoKey],
   )
-  const parkingsMarkers = useMemo(() => renderMarker(locations.parkings, ParkingIcon), [
-    renderMarker,
+
+  const parkingsMarkers = useMemo(() => renderMarkers(locations.parkings, "parkings", ParkingIcon), [
+    renderMarkers,
     locations.parkings,
   ])
-  const servicesMarkers = useMemo(() => renderMarker(locations.services, ServiceIcon), [
-    renderMarker,
+  const servicesMarkers = useMemo(() => renderMarkers(locations.services, "services", ServiceIcon), [
+    renderMarkers,
     locations.services,
   ])
-  const shopsMarkers = useMemo(() => renderMarker(locations.shops, ShopIcon), [renderMarker, locations.shops])
-  const currentMarker = useMemo(() => current && renderMarker([{ point: current }]), [renderMarker, current])
-  const additionalMapProps = useMemo(
-    () => (locationsCount ? {} : { zoom: 14, center: { lat: 47.0203966, lng: 28.829422 } }),
-    [locationsCount],
-  )
+  const shopsMarkers = useMemo(() => renderMarkers(locations.shops, "shops", ShopIcon), [
+    renderMarkers,
+    locations.shops,
+  ])
+  const additionalMapProps = useMemo(() => (locationsCount ? {} : MapOptions), [locationsCount])
+
   return (
-    <GoogleMap
-      options={{ disableDefaultUI: true }}
-      containerElement={<Styled.MapContainer />}
-      mapElement={<Styled.Map />}
-      {...additionalMapProps}
-    >
+    <GoogleMap options={{ disableDefaultUI: true }} {...additionalMapProps}>
       {parkingsMarkers}
       {servicesMarkers}
       {shopsMarkers}
-      {currentMarker}
+      {current && <GoogleMap.Marker position={current} />}
     </GoogleMap>
   )
 }

@@ -1,7 +1,11 @@
 /* global google */
 
 import React, { useRef, useMemo, useEffect } from "react"
-import { GoogleMap as MapComponent, withGoogleMap, GoogleMapProps, Marker, MarkerProps } from "react-google-maps"
+import { GoogleMap as MapComponent, withGoogleMap, GoogleMapProps } from "react-google-maps"
+import { compose, withProps } from "recompose"
+
+import { Marker } from "./Marker"
+import * as Styled from "./GoogleMap.styled"
 
 interface IProps extends GoogleMapProps {
   children?: React.ReactNode
@@ -16,9 +20,8 @@ export const GoogleMap: React.FC<IProps> = ({ children, ...props }) => {
         return child
       }
       if (child.type === Marker) {
-        const marker: React.ReactElement<MarkerProps> = child
-        if (marker.props.position) {
-          const { lat, lng } = marker.props.position
+        if (child.props.position && child.props.useInFitBounds) {
+          const { lat, lng } = child.props.position
           const latLng = new google.maps.LatLng(
             typeof lat === "function" ? lat() : lat,
             typeof lng === "function" ? lng() : lng,
@@ -43,4 +46,10 @@ export const GoogleMap: React.FC<IProps> = ({ children, ...props }) => {
   )
 }
 
-export default withGoogleMap(GoogleMap)
+export default compose<{}, IProps>(
+  withProps({
+    containerElement: <Styled.MapContainer />,
+    mapElement: <Styled.Map />,
+  }),
+  withGoogleMap,
+)(GoogleMap)

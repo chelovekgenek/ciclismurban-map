@@ -6,6 +6,7 @@ import {
   successGetCurrent,
   failureGetCurrent,
 } from "../actions"
+import { IPoint } from "../interface"
 
 export interface IState {
   polling: boolean

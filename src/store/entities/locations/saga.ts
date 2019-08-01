@@ -16,10 +16,14 @@ import {
   failureGetServices,
   successGetShops,
   failureGetShops,
+  requestGetSelected,
+  successGetSelected,
+  failureGetSelected,
 } from "./actions"
 import { getFilters } from "./selectors"
-import { getParkings, getServices, getShops } from "./api"
+import { getParkings, getServices, getShops, getParkingById, getServiceById, getShopById } from "./api"
 import { AxiosResponse } from "axios"
+import { IPoint, ILocation, TAcceptedEntity, TRequiredLocation } from "./interface"
 
 function* handleToggle({ payload }: ReturnType<typeof toggle>) {
   const filters: ReturnType<typeof getFilters> = yield select(getFilters)
@@ -79,12 +83,27 @@ function* handleGetShops() {
   }
 }
 
+function* handleGetSelected({ payload }: ReturnType<typeof requestGetSelected>) {
+  const mapEntityByApiCall: { [key in TAcceptedEntity]: (id: string) => Promise<AxiosResponse<any>> } = {
+    parkings: getParkingById,
+    services: getServiceById,
+    shops: getShopById,
+  }
+  try {
+    const { data }: AxiosResponse<TRequiredLocation> = yield call(mapEntityByApiCall[payload.entity], payload.uuid)
+    yield put(successGetSelected(data))
+  } catch (e) {
+    yield put(failureGetSelected(e))
+  }
+}
+
 export function* watcher() {
   yield takeLatest(types.TOGGLE, handleToggle)
   yield takeLatest(types.CURRENT__GET__REQUEST, handleGetCurrent)
   yield takeLatest(types.PARKINGS__GET__REQUEST, handleGetParkings)
   yield takeLatest(types.SERVICES__GET__REQUEST, handleGetServices)
   yield takeLatest(types.SHOPS__GET__REQUEST, handleGetShops)
+  yield takeLatest(types.SELECTED__GET__REQUEST, handleGetSelected)
 
   while (true) {
     yield take(types.CURRENT__POLLING__START)

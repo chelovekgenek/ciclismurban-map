@@ -17,7 +17,7 @@ In the project directory, you can run:
 Runs the app in the production mode.
 You have to build the project first.
 
-### `yarn start:dev`
+### `yarn watch`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

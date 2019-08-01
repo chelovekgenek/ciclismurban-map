@@ -1,6 +1,7 @@
 import { reducer, on } from "ts-action"
 
 import { requestGetParkings, successGetParkings, failureGetParkings } from "../actions"
+import { ILocation } from "../interface"
 
 export interface IState {
   data: ILocation[]

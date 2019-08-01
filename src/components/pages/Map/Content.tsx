@@ -71,7 +71,12 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
   const additionalMapProps = useMemo(() => (locationsCount ? {} : MapOptions), [locationsCount])
 
   return (
-    <GoogleMap options={{ disableDefaultUI: true }} {...additionalMapProps}>
+    <GoogleMap
+      defaultCenter={MapOptions.position}
+      defaultZoom={MapOptions.zoom}
+      options={{ disableDefaultUI: true }}
+      {...additionalMapProps}
+    >
       {parkingsMarkers}
       {servicesMarkers}
       {shopsMarkers}

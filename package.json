@@ -22,6 +22,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@ciclismurban/api": "1.0.13",
     "@types/antd": "^1.0.0",
     "@types/googlemaps": "^3.37.0",
     "@types/jest": "24.0.15",
@@ -38,6 +39,7 @@
     "@types/styled-components": "^4.1.18",
     "antd": "3.19.8",
     "axios": "^0.19.0",
+    "formik": "^1.5.8",
     "history": "^4.9.0",
     "lodash": "^4.17.15",
     "lodash-es": "^4.17.15",
@@ -54,6 +56,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.5",
+    "reflect-metadata": "^0.1.13",
     "reselect": "^4.0.0",
     "styled-components": "^4.3.2",
     "ts-action": "^10.1.0",

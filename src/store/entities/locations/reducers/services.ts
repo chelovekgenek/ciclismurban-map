@@ -1,9 +1,11 @@
 import { reducer, on } from "ts-action"
-import { requestGetServices, successGetServices, failureGetServices } from "../actions"
-import { ILocation } from "../interface"
+
+import { LocationModel } from "models/location"
+
+import { ServicesActions } from "../actions"
 
 export interface IState {
-  data: ILocation[]
+  data: LocationModel[]
   fetching: boolean
   error?: Error
 }
@@ -15,7 +17,7 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(requestGetServices, state => ({ ...state, fetching: true })),
-  on(successGetServices, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
-  on(failureGetServices, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
+  on(ServicesActions.requestGet, state => ({ ...state, fetching: true })),
+  on(ServicesActions.successGet, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
+  on(ServicesActions.failureGet, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
 )

@@ -1,8 +1,8 @@
 import { get } from "lodash-es"
 
-import { IPoint } from "store/entities/locations"
+import { PointModel } from "models/location"
 
-export const getCurrentLatLng = (): Promise<IPoint> =>
+export const getCurrentLatLng = (): Promise<PointModel> =>
   new Promise((resolve, reject) => {
     const getLocation = get(navigator, "geolocation.getCurrentPosition")
     if (!getLocation) {

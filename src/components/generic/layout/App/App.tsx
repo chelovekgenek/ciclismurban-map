@@ -1,13 +1,13 @@
 import React from "react"
 
-import * as Styled from "./MainLayout.styled"
+import * as Styled from "./App.styled"
 
 interface IProps {
   children: React.ReactNode
   useContentLayout?: boolean
 }
 
-export const MainLayout: React.FC<IProps> = ({ children, useContentLayout }) => (
+export const App: React.FC<IProps> = ({ children, useContentLayout }) => (
   <Styled.Layout>
     {/* <Layout.Sider width="14rem" theme="light">
       privet

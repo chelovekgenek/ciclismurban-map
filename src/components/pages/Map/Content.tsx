@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { clamp, truncate } from "lodash-es"
 
 import { GoogleMap } from "components/generic/ui"
-import { getFilteredLocations, getFilteredLocationsCount, getCurrentData, ILocation } from "store/entities/locations"
+import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
 import { TAppState } from "store/entities"
 
 import ParkingIcon from "assets/parking.png"
@@ -30,7 +30,7 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
   const [infoKey, setInfoKey] = useState<null | number>(null)
 
   const renderMarkers = useCallback(
-    (dataset: ILocation[], entity: string, icon?: string) =>
+    (dataset: typeof locations[keyof typeof locations], entity: string, icon?: string) =>
       dataset.map(({ uuid, point, title, image, description }) => {
         const key = clamp(point.lat, point.lng)
         return (
@@ -53,7 +53,7 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
           </GoogleMap.Marker>
         )
       }),
-    [infoKey],
+    [infoKey, locations],
   )
 
   const parkingsMarkers = useMemo(() => renderMarkers(locations.parkings, "parkings", ParkingIcon), [

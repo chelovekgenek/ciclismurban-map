@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react"
 import { connect } from "react-redux"
 
 import { TAppState } from "store/entities"
-import { toggle, getFilters } from "store/entities/locations"
+import { FiltersActions, getFilters } from "store/entities/locations"
 
 import * as Styled from "./Legend.styled"
 
@@ -10,7 +10,7 @@ interface IStateProps {
   filters: ReturnType<typeof getFilters>
 }
 interface IDispatchProps {
-  toggle: typeof toggle
+  toggle: typeof FiltersActions.toggle
 }
 
 interface IProps extends IStateProps, IDispatchProps {}
@@ -58,6 +58,6 @@ export default connect<IStateProps, IDispatchProps, null, TAppState>(
     filters: getFilters(state),
   }),
   {
-    toggle,
+    toggle: FiltersActions.toggle,
   },
 )(Sider)

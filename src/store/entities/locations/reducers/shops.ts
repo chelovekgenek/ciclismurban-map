@@ -1,10 +1,11 @@
 import { reducer, on } from "ts-action"
 
-import { requestGetShops, successGetShops, failureGetShops } from "../actions"
-import { ILocation } from "../interface"
+import { LocationModel } from "models/location"
+
+import { ShopsActions } from "../actions"
 
 export interface IState {
-  data: ILocation[]
+  data: LocationModel[]
   fetching: boolean
   error?: Error
 }
@@ -16,7 +17,7 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(requestGetShops, state => ({ ...state, fetching: true })),
-  on(successGetShops, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
-  on(failureGetShops, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
+  on(ShopsActions.requestGet, state => ({ ...state, fetching: true })),
+  on(ShopsActions.successGet, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
+  on(ShopsActions.failureGet, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
 )

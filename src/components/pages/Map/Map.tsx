@@ -1,16 +1,16 @@
 import React, { useEffect } from "react"
 import { connect } from "react-redux"
 
-import { MainLayout } from "components/generic"
-import { requestGetParkings, requestGetServices, requestGetShops } from "store/entities/locations"
+import { Layout } from "components/generic"
+import { ParkingsActions, ServicesActions, ShopsActions } from "store/entities/locations"
 
 import Content from "./Content"
 import Legend from "./Legend"
 
 interface IDispatchProps {
-  getParkings: typeof requestGetParkings
-  getServices: typeof requestGetServices
-  getShops: typeof requestGetShops
+  getParkings: typeof ParkingsActions.requestGet
+  getServices: typeof ServicesActions.requestGet
+  getShops: typeof ShopsActions.requestGet
 }
 
 interface IProps extends IDispatchProps {}
@@ -22,18 +22,18 @@ export const Map: React.FC<IProps> = ({ getParkings, getServices, getShops }) =>
     getShops()
   })
   return (
-    <MainLayout>
+    <Layout.App>
       <Legend />
       <Content />
-    </MainLayout>
+    </Layout.App>
   )
 }
 
 export default connect<null, IDispatchProps, null, null>(
   null,
   {
-    getParkings: requestGetParkings,
-    getServices: requestGetServices,
-    getShops: requestGetShops,
+    getParkings: ParkingsActions.requestGet,
+    getServices: ServicesActions.requestGet,
+    getShops: ShopsActions.requestGet,
   },
 )(Map)

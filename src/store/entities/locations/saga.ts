@@ -1,115 +1,114 @@
 import { takeLatest, select, put, take, race, call, delay } from "redux-saga/effects"
+import { AxiosResponse } from "axios"
 
 import { getCurrentLatLng } from "helpers/geolocation"
+import { LocationModel, PointModel } from "models/location"
 
-import {
-  types,
-  toggle,
-  pollingCurrentStart,
-  pollingCurrentStop,
-  requestGetCurrent,
-  failureGetCurrent,
-  successGetCurrent,
-  successGetParkings,
-  successGetServices,
-  failureGetParkings,
-  failureGetServices,
-  successGetShops,
-  failureGetShops,
-  requestGetSelected,
-  successGetSelected,
-  failureGetSelected,
-} from "./actions"
 import { getFilters } from "./selectors"
 import { getParkings, getServices, getShops, getParkingById, getServiceById, getShopById } from "./api"
-import { AxiosResponse } from "axios"
-import { IPoint, ILocation, TAcceptedEntity, TRequiredLocation } from "./interface"
+import {
+  TAcceptedEntity,
+  FiltersTypes,
+  CurrentTypes,
+  ParkingsTypes,
+  ServicesTypes,
+  ShopsTypes,
+  SelectedTypes,
+} from "./types"
+import {
+  FiltersActions,
+  SelectedActions,
+  CurrentActions,
+  ParkingsActions,
+  ServicesActions,
+  ShopsActions,
+} from "./actions"
 
-function* handleToggle({ payload }: ReturnType<typeof toggle>) {
+function* handleToggle({ payload }: ReturnType<typeof FiltersActions.toggle>) {
   const filters: ReturnType<typeof getFilters> = yield select(getFilters)
   if (payload === "current" && filters.current) {
-    yield put(pollingCurrentStart())
+    yield put(CurrentActions.pollingStart())
   }
   if (payload === "current" && !filters.current) {
-    yield put(pollingCurrentStop())
+    yield put(CurrentActions.pollingStop())
   }
 }
 
 function* handlePollingCurrent() {
   while (true) {
-    yield put(requestGetCurrent())
+    yield put(CurrentActions.requestGet())
     yield delay(10000)
   }
 }
 
 function* handleGetCurrent() {
   try {
-    const data: IPoint = yield call(getCurrentLatLng)
-    yield put(successGetCurrent(data))
+    const data: PointModel = yield call(getCurrentLatLng)
+    yield put(CurrentActions.successGet(data))
   } catch (e) {
-    yield put(failureGetCurrent(e))
+    yield put(CurrentActions.failureGet(e))
     if (e.code === 1) {
-      yield put(pollingCurrentStop())
+      yield put(CurrentActions.pollingStop())
       yield delay(2000)
-      yield put(toggle("current"))
+      yield put(FiltersActions.toggle("current"))
     }
   }
 }
 
 function* handleGetParkings() {
   try {
-    const { data }: AxiosResponse<ILocation[]> = yield call(getParkings)
-    yield put(successGetParkings(data))
+    const { data }: AxiosResponse<LocationModel[]> = yield call(getParkings)
+    yield put(ParkingsActions.successGet(data))
   } catch (e) {
-    yield put(failureGetParkings(e))
+    yield put(ParkingsActions.failureGet(e))
   }
 }
 
 function* handleGetServices() {
   try {
-    const { data }: AxiosResponse<ILocation[]> = yield call(getServices)
-    yield put(successGetServices(data))
+    const { data }: AxiosResponse<LocationModel[]> = yield call(getServices)
+    yield put(ServicesActions.successGet(data))
   } catch (e) {
-    yield put(failureGetServices(e))
+    yield put(ServicesActions.failureGet(e))
   }
 }
 
 function* handleGetShops() {
   try {
-    const { data }: AxiosResponse<ILocation[]> = yield call(getShops)
-    yield put(successGetShops(data))
+    const { data }: AxiosResponse<LocationModel[]> = yield call(getShops)
+    yield put(ShopsActions.successGet(data))
   } catch (e) {
-    yield put(failureGetShops(e))
+    yield put(ShopsActions.failureGet(e))
   }
 }
 
-function* handleGetSelected({ payload }: ReturnType<typeof requestGetSelected>) {
+function* handleGetSelected({ payload }: ReturnType<typeof SelectedActions.requestGet>) {
   const mapEntityByApiCall: { [key in TAcceptedEntity]: (id: string) => Promise<AxiosResponse<any>> } = {
     parkings: getParkingById,
     services: getServiceById,
     shops: getShopById,
   }
   try {
-    const { data }: AxiosResponse<TRequiredLocation> = yield call(mapEntityByApiCall[payload.entity], payload.uuid)
-    yield put(successGetSelected(data))
+    const { data }: AxiosResponse<LocationModel> = yield call(mapEntityByApiCall[payload.entity], payload.uuid)
+    yield put(SelectedActions.successGet(data))
   } catch (e) {
-    yield put(failureGetSelected(e))
+    yield put(SelectedActions.failureGet(e))
   }
 }
 
 export function* watcher() {
-  yield takeLatest(types.TOGGLE, handleToggle)
-  yield takeLatest(types.CURRENT__GET__REQUEST, handleGetCurrent)
-  yield takeLatest(types.PARKINGS__GET__REQUEST, handleGetParkings)
-  yield takeLatest(types.SERVICES__GET__REQUEST, handleGetServices)
-  yield takeLatest(types.SHOPS__GET__REQUEST, handleGetShops)
-  yield takeLatest(types.SELECTED__GET__REQUEST, handleGetSelected)
+  yield takeLatest(FiltersTypes.TOGGLE, handleToggle)
+  yield takeLatest(CurrentTypes.GET__REQUEST, handleGetCurrent)
+  yield takeLatest(ParkingsTypes.GET__REQUEST, handleGetParkings)
+  yield takeLatest(ServicesTypes.GET__REQUEST, handleGetServices)
+  yield takeLatest(ShopsTypes.GET__REQUEST, handleGetShops)
+  yield takeLatest(SelectedTypes.GET__REQUEST, handleGetSelected)
 
   while (true) {
-    yield take(types.CURRENT__POLLING__START)
+    yield take(CurrentTypes.POLLING__START)
     yield race({
       task: call(handlePollingCurrent),
-      cancel: take(types.CURRENT__POLLING__STOP),
+      cancel: take(CurrentTypes.POLLING__STOP),
     })
   }
 }

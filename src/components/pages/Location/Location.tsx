@@ -2,15 +2,14 @@ import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import { withRouter, RouteComponentProps } from "react-router"
 
-import { MainLayout } from "components/generic"
+import { Layout } from "components/generic"
 import { Empty, Spinner, GoogleMap } from "components/generic/ui"
 import {
   TAcceptedEntity,
   ACCEPTED_ENTITIES,
-  requestGetSelected,
-  clearSelected,
   getSelectedData,
   getSelectedFetching,
+  SelectedActions,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
 
@@ -25,12 +24,12 @@ interface IStateProps {
   fetching: ReturnType<typeof getSelectedFetching>
 }
 interface IDispatchProps {
-  getSelected: typeof requestGetSelected
-  clearSelected: typeof clearSelected
+  getSelected: typeof SelectedActions.requestGet
+  clearSelected: typeof SelectedActions.clear
 }
 interface IProps extends RouteComponentProps<IParams>, IStateProps, IDispatchProps {}
 
-export const Location: React.FC<IProps> = ({ history, match, getSelected, selected, fetching }) => {
+export const Location: React.FC<IProps> = ({ history, match, getSelected, selected, fetching, clearSelected }) => {
   useEffect(() => {
     const { entity, id } = match.params
     if (!ACCEPTED_ENTITIES.includes(entity)) {
@@ -42,7 +41,7 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
     return () => {
       clearSelected()
     }
-  }, [getSelected, history, match.params])
+  }, [getSelected, history, match.params, clearSelected])
 
   if (fetching) {
     return <Spinner />
@@ -52,7 +51,7 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
   }
 
   return (
-    <MainLayout useContentLayout>
+    <Layout.App useContentLayout>
       <h2>{selected.title}</h2>
       <p>{selected.description}</p>
       <Styled.Image src={selected.image} alt={selected.title} />
@@ -61,7 +60,7 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
           <GoogleMap.Marker position={selected.point} />
         </GoogleMap>
       </Styled.MapContainer>
-    </MainLayout>
+    </Layout.App>
   )
 }
 
@@ -72,8 +71,8 @@ export default withRouter(
       fetching: getSelectedFetching(state),
     }),
     {
-      getSelected: requestGetSelected,
-      clearSelected,
+      getSelected: SelectedActions.requestGet,
+      clearSelected: SelectedActions.clear,
     },
   )(Location),
 )

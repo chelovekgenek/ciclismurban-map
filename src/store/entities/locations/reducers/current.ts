@@ -1,17 +1,12 @@
 import { reducer, on } from "ts-action"
-import {
-  pollingCurrentStart,
-  pollingCurrentStop,
-  requestGetCurrent,
-  successGetCurrent,
-  failureGetCurrent,
-} from "../actions"
-import { IPoint } from "../interface"
+import { PointModel } from "models/location"
+
+import { CurrentActions } from "../actions"
 
 export interface IState {
   polling: boolean
   fetching: boolean
-  data?: IPoint
+  data?: PointModel
   error?: Error
 }
 
@@ -22,9 +17,9 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(pollingCurrentStart, state => ({ ...state, polling: true })),
-  on(pollingCurrentStop, () => initialState),
-  on(requestGetCurrent, state => ({ ...state, fetching: true })),
-  on(successGetCurrent, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
-  on(failureGetCurrent, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
+  on(CurrentActions.pollingStart, state => ({ ...state, polling: true })),
+  on(CurrentActions.pollingStop, () => initialState),
+  on(CurrentActions.requestGet, state => ({ ...state, fetching: true })),
+  on(CurrentActions.successGet, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
+  on(CurrentActions.failureGet, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
 )

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
-import { Grid, Checkbox } from "components/generic/ui"
+import { Grid } from "components/generic/layout"
+import { Checkbox } from "components/generic/ui"
 
 export const Col = styled(Grid.Col)`
   & > .ant-row {

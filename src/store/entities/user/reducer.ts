@@ -9,7 +9,7 @@ export interface IState {
   fetching: boolean
   token?: string
   data?: UserModel
-  error?: Error
+  error?: number
 }
 
 const initialState: IState = {
@@ -21,6 +21,7 @@ export default reducer(
   initialState,
   on(RegisterActions.request, LoginActions.request, LoginByTokenActions.request, state => ({
     ...state,
+    error: undefined,
     fetching: true,
   })),
   on(RegisterActions.success, LoginActions.success, LoginByTokenActions.success, (state, { payload }) => ({

@@ -6,18 +6,24 @@ import storage from "redux-persist/lib/storage"
 import { reducer as locations } from "./locations"
 import { reducer as user } from "./user"
 
-const persistConfig = {
+const rootPersistConfig = {
   key: "root",
   storage,
   whitelist: ["locations"],
 }
 
+const userPersistConfig = {
+  key: "user",
+  storage: storage,
+  whitelist: ["token"],
+}
+
 const appReducers = combineReducers({
   router,
   locations,
-  user,
+  user: persistReducer(userPersistConfig, user),
 })
 
-export const reducers = persistReducer(persistConfig, appReducers)
+export const reducers = persistReducer(rootPersistConfig, appReducers)
 
 export type TAppState = ReturnType<typeof appReducers>

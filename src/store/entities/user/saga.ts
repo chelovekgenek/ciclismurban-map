@@ -1,21 +1,21 @@
 import { takeLatest, call, put } from "redux-saga/effects"
 import { history } from "store/history"
+import { AxiosResponse } from "axios"
+
+import { AuthResponseModel } from "models/user"
 
 import { LoginActions, LoginByTokenActions, RegisterActions } from "./actions"
-import * as api from "./api"
-import { AxiosResponse } from "axios"
-import { AuthResponseModel } from "models/user"
 import { RegisterTypes, LoginByTokenTypes, LogoutType, LoginTypes } from "./types"
+import * as api from "./api"
 
 function* handleLogin({ payload }: ReturnType<typeof LoginActions.request>) {
-  console.log(payload)
   try {
     const { data }: AxiosResponse<AuthResponseModel> = yield call(api.login, payload)
 
     yield put(LoginActions.success(data))
     yield call(history.replace, { pathname: "/" })
   } catch (e) {
-    yield put(LoginActions.failure(e))
+    yield put(LoginActions.failure(e.response.status))
   }
 }
 
@@ -35,7 +35,7 @@ function* handleRegister({ payload }: ReturnType<typeof RegisterActions.request>
     yield put(RegisterActions.success(data))
     yield call(history.replace, { pathname: "/" })
   } catch (e) {
-    yield put(RegisterActions.failure(e))
+    yield put(RegisterActions.failure(e.response.status))
   }
 }
 

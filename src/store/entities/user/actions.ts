@@ -4,7 +4,7 @@ import { RegisterTypes, LoginTypes, LoginByTokenTypes, LogoutType } from "./type
 import { IState } from "./reducer"
 import { AuthResponseModel, LoginForm } from "models/user"
 
-type TRequiredState = Required<IState>
+export type TRequiredState = Required<IState>
 
 type TLoginRequestPayload = LoginForm
 type TLoginSuccessPayload = AuthResponseModel

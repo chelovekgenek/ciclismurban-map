@@ -1,6 +1,7 @@
 import React from "react"
 
-import { Header } from "./Header"
+import Header from "./Header"
+
 import * as Styled from "./App.styled"
 
 interface IProps {

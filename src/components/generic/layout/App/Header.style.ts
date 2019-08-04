@@ -17,3 +17,10 @@ export const SectionRight = styled.div`
   position: relative;
   float: right;
 `
+
+export const Profile = styled.span`
+  cursor: pointer;
+  &:hover {
+    color: lightblue;
+  }
+`

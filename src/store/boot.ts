@@ -1,11 +1,17 @@
 import { Store } from "redux"
 import { getFilters, CurrentActions } from "./entities/locations"
+import { getToken, LoginByTokenActions } from "./entities/user"
 
-export const handleBoot = (store: Store) => () =>
+export const handleBoot = ({ dispatch, getState }: Store) => () =>
   new Promise(() => {
-    const filters = getFilters(store.getState())
+    const state = getState()
+    const filters = getFilters(state)
+    const token = getToken(state)
 
     if (filters.current) {
-      store.dispatch(CurrentActions.pollingStart())
+      dispatch(CurrentActions.pollingStart())
+    }
+    if (token) {
+      dispatch(LoginByTokenActions.request())
     }
   })

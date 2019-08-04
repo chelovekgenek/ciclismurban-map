@@ -8,4 +8,5 @@ export const Icon = styled(UI.Icon)`
 
 export const Button = styled(UI.Button)`
   width: 100%;
+  margin-bottom: 1.2rem;
 `

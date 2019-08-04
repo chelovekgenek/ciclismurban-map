@@ -1,8 +1,11 @@
 import styled from "styled-components"
 import { Layout as AntdLayout } from "antd"
 
-export const Layout = styled(AntdLayout)`
-  height: 100%;
+interface ILayout {
+  fullHeight: boolean
+}
+export const Layout = styled(AntdLayout)<ILayout>`
+  height: ${({ fullHeight }) => (fullHeight ? "auto" : "100%")};
 `
 
 export const Header = styled(AntdLayout.Header)``

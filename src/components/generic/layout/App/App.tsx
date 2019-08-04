@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export const App: React.FC<IProps> = ({ children, useContentLayout }) => (
-  <Styled.Layout>
+  <Styled.Layout fullHeight={!!useContentLayout}>
     <Styled.Header theme="light">
       <Styled.HeaderRightSection>
         <Link to="/login">Войти</Link>

@@ -8,13 +8,6 @@ export const Layout = styled(AntdLayout)<ILayout>`
   height: ${({ fullHeight }) => (fullHeight ? "auto" : "100%")};
 `
 
-export const Header = styled(AntdLayout.Header)``
-export const HeaderRightSection = styled.div`
-  color: white;
-  position: relative;
-  float: right;
-`
-
 export const Sider = styled(AntdLayout.Sider)`
   &.ant-layout-sider-light {
     background-color: #f5f5f5;

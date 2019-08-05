@@ -5,6 +5,7 @@ import { clamp, truncate } from "lodash-es"
 import { GoogleMap } from "components/generic/ui"
 import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
 import { TAppState } from "store/entities"
+import { MapOptions } from "helpers"
 
 import ParkingIcon from "assets/parking.png"
 import ServiceIcon from "assets/service.png"
@@ -12,11 +13,6 @@ import ShopIcon from "assets/shop.png"
 
 import * as Styled from "./Content.styled"
 import { Link } from "react-router-dom"
-
-const MapOptions = {
-  zoom: 14,
-  position: { lat: 47.0203966, lng: 28.829422 },
-}
 
 interface IStateProps {
   locations: ReturnType<typeof getFilteredLocations>

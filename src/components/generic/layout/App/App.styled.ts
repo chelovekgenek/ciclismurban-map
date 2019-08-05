@@ -2,10 +2,10 @@ import styled from "styled-components"
 import { Layout as AntdLayout } from "antd"
 
 interface ILayout {
-  fullHeight: boolean
+  fullHeight?: boolean
 }
 export const Layout = styled(AntdLayout)<ILayout>`
-  height: ${({ fullHeight }) => (fullHeight ? "auto" : "100%")};
+  height: ${({ fullHeight = true }) => (fullHeight ? "inherit" : "100%")};
 `
 
 export const Sider = styled(AntdLayout.Sider)`

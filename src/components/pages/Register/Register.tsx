@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import { withFormik, FormikProps } from "formik"
 
-import { Input } from "components/generic/ui"
+import { Input } from "components/generic/form"
 import * as Layout from "components/generic/layout"
 import { validateFormik } from "helpers"
 import { UserModel, ExposeGroup, LoginForm } from "models/user"

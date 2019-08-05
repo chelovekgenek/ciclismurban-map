@@ -22,3 +22,8 @@ export const getCurrentLatLng = (): Promise<PointModel> =>
       },
     )
   })
+
+export const MapOptions = {
+  zoom: 14,
+  position: { lat: 47.0203966, lng: 28.829422 },
+}

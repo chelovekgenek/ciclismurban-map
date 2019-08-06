@@ -1,23 +1,14 @@
 import styled from "styled-components"
-import { Layout as AntdLayout } from "antd"
+import { Layout as AntLayout } from "antd"
 
 interface ILayout {
   fullHeight?: boolean
 }
-export const Layout = styled(AntdLayout)<ILayout>`
+export const Layout = styled(AntLayout)<ILayout>`
   height: ${({ fullHeight = true }) => (fullHeight ? "inherit" : "100%")};
 `
 
-export const Sider = styled(AntdLayout.Sider)`
-  &.ant-layout-sider-light {
-    background-color: #f5f5f5;
-  }
-  .ant-layout-sider-children {
-    padding: 1rem;
-  }
-`
-
-export const Content = styled(AntdLayout.Content)`
+export const Content = styled(AntLayout.Content)`
   height: 100%;
   position: relative;
 `

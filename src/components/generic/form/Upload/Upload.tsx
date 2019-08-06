@@ -11,13 +11,14 @@ import * as Styled from ".//Upload.styled"
 
 interface IProps {
   name: string
+  label?: string
 }
 
-export const Upload: React.FC<IProps> = ({ name }) => (
+export const Upload: React.FC<IProps> = ({ name, label }) => (
   <Field name={name}>
     {({ field, form }: FieldProps) => {
       return (
-        <FormItem touched={form.touched[field.name]} error={form.errors[field.name]}>
+        <FormItem label={label} touched={form.touched[field.name]} error={form.errors[field.name]}>
           <Styled.Upload
             name={name}
             accept="image/*"

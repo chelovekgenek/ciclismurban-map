@@ -13,7 +13,7 @@ interface IProps extends InputProps {
 export const Input: React.FC<IProps> = ({ name, label, ...props }) => (
   <Field name={name}>
     {({ field, form }: FieldProps) => (
-      <FormItem touched={form.touched[field.name]} error={form.errors[field.name]}>
+      <FormItem label={label} touched={form.touched[field.name]} error={form.errors[field.name]}>
         <AntInput name={name} value={form.values[name]} onChange={field.onChange} onBlur={field.onBlur} {...props} />
       </FormItem>
     )}

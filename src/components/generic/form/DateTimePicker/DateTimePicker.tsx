@@ -9,16 +9,17 @@ const format = "DD/MM/YYYY HH:mm"
 
 interface IProps {
   name: string
+  label?: string
   placeholder?: string
 }
 
-export const DateTimePicker: React.FC<IProps> = ({ name, placeholder }) => (
+export const DateTimePicker: React.FC<IProps> = ({ name, label, placeholder }) => (
   <Field name={name}>
     {({ field, form }: FieldProps) => {
       const handler = (date: Moment) => form.setFieldValue(name, date.toISOString())
 
       return (
-        <FormItem touched={form.touched[field.name]} error={form.errors[field.name]}>
+        <FormItem label={label} touched={form.touched[field.name]} error={form.errors[field.name]}>
           <Styled.DateTimePicker
             showTime
             allowClear={false}

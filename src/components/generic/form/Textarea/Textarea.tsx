@@ -13,7 +13,7 @@ interface IProps extends TextAreaProps {
 export const Textarea: React.FC<IProps> = ({ name, label, ...props }) => (
   <Field name={name}>
     {({ field, form }: FieldProps) => (
-      <FormItem touched={form.touched[field.name]} error={form.errors[field.name]}>
+      <FormItem label={label} touched={form.touched[field.name]} error={form.errors[field.name]}>
         <AntInput.TextArea
           name={name}
           value={form.values[name]}

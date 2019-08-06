@@ -51,8 +51,7 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
   }
 
   return (
-    <Layout.App useContentLayout>
-      <h2>{selected.title}</h2>
+    <Layout.App content={{ useLayout: true, useHeader: true, title: selected.title }}>
       <p>{selected.description}</p>
       <Styled.Image src={selected.image} alt={selected.title} />
       <Styled.MapContainer>

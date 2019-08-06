@@ -22,7 +22,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@ciclismurban/api": "1.0.15",
+    "@ciclismurban/api": "1.0.16",
     "@types/antd": "^1.0.0",
     "@types/googlemaps": "^3.37.0",
     "@types/jest": "24.0.15",

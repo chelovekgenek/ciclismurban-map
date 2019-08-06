@@ -1,5 +1,5 @@
-export const getBase64 = (blob: Blob, callback: (result: string) => void) => {
+export const getBase64 = (file: File, callback: (result: string) => void) => {
   const reader = new FileReader()
   reader.addEventListener("load", () => callback(reader.result as string))
-  reader.readAsDataURL(blob)
+  reader.readAsDataURL(file)
 }

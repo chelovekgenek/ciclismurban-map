@@ -11,7 +11,6 @@ import { ExposeGroup, EventModel } from "models/location"
 import { validateFormik } from "helpers"
 
 import { InitForm } from "./EventForm.helper"
-import { omit } from "lodash-es"
 
 interface IStateProps {
   fetching: ReturnType<typeof getEventsFetching>
@@ -57,7 +56,7 @@ export default connect<IStateProps, IDispatchProps, IProps, TAppState>(
     mapPropsToValues: () => new InitForm(),
     handleSubmit: (values, { props }) => props.create(values),
     validate: v => {
-      let errors = omit(validateFormik(EventModel, [ExposeGroup.WRITE])(v), ["image"])
+      let errors = validateFormik(EventModel, [ExposeGroup.WRITE], ["image"])(v)
       if (!v.image) {
         errors.image = "Image must be provided"
       }

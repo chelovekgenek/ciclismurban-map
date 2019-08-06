@@ -5,6 +5,7 @@ import {
 import { ClassType } from "class-transformer/ClassTransformer"
 
 import { FormikValues } from "formik"
+import { omit } from "lodash-es"
 
 export const validateEntity = (
   entity: ClassType<object>,
@@ -34,5 +35,9 @@ export const validateEntity = (
   }
 }
 
-export const validateFormik = (entity: ClassType<object>, groups: string[]) => (values: FormikValues) =>
-  validateEntity(entity, values, groups)
+export const validateFormik = (entity: ClassType<object>, groups: string[], exclude?: string[]) => (
+  values: FormikValues,
+) => {
+  const errors = validateEntity(entity, exclude ? omit(values, exclude) : values, groups)
+  return exclude ? omit(errors, exclude) : errors
+}

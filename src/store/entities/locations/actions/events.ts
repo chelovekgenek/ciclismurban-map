@@ -19,7 +19,7 @@ export const EventsActions = {
   successGet: action(EventsTypes.GET__SUCCESS, payload<TRequiredEventsState["data"]>()),
   failureGet: action(EventsTypes.GET__FAILURE, payload<TRequiredEventsState["error"]>()),
 
-  requestCreate: action(EventsTypes.GET__REQUEST, payload<LocationModel>()),
-  successCreate: action(EventsTypes.GET__SUCCESS, payload<TRequiredEventsState["data"][number]>()),
-  failureCreate: action(EventsTypes.GET__FAILURE, payload<TRequiredEventsState["error"]>()),
+  requestCreate: action(EventsTypes.CREATE__REQUEST, payload<Partial<LocationModel>>()),
+  successCreate: action(EventsTypes.CREATE__SUCCESS, payload<TRequiredEventsState["data"][number]>()),
+  failureCreate: action(EventsTypes.CREATE__FAILURE, payload<TRequiredEventsState["error"]>()),
 }

@@ -108,10 +108,10 @@ function* handleGetSelected({ payload }: ReturnType<typeof SelectedActions.reque
 export function* watcher() {
   yield takeLatest(FiltersTypes.TOGGLE, handleToggle)
   yield takeLatest(CurrentTypes.GET__REQUEST, handleGetCurrent)
+  yield takeLatest(EventsTypes.CREATE__REQUEST, handleCreateEvent)
   yield takeLatest(ParkingsTypes.GET__REQUEST, handleGetParkings)
   yield takeLatest(ServicesTypes.GET__REQUEST, handleGetServices)
   yield takeLatest(ShopsTypes.GET__REQUEST, handleGetShops)
-  yield takeLatest(EventsTypes.CREATE__REQUEST, handleCreateEvent)
   yield takeLatest(SelectedTypes.GET__REQUEST, handleGetSelected)
 
   while (true) {

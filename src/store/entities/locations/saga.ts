@@ -5,23 +5,23 @@ import { getCurrentLatLng } from "helpers/geolocation"
 import { LocationModel, PointModel } from "models/location"
 
 import { getFilters } from "./selectors"
-import { getParkings, getServices, getShops, getParkingById, getServiceById, getShopById } from "./api"
+import * as api from "./api"
+import { TAcceptedEntity } from "./types"
 import {
-  TAcceptedEntity,
   FiltersTypes,
   CurrentTypes,
   ParkingsTypes,
   ServicesTypes,
   ShopsTypes,
   SelectedTypes,
-} from "./types"
-import {
   FiltersActions,
   SelectedActions,
   CurrentActions,
   ParkingsActions,
   ServicesActions,
   ShopsActions,
+  EventsTypes,
+  EventsActions,
 } from "./actions"
 
 function* handleToggle({ payload }: ReturnType<typeof FiltersActions.toggle>) {
@@ -57,7 +57,7 @@ function* handleGetCurrent() {
 
 function* handleGetParkings() {
   try {
-    const { data }: AxiosResponse<LocationModel[]> = yield call(getParkings)
+    const { data }: AxiosResponse<LocationModel[]> = yield call(api.getParkings)
     yield put(ParkingsActions.successGet(data))
   } catch (e) {
     yield put(ParkingsActions.failureGet(e))
@@ -66,16 +66,25 @@ function* handleGetParkings() {
 
 function* handleGetServices() {
   try {
-    const { data }: AxiosResponse<LocationModel[]> = yield call(getServices)
+    const { data }: AxiosResponse<LocationModel[]> = yield call(api.getServices)
     yield put(ServicesActions.successGet(data))
   } catch (e) {
     yield put(ServicesActions.failureGet(e))
   }
 }
 
+function* handleCreateEvent({ payload }: ReturnType<typeof EventsActions.requestCreate>) {
+  try {
+    const { data }: AxiosResponse<LocationModel> = yield call(api.createEvent, payload)
+    yield put(EventsActions.successCreate(data))
+  } catch (e) {
+    yield put(EventsActions.failureCreate(e))
+  }
+}
+
 function* handleGetShops() {
   try {
-    const { data }: AxiosResponse<LocationModel[]> = yield call(getShops)
+    const { data }: AxiosResponse<LocationModel[]> = yield call(api.getShops)
     yield put(ShopsActions.successGet(data))
   } catch (e) {
     yield put(ShopsActions.failureGet(e))
@@ -84,9 +93,9 @@ function* handleGetShops() {
 
 function* handleGetSelected({ payload }: ReturnType<typeof SelectedActions.requestGet>) {
   const mapEntityByApiCall: { [key in TAcceptedEntity]: (id: string) => Promise<AxiosResponse<any>> } = {
-    parkings: getParkingById,
-    services: getServiceById,
-    shops: getShopById,
+    parkings: api.getParkingById,
+    services: api.getServiceById,
+    shops: api.getShopById,
   }
   try {
     const { data }: AxiosResponse<LocationModel> = yield call(mapEntityByApiCall[payload.entity], payload.uuid)
@@ -102,6 +111,7 @@ export function* watcher() {
   yield takeLatest(ParkingsTypes.GET__REQUEST, handleGetParkings)
   yield takeLatest(ServicesTypes.GET__REQUEST, handleGetServices)
   yield takeLatest(ShopsTypes.GET__REQUEST, handleGetShops)
+  yield takeLatest(EventsTypes.CREATE__REQUEST, handleCreateEvent)
   yield takeLatest(SelectedTypes.GET__REQUEST, handleGetSelected)
 
   while (true) {

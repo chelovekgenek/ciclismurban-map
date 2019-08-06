@@ -1,7 +1,7 @@
 import { all, fork } from "redux-saga/effects"
 
-import { watcher as locations } from "./locations"
-import { watcher as user } from "./user"
+import locations from "./locations/saga"
+import user from "./user/saga"
 
 export function* sagas() {
   yield all([fork(locations), fork(user)])

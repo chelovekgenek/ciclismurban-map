@@ -9,4 +9,4 @@ import parkings from "./reducers/parkings"
 import services from "./reducers/services"
 import shops from "./reducers/shops"
 
-export const reducer = combineReducers({ filters, current, selected, events, parkings, services, shops })
+export default combineReducers({ filters, current, selected, events, parkings, services, shops })

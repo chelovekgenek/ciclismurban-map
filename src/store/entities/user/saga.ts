@@ -43,7 +43,7 @@ function* handleLogout() {
   yield call(history.replace, { pathname: "/" })
 }
 
-export function* watcher() {
+export default function*() {
   yield takeLatest(RegisterTypes.REQUEST, handleRegister)
   yield takeLatest(LoginTypes.REQUEST, handleLogin)
   yield takeLatest(LoginByTokenTypes.REQUEST, handleLoginByToken)

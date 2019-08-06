@@ -3,8 +3,8 @@ import { persistReducer } from "redux-persist"
 import { routerReducer as router } from "react-router-redux"
 import storage from "redux-persist/lib/storage"
 
-import { reducer as locations } from "./locations"
-import { reducer as user } from "./user"
+import locations from "./locations/reducer"
+import user from "./user/reducer"
 
 const rootPersistConfig = {
   key: "root",

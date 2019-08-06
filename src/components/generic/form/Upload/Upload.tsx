@@ -25,12 +25,12 @@ export const Upload: React.FC<IProps> = ({ name, label }) => (
             className="avatar-uploader"
             showUploadList={false}
             onChange={({ file }: UploadChangeParam<UploadFile>) => {
-              form.setFieldValue(name, URL.createObjectURL(file.originFileObj))
+              form.setFieldValue(name, file.originFileObj)
             }}
             customRequest={() => {}}
           >
             {field.value ? (
-              <img src={field.value as string} alt="avatar" style={{ width: "100%" }} />
+              <img src={URL.createObjectURL(field.value)} alt="avatar" style={{ width: "100%" }} />
             ) : (
               <div>
                 <Icon type="plus" />

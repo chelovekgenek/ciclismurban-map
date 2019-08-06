@@ -11,3 +11,12 @@ export const getShopById = async (id: string) => request.get(`/shops/${id}`)
 
 export const createEvent = async (payload: ReturnType<typeof EventsActions.requestCreate>["payload"]) =>
   request.post("/events", payload)
+
+export const uploadFile = async (file: string) => {
+  const form = new FormData()
+  form.set("file", file)
+
+  return request.post<string>("/files", form, {
+    headers: { "Content-Type": "multipart/form-data" },
+  })
+}

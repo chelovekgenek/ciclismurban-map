@@ -5,7 +5,7 @@ import { withFormik, Form, FormikProps } from "formik"
 import { App } from "components/generic/layout"
 import { Input, Textarea, GoogleMap, DateTimePicker, Upload } from "components/generic/form"
 import { Button } from "components/generic/ui"
-import { EventsActions } from "store/entities/locations"
+import { EventsActions, getEventsFetching } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { ExposeGroup, EventModel } from "models/location"
 import { validateFormik } from "helpers"
@@ -13,20 +13,23 @@ import { validateFormik } from "helpers"
 import { InitForm } from "./EventForm.helper"
 import { omit } from "lodash-es"
 
+interface IStateProps {
+  fetching: ReturnType<typeof getEventsFetching>
+}
 interface IDispatchProps {
   create: typeof EventsActions.requestCreate
 }
 
-interface IProps extends IDispatchProps {}
+interface IProps extends IStateProps, IDispatchProps {}
 
-export const EventForm: React.FC<IProps & FormikProps<InitForm>> = ({ submitForm, isValid }) => (
+export const EventForm: React.FC<IProps & FormikProps<InitForm>> = ({ submitForm, isValid, fetching }) => (
   <App
     content={{
       useHeader: true,
       useLayout: true,
       title: "Новое событие",
       actions: [
-        <Button key="1" type="primary" onClick={submitForm} disabled={!isValid}>
+        <Button key="1" type="primary" onClick={submitForm} disabled={!isValid} loading={fetching}>
           Сохранить
         </Button>,
       ],
@@ -42,8 +45,10 @@ export const EventForm: React.FC<IProps & FormikProps<InitForm>> = ({ submitForm
   </App>
 )
 
-export default connect<null, IDispatchProps, IProps, TAppState>(
-  null,
+export default connect<IStateProps, IDispatchProps, IProps, TAppState>(
+  state => ({
+    fetching: getEventsFetching(state),
+  }),
   {
     create: EventsActions.requestCreate,
   },

@@ -9,6 +9,8 @@ export const getCurrentData = (state: TAppState) => state.locations.current.data
 export const getSelectedData = (state: TAppState) => state.locations.selected.data
 export const getSelectedFetching = (state: TAppState) => state.locations.selected.fetching
 
+export const getEventsFetching = (state: TAppState) => state.locations.events.fetching
+
 export const getFilteredLocations = createSelector(
   getRoot,
   getFilters,

@@ -954,10 +954,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ciclismurban/api@1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@ciclismurban/api/-/api-1.0.13.tgz#0525180e0f0b41736b8c3a703dd99e96f8195bec"
-  integrity sha512-5TB10OY5+DxVuDGiYx08XAG0JfmCc2EhCmzRnEd7bUSUzEgmIFcAuDpm747k4AOpkk3fALJuU+oUFLj8KLpMXw==
+"@ciclismurban/api@1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@ciclismurban/api/-/api-1.0.15.tgz#f0b64495efce777ac26680a89edc19790d72ec8b"
+  integrity sha512-Ou5Vdph1SYrYgn8L+DCJy/qCinNbed/GSt/muPtlzG+93WSGvBWB8dFjRRV6lzRxwR2z2NF6bVEqe1sE8hnZvg==
   dependencies:
     "@moebius/http-graceful-shutdown" "^1.1.0"
     "@nestjs/common" "^6.0.0"

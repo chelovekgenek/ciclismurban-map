@@ -5,9 +5,13 @@ import { withFormik, Form, FormikProps } from "formik"
 import { App } from "components/generic/layout"
 import { Input, Textarea, GoogleMap, DateTimePicker, Upload } from "components/generic/form"
 import { Button } from "components/generic/ui"
-import { LocationForm } from "models/location"
 import { EventsActions } from "store/entities/locations"
 import { TAppState } from "store/entities"
+import { ExposeGroup, EventModel } from "models/location"
+import { validateFormik } from "helpers"
+
+import { InitForm } from "./EventForm.helper"
+import { omit } from "lodash-es"
 
 interface IDispatchProps {
   create: typeof EventsActions.requestCreate
@@ -15,7 +19,7 @@ interface IDispatchProps {
 
 interface IProps extends IDispatchProps {}
 
-export const Event: React.FC<IProps & FormikProps<Partial<LocationForm>>> = ({ submitForm, isValid }) => (
+export const EventForm: React.FC<IProps & FormikProps<InitForm>> = ({ submitForm, isValid }) => (
   <App
     content={{
       useHeader: true,
@@ -44,9 +48,16 @@ export default connect<null, IDispatchProps, IProps, TAppState>(
     create: EventsActions.requestCreate,
   },
 )(
-  withFormik<IProps, Partial<LocationForm>>({
-    mapPropsToValues: () => new LocationForm(),
+  withFormik<IProps, InitForm>({
+    mapPropsToValues: () => new InitForm(),
     handleSubmit: (values, { props }) => props.create(values),
+    validate: v => {
+      let errors = omit(validateFormik(EventModel, [ExposeGroup.WRITE])(v), ["image"])
+      if (!v.image) {
+        errors.image = "Image must be provided"
+      }
+      return errors
+    },
     validateOnBlur: true,
-  })(Event),
+  })(EventForm),
 )

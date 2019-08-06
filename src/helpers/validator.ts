@@ -6,7 +6,11 @@ import { ClassType } from "class-transformer/ClassTransformer"
 
 import { FormikValues } from "formik"
 
-export const validateEntity = (entity: ClassType<object>, values: object | Array<object>, groups: string[]): object => {
+export const validateEntity = (
+  entity: ClassType<object>,
+  values: object | Array<object>,
+  groups: string[],
+): { [key: string]: string } => {
   try {
     transformAndValidateEntitySync(entity, values, {
       validator: {

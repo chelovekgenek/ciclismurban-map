@@ -22,7 +22,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@ciclismurban/api": "1.0.13",
+    "@ciclismurban/api": "1.0.15",
     "@types/antd": "^1.0.0",
     "@types/googlemaps": "^3.37.0",
     "@types/jest": "24.0.15",
@@ -40,6 +40,7 @@
     "@types/styled-components": "^4.1.18",
     "antd": "3.19.8",
     "axios": "^0.19.0",
+    "class-validator": "^0.9.1",
     "formik": "^1.5.8",
     "history": "^4.9.0",
     "lodash": "^4.17.15",

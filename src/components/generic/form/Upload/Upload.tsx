@@ -4,7 +4,6 @@ import { UploadChangeParam } from "antd/lib/upload"
 import { UploadFile } from "antd/lib/upload/interface"
 
 import { Icon } from "components/generic/ui"
-import { getBase64 } from "helpers"
 
 import { FormItem } from "../FormItem"
 import * as Styled from ".//Upload.styled"
@@ -26,7 +25,7 @@ export const Upload: React.FC<IProps> = ({ name, label }) => (
             className="avatar-uploader"
             showUploadList={false}
             onChange={({ file }: UploadChangeParam<UploadFile>) => {
-              getBase64(file.originFileObj as Blob, file => form.setFieldValue(name, file))
+              form.setFieldValue(name, URL.createObjectURL(file.originFileObj))
             }}
             customRequest={() => {}}
           >

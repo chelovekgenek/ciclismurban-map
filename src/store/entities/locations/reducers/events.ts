@@ -1,11 +1,11 @@
 import { reducer, on } from "ts-action"
 
-import { LocationModel } from "models/location"
+import { EventModel } from "models/location"
 
 import { EventsActions } from "../actions"
 
 export interface IState {
-  data: LocationModel[]
+  data: EventModel[]
   fetching: boolean
   error?: Error
 }

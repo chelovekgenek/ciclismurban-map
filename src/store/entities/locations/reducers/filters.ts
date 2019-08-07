@@ -3,16 +3,18 @@ import { FiltersActions } from "../actions"
 
 export interface IState {
   current: boolean
+  events: boolean
+  parkings: boolean
   services: boolean
   shops: boolean
-  parkings: boolean
 }
 
 const initialState: IState = {
   current: false,
+  events: false,
+  parkings: true,
   services: true,
   shops: true,
-  parkings: true,
 }
 
 export default reducer(

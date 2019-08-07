@@ -4,7 +4,16 @@ import { AxiosResponse } from "axios"
 import { EventModel } from "models/location"
 
 import { EventsTypes, EventsActions } from "../actions"
-import { createEvent, uploadFile } from "../api"
+import { createEvent, uploadFile, getEvents } from "../api"
+
+function* handleGet() {
+  try {
+    const { data }: AxiosResponse<EventModel[]> = yield call(getEvents)
+    yield put(EventsActions.successGet(data))
+  } catch (e) {
+    yield put(EventsActions.failureGet(e))
+  }
+}
 
 function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof EventsActions.requestCreate>) {
   try {
@@ -17,5 +26,6 @@ function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof Eve
 }
 
 export function* watcher() {
+  yield takeLatest(EventsTypes.GET__REQUEST, handleGet)
   yield takeLatest(EventsTypes.CREATE__REQUEST, handleCreate)
 }

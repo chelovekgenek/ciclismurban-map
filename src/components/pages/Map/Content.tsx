@@ -1,10 +1,12 @@
 import React, { useMemo, useState, useCallback } from "react"
+import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { clamp, truncate } from "lodash-es"
 
 import { GoogleMap } from "components/generic/ui"
 import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
 import { TAppState } from "store/entities"
+import { LocationModel } from "models/location"
 import { MapOptions } from "helpers"
 
 import ParkingIcon from "assets/parking.png"
@@ -12,7 +14,6 @@ import ServiceIcon from "assets/service.png"
 import ShopIcon from "assets/shop.png"
 
 import * as Styled from "./Content.styled"
-import { Link } from "react-router-dom"
 
 interface IStateProps {
   locations: ReturnType<typeof getFilteredLocations>
@@ -26,7 +27,7 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
   const [infoKey, setInfoKey] = useState<null | number>(null)
 
   const renderMarkers = useCallback(
-    (dataset: typeof locations[keyof typeof locations], entity: string, icon?: string) =>
+    (dataset: Array<LocationModel>, entity: string, icon?: string) =>
       dataset.map(({ uuid, point, title, image, description }) => {
         const key = clamp(point.lat, point.lng)
         return (
@@ -49,9 +50,13 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
           </GoogleMap.Marker>
         )
       }),
-    [infoKey, locations],
+    [infoKey],
   )
 
+  const eventsMarkers = useMemo(() => renderMarkers(locations.events, "events", ParkingIcon), [
+    renderMarkers,
+    locations.events,
+  ])
   const parkingsMarkers = useMemo(() => renderMarkers(locations.parkings, "parkings", ParkingIcon), [
     renderMarkers,
     locations.parkings,
@@ -73,6 +78,7 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
       options={{ disableDefaultUI: true }}
       {...additionalMapProps}
     >
+      {eventsMarkers}
       {parkingsMarkers}
       {servicesMarkers}
       {shopsMarkers}

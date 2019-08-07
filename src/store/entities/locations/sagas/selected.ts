@@ -4,11 +4,12 @@ import { AxiosResponse } from "axios"
 import { LocationModel } from "models/location"
 
 import { SelectedTypes, SelectedActions } from "../actions"
-import { getParkingById, getServiceById, getShopById } from "../api"
+import { getParkingById, getServiceById, getShopById, getEventById } from "../api"
 import { TAcceptedEntity } from "../types"
 
 function* handleGet({ payload }: ReturnType<typeof SelectedActions.requestGet>) {
   const mapEntityByApiCall: { [key in TAcceptedEntity]: (id: string) => Promise<AxiosResponse<any>> } = {
+    events: getEventById,
     parkings: getParkingById,
     services: getServiceById,
     shops: getShopById,

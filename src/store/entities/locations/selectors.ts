@@ -15,6 +15,7 @@ export const getFilteredLocations = createSelector(
   getRoot,
   getFilters,
   (locations, filters) => ({
+    events: filters.events ? locations.events.data : [],
     parkings: filters.parkings ? locations.parkings.data : [],
     services: filters.services ? locations.services.data : [],
     shops: filters.shops ? locations.shops.data : [],

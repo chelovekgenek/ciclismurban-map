@@ -30,12 +30,16 @@ export const Sider: React.FC<IProps> = ({ filters, toggle }) => {
           value: "current",
         },
         {
-          label: "Сервисы",
-          value: "services",
+          label: "События",
+          value: "events",
         },
         {
           label: "Парковки",
           value: "parkings",
+        },
+        {
+          label: "Сервисы",
+          value: "services",
         },
         {
           label: "Магазины",

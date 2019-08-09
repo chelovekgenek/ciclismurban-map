@@ -1,5 +1,7 @@
 import React from "react"
 
+import * as Guard from "components/generic/guard"
+
 import Header from "./Header"
 import Sider from "./Sider"
 import ContentHeader from "./ContentHeader"
@@ -20,7 +22,9 @@ export const App: React.FC<IProps> = ({ children, content = { useLayout: false, 
   <Styled.Layout fullHeight={!!content.useLayout}>
     <Header />
     <Styled.Layout>
-      <Sider />
+      <Guard.Authentication>
+        <Sider />
+      </Guard.Authentication>
       <Styled.Content>
         {!content.useLayout && content.useHeader && <ContentHeader title={content.title} extra={content.actions} />}
         {content.useLayout ? (

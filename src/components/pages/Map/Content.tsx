@@ -1,11 +1,10 @@
 import React, { useMemo, useState, useCallback } from "react"
 import { Link } from "react-router-dom"
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 import { clamp, truncate } from "lodash-es"
 
 import { GoogleMap } from "components/generic/ui"
 import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
-import { TAppState } from "store/entities"
 import { LocationModel } from "models/location"
 import { MapOptions } from "helpers"
 
@@ -15,16 +14,14 @@ import ShopIcon from "assets/shop.png"
 
 import * as Styled from "./Content.styled"
 
-interface IStateProps {
-  locations: ReturnType<typeof getFilteredLocations>
-  locationsCount: ReturnType<typeof getFilteredLocationsCount>
-  current: ReturnType<typeof getCurrentData>
-}
+interface IProps {}
 
-interface IProps extends IStateProps {}
-
-export const Content: React.FC<IProps> = ({ locations, locationsCount, current }) => {
+export const Content: React.FC<IProps> = () => {
   const [infoKey, setInfoKey] = useState<null | number>(null)
+
+  const current = useSelector(getCurrentData)
+  const locations = useSelector(getFilteredLocations)
+  const locationsCount = useSelector(getFilteredLocationsCount)
 
   const renderMarkers = useCallback(
     (dataset: Array<LocationModel>, entity: string, icon?: string) =>
@@ -87,8 +84,4 @@ export const Content: React.FC<IProps> = ({ locations, locationsCount, current }
   )
 }
 
-export default connect<IStateProps, null, null, TAppState>(state => ({
-  current: getCurrentData(state),
-  locations: getFilteredLocations(state),
-  locationsCount: getFilteredLocationsCount(state),
-}))(Content)
+export default Content

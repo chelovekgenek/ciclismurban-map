@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getToken } from "store/entities/user"
+import { getToken, LogoutAction } from "store/entities/user"
 
 export const request = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -17,3 +17,14 @@ request.interceptors.request.use(config => {
 
   return config
 })
+
+request.interceptors.response.use(
+  config => config,
+  error => {
+    if (error.response.status === 401) {
+      const { store } = require("store")
+      store.dispatch(LogoutAction())
+    }
+    return Promise.reject(error)
+  },
+)

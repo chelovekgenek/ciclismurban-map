@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useCallback } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { clamp, truncate } from "lodash-es"
+import { truncate } from "lodash-es"
 
 import { GoogleMap } from "components/generic/ui"
 import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
@@ -17,7 +17,7 @@ import * as Styled from "./Content.styled"
 interface IProps {}
 
 export const Content: React.FC<IProps> = () => {
-  const [infoKey, setInfoKey] = useState<null | number>(null)
+  const [infoKey, setInfoKey] = useState<null | string>(null)
 
   const current = useSelector(getCurrentData)
   const locations = useSelector(getFilteredLocations)
@@ -25,28 +25,25 @@ export const Content: React.FC<IProps> = () => {
 
   const renderMarkers = useCallback(
     (dataset: Array<LocationModel>, entity: string, icon?: string) =>
-      dataset.map(({ uuid, point, title, image, description }) => {
-        const key = clamp(point.lat, point.lng)
-        return (
-          <GoogleMap.Marker
-            useInFitBounds
-            key={key}
-            position={point}
-            onClick={() => setInfoKey(key === infoKey ? null : key)}
-            icon={icon ? { url: icon } : undefined}
-          >
-            {infoKey === key && entity && (
-              <GoogleMap.InfoWindow onCloseClick={() => setInfoKey(null)}>
-                <Styled.MarkerInfoContainer>
-                  <Link to={`/locations/${entity}/${uuid}`}>{title}</Link>
-                  <p>{truncate(description, { length: 100 })}</p>
-                  <img src={image} alt={title} />
-                </Styled.MarkerInfoContainer>
-              </GoogleMap.InfoWindow>
-            )}
-          </GoogleMap.Marker>
-        )
-      }),
+      dataset.map(({ uuid, point, title, image, description }) => (
+        <GoogleMap.Marker
+          useInFitBounds
+          key={uuid}
+          position={point}
+          onClick={() => setInfoKey(uuid === infoKey ? null : uuid)}
+          icon={icon ? { url: icon } : undefined}
+        >
+          {infoKey === uuid && entity && (
+            <GoogleMap.InfoWindow onCloseClick={() => setInfoKey(null)}>
+              <Styled.MarkerInfoContainer>
+                <Link to={`/locations/${entity}/${uuid}`}>{title}</Link>
+                <p>{truncate(description, { length: 100 })}</p>
+                <img src={image} alt={title} />
+              </Styled.MarkerInfoContainer>
+            </GoogleMap.InfoWindow>
+          )}
+        </GoogleMap.Marker>
+      )),
     [infoKey],
   )
 

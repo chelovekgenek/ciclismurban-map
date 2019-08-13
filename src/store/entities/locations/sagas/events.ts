@@ -1,6 +1,7 @@
 import { takeLatest, put, call } from "redux-saga/effects"
 import { AxiosResponse } from "axios"
 
+import { history } from "store/history"
 import { EventModel } from "models/location"
 
 import { EventsTypes, EventsActions } from "../actions"
@@ -20,6 +21,7 @@ function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof Eve
     const { data: link }: AxiosResponse<string> = yield call(uploadFile, image!)
     const { data }: AxiosResponse<EventModel> = yield call(createEvent, { ...payload, image: link })
     yield put(EventsActions.successCreate(data))
+    yield call(history.replace, { pathname: "/events" })
   } catch (e) {
     yield put(EventsActions.failureCreate(e))
   }

@@ -11,12 +11,12 @@ interface IProps extends RouteComponentProps {}
 
 export const Sider: React.FC<IProps> = ({ history }) => {
   const [collapsed, setCollapsed] = useState(false)
-  const handleClickItem = useCallback(({ key }: ClickParam) => history.push(options[Number(key)].link), [history])
+  const handleClickItem = useCallback(({ key }: ClickParam) => history.push(key), [history])
   return (
     <Styled.Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
       <Styled.Menu>
-        {options.map((item, index) => (
-          <Styled.MenuItem key={index} onClick={handleClickItem}>
+        {options.map(item => (
+          <Styled.MenuItem key={item.link} onClick={handleClickItem}>
             <Icon type={item.icon} />
             <span>{item.title}</span>
           </Styled.MenuItem>

@@ -1,5 +1,10 @@
 [
   {
+    "title": "Карта",
+    "link": "/",
+    "icon": "environment"
+  },
+  {
     "title": "Cобытия",
     "link": "/events",
     "icon": "compass"

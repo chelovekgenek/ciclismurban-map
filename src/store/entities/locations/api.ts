@@ -14,6 +14,8 @@ export const getShopById = async (id: string) => request.get(`/shops/${id}`)
 export const createEvent = async (payload: ReturnType<typeof EventsActions.requestCreate>["payload"]) =>
   request.post("/events", payload)
 
+export const deleteEvent = async (id: string) => request.delete(`/events/${id}`)
+
 export const uploadFile = async (file: string) => {
   const form = new FormData()
   form.set("file", file)

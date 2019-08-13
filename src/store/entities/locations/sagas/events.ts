@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios"
 import { EventModel } from "models/location"
 
 import { EventsTypes, EventsActions } from "../actions"
-import { createEvent, uploadFile, getEvents } from "../api"
+import { createEvent, uploadFile, getEvents, deleteEvent } from "../api"
 
 function* handleGet() {
   try {
@@ -25,7 +25,17 @@ function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof Eve
   }
 }
 
+function* handleDelete({ payload }: ReturnType<typeof EventsActions.requestDelete>) {
+  try {
+    const { data }: AxiosResponse<string> = yield call(deleteEvent, payload)
+    yield put(EventsActions.successDelete(data))
+  } catch (e) {
+    yield put(EventsActions.failureDelete(e))
+  }
+}
+
 export function* watcher() {
   yield takeLatest(EventsTypes.GET__REQUEST, handleGet)
   yield takeLatest(EventsTypes.CREATE__REQUEST, handleCreate)
+  yield takeLatest(EventsTypes.DELETE__REQUEST, handleDelete)
 }

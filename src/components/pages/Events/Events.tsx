@@ -1,89 +1,18 @@
-import React, { useCallback, useMemo, useEffect } from "react"
-import { connect } from "react-redux"
-import { withRouter, RouteComponentProps } from "react-router"
+import React from "react"
 
-import { Button, Table, Icon, Popconfirm } from "components/generic/ui"
-import { App } from "components/generic/layout"
-import { getEventsData, EventsActions, getEventsFetching } from "store/entities/locations"
-import { TAppState } from "store/entities"
-import { getGMapLink } from "helpers"
+import { Locations } from "components/generic/page"
 
-interface IStateProps {
-  events: ReturnType<typeof getEventsData>
-  fetching: ReturnType<typeof getEventsFetching>
-}
-interface IDispatchProps {
-  getEvents: typeof EventsActions.requestGet
-  deleteEvent: typeof EventsActions.requestDelete
-}
-interface IProps extends IStateProps, IDispatchProps, RouteComponentProps {}
+import { IStateProps, IDispatchProps } from "./Events.container"
 
-export const Events: React.FC<IProps> = ({ history, events, fetching, getEvents, deleteEvent }) => {
-  useEffect(() => {
-    getEvents()
-  }, [getEvents])
-  const handleCreate = useCallback(() => history.push("/events/new"), [history])
-  const handleRowKey = useCallback((record: typeof events[number]) => record.uuid, [events])
-  const columns = useMemo(
-    () => [
-      {
-        title: "Название",
-        dataIndex: "title",
-      },
-      {
-        render: ({ point }: typeof events[number]) => (
-          <a target="_blank" rel="noopener noreferrer" href={getGMapLink(point)}>
-            Координаты
-          </a>
-        ),
-      },
-      {
-        render: ({ uuid }: typeof events[number]) => (
-          <Button.Group>
-            <Button onClick={() => history.push(`/events/${uuid}`)}>
-              <Icon type="edit" />
-            </Button>
-            <Popconfirm
-              title="Вы уверены?"
-              cancelText="Отменить"
-              okText="Подтвердить"
-              onConfirm={() => deleteEvent(uuid)}
-            >
-              <Button type="danger" disabled={fetching}>
-                <Icon type="delete" />
-              </Button>
-            </Popconfirm>
-          </Button.Group>
-        ),
-      },
-    ],
-    [events, fetching, deleteEvent, history],
-  )
-  return (
-    <App
-      content={{
-        useHeader: true,
-        useLayout: true,
-        title: "События",
-        actions: [
-          <Button key="1" type="primary" onClick={handleCreate}>
-            Создать
-          </Button>,
-        ],
-      }}
-    >
-      <Table columns={columns} dataSource={events} rowKey={handleRowKey} />
-    </App>
-  )
-}
+interface IProps extends IStateProps, IDispatchProps {}
 
-export default connect<IStateProps, IDispatchProps, IProps, TAppState>(
-  state => ({
-    events: getEventsData(state),
-    fetching: getEventsFetching(state),
-  }),
-  {
-    getEvents: EventsActions.requestGet,
-    deleteEvent: EventsActions.requestDelete,
-  },
-)(withRouter(Events))
+export const Events: React.FC<IProps> = ({ events, fetching, getEvents, deleteEvent }) => (
+  <Locations
+    title="События"
+    fetching={fetching}
+    locations={events}
+    links={{ create: "/events/new", getInfo: uuid => `/events/${uuid}` }}
+    getLocations={getEvents}
+    deleteLocation={deleteEvent}
+  />
+)

@@ -1,1 +1,1 @@
-export { default as Events } from "./Events"
+export { EventsContainer as Events } from "./Events.container"

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { truncate } from "lodash-es"
 
 import { GoogleMap } from "components/generic/ui"
-import { getFilteredLocations, getFilteredLocationsCount, getCurrentData } from "store/entities/locations"
+import { getFilteredLocations, getFilteredLocationsCount, getCurrentLocation } from "store/entities/locations"
 import { LocationModel } from "models/location"
 import { MapOptions } from "helpers"
 
@@ -19,7 +19,7 @@ interface IProps {}
 export const Content: React.FC<IProps> = () => {
   const [infoKey, setInfoKey] = useState<null | string>(null)
 
-  const current = useSelector(getCurrentData)
+  const current = useSelector(getCurrentLocation)
   const locations = useSelector(getFilteredLocations)
   const locationsCount = useSelector(getFilteredLocationsCount)
 

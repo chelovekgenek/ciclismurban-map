@@ -7,7 +7,7 @@ import { Empty, Spinner, GoogleMap } from "components/generic/ui"
 import {
   TAcceptedEntity,
   ACCEPTED_ENTITIES,
-  getSelectedData,
+  getSelectedLocation,
   getSelectedFetching,
   SelectedActions,
 } from "store/entities/locations"
@@ -20,7 +20,7 @@ interface IParams {
   id: string
 }
 interface IStateProps {
-  selected: ReturnType<typeof getSelectedData>
+  selected: ReturnType<typeof getSelectedLocation>
   fetching: ReturnType<typeof getSelectedFetching>
 }
 interface IDispatchProps {
@@ -66,7 +66,7 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
 export default withRouter(
   connect<IStateProps, IDispatchProps, {}, TAppState>(
     state => ({
-      selected: getSelectedData(state),
+      selected: getSelectedLocation(state),
       fetching: getSelectedFetching(state),
     }),
     {

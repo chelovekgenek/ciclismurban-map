@@ -8,5 +8,10 @@
     "title": "Cобытия",
     "link": "/events",
     "icon": "compass"
+  },
+  {
+    "title": "Парковки",
+    "link": "/parkings",
+    "icon": "car"
   }
 ]

@@ -1,16 +1,10 @@
 import { createSelector } from "reselect"
 import { union } from "lodash-es"
 
-import { TAppState } from "../reducers"
+import { TAppState } from "store/entities/reducers"
+import { getRoot } from "./root"
 
-export const getRoot = (state: TAppState) => state.locations
 export const getFilters = (state: TAppState) => state.locations.filters
-export const getCurrentData = (state: TAppState) => state.locations.current.data
-export const getSelectedData = (state: TAppState) => state.locations.selected.data
-export const getSelectedFetching = (state: TAppState) => state.locations.selected.fetching
-
-export const getEventsFetching = (state: TAppState) => state.locations.events.fetching
-export const getEventsData = (state: TAppState) => state.locations.events.data
 
 export const getFilteredLocations = createSelector(
   getRoot,

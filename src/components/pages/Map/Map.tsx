@@ -2,14 +2,14 @@ import React, { useEffect } from "react"
 import { connect } from "react-redux"
 
 import { Layout } from "components/generic"
-import { ParkingsActions, ServicesActions, ShopsActions, EventsActions } from "store/entities/locations"
+import { ParkingsGetActions, ServicesActions, ShopsActions, EventsActions } from "store/entities/locations"
 
 import Content from "./Content"
 import Legend from "./Legend"
 
 interface IDispatchProps {
   getEvents: typeof EventsActions.requestGet
-  getParkings: typeof ParkingsActions.requestGet
+  getParkings: typeof ParkingsGetActions.request
   getServices: typeof ServicesActions.requestGet
   getShops: typeof ShopsActions.requestGet
 }
@@ -35,7 +35,7 @@ export default connect<null, IDispatchProps, {}, null>(
   null,
   {
     getEvents: EventsActions.requestGet,
-    getParkings: ParkingsActions.requestGet,
+    getParkings: ParkingsGetActions.request,
     getServices: ServicesActions.requestGet,
     getShops: ShopsActions.requestGet,
   },

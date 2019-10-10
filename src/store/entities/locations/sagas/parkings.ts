@@ -3,18 +3,18 @@ import { AxiosResponse } from "axios"
 
 import { LocationModel } from "models/location"
 
-import { ParkingsTypes, ParkingsActions } from "../actions"
+import { ParkingsGetActions, ParkingsGetTypes } from "../actions"
 import { getParkings } from "../api"
 
 function* handleGet() {
   try {
     const { data }: AxiosResponse<LocationModel[]> = yield call(getParkings)
-    yield put(ParkingsActions.successGet(data))
+    yield put(ParkingsGetActions.success(data))
   } catch (e) {
-    yield put(ParkingsActions.failureGet(e))
+    yield put(ParkingsGetActions.failure(e))
   }
 }
 
 export function* watcher() {
-  yield takeLatest(ParkingsTypes.GET__REQUEST, handleGet)
+  yield takeLatest(ParkingsGetTypes.REQUEST, handleGet)
 }

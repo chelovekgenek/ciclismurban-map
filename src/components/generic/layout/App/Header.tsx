@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
@@ -24,33 +24,37 @@ export const Header: React.FC<IProps> = ({ authenticated, email, logout }) => (
       <Styled.Logo />
     </Link>
     <Styled.SectionRight>
-      {authenticated ? (
-        <Dropdown
-          overlay={
-            <Menu>
-              <Menu.Item onClick={logout}>
-                <Icon type="user" />
-                Выйти
-              </Menu.Item>
-            </Menu>
-          }
-        >
-          <Styled.Profile>
-            {email} <Icon type="down" />
-          </Styled.Profile>
-        </Dropdown>
-      ) : (
-        <React.Fragment>
-          <Link to="/login">Войти</Link>
-          <Divider type="vertical" />
-          <Link to="/register">Зарегестрироваться</Link>
-        </React.Fragment>
+      {useMemo(
+        () =>
+          authenticated ? (
+            <Dropdown
+              overlay={
+                <Menu>
+                  <Menu.Item onClick={logout}>
+                    <Icon type="user" />
+                    Выйти
+                  </Menu.Item>
+                </Menu>
+              }
+            >
+              <Styled.Profile>
+                {email} <Icon type="down" />
+              </Styled.Profile>
+            </Dropdown>
+          ) : (
+            <React.Fragment>
+              <Link to="/login">Войти</Link>
+              <Divider type="vertical" />
+              <Link to="/register">Зарегестрироваться</Link>
+            </React.Fragment>
+          ),
+        [authenticated, email, logout],
       )}
     </Styled.SectionRight>
   </Styled.Container>
 )
 
-export default connect<IStateProps, IDispatchProps, null, TAppState>(
+export default connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     authenticated: getAuthenticated(state),
     email: getEmail(state),

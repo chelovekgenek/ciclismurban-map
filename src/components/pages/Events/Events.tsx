@@ -38,20 +38,25 @@ export const Events: React.FC<IProps> = ({ history, events, fetching, getEvents,
       },
       {
         render: ({ uuid }: typeof events[number]) => (
-          <Popconfirm
-            title="Вы уверены?"
-            cancelText="Отменить"
-            okText="Подтвердить"
-            onConfirm={() => deleteEvent(uuid)}
-          >
-            <Button type="danger" disabled={fetching}>
-              <Icon type="delete" />
+          <Button.Group>
+            <Button onClick={() => history.push(`/events/${uuid}`)}>
+              <Icon type="edit" />
             </Button>
-          </Popconfirm>
+            <Popconfirm
+              title="Вы уверены?"
+              cancelText="Отменить"
+              okText="Подтвердить"
+              onConfirm={() => deleteEvent(uuid)}
+            >
+              <Button type="danger" disabled={fetching}>
+                <Icon type="delete" />
+              </Button>
+            </Popconfirm>
+          </Button.Group>
         ),
       },
     ],
-    [events, fetching, deleteEvent],
+    [events, fetching, deleteEvent, history],
   )
   return (
     <App

@@ -57,7 +57,7 @@ export const Sider: React.FC<IProps> = ({ filters, toggle }) => {
   )
 }
 
-export default connect<IStateProps, IDispatchProps, null, TAppState>(
+export default connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     filters: getFilters(state),
   }),

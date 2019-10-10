@@ -14,6 +14,7 @@ export const Router = () => (
     <Guard.Authentication>
       <Route exact path="/events" component={Page.Events} />
       <Route exact path="/events/new" component={Page.EventForm} />
+      <Route exact path="/events/:id" component={Page.EventForm} />
     </Guard.Authentication>
     <Redirect to="/" />
   </Switch>

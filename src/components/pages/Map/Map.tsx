@@ -31,7 +31,7 @@ export const Map: React.FC<IProps> = ({ getEvents, getParkings, getServices, get
   )
 }
 
-export default connect<null, IDispatchProps, null, null>(
+export default connect<null, IDispatchProps, {}, null>(
   null,
   {
     getEvents: EventsActions.requestGet,

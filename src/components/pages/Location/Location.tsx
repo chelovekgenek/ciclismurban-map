@@ -64,7 +64,7 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
 }
 
 export default withRouter(
-  connect<IStateProps, IDispatchProps, null, TAppState>(
+  connect<IStateProps, IDispatchProps, {}, TAppState>(
     state => ({
       selected: getSelectedData(state),
       fetching: getSelectedFetching(state),

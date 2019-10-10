@@ -23,6 +23,7 @@ export const Events: React.FC<IProps> = ({ history, events, fetching, getEvents,
     getEvents()
   }, [getEvents])
   const handleCreate = useCallback(() => history.push("/events/new"), [history])
+  const handleRowKey = useCallback((record: typeof events[number]) => record.uuid, [events])
   const columns = useMemo(
     () => [
       {
@@ -71,7 +72,7 @@ export const Events: React.FC<IProps> = ({ history, events, fetching, getEvents,
         ],
       }}
     >
-      <Table columns={columns} dataSource={events} />
+      <Table columns={columns} dataSource={events} rowKey={handleRowKey} />
     </App>
   )
 }

@@ -1,1 +1,1 @@
-export { default as EventForm } from "./EventForm"
+export { EventFormContainer as EventForm } from "./EventForm.container"

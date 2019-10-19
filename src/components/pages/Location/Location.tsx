@@ -1,32 +1,18 @@
 import React, { useEffect } from "react"
-import { connect } from "react-redux"
-import { withRouter, RouteComponentProps } from "react-router"
+import { RouteComponentProps } from "react-router"
 
 import { Layout } from "components/generic"
 import { Empty, Spinner, GoogleMap } from "components/generic/ui"
-import {
-  TAcceptedEntity,
-  ACCEPTED_ENTITIES,
-  getSelectedLocation,
-  getSelectedFetching,
-  SelectedActions,
-} from "store/entities/locations"
-import { TAppState } from "store/entities"
+import { TAcceptedEntity, ACCEPTED_ENTITIES } from "store/entities/locations"
 
 import * as Styled from "./Location.styled"
+import { IStateProps, IDispatchProps } from "./Location.container"
 
 interface IParams {
   entity: TAcceptedEntity
   id: string
 }
-interface IStateProps {
-  selected: ReturnType<typeof getSelectedLocation>
-  fetching: ReturnType<typeof getSelectedFetching>
-}
-interface IDispatchProps {
-  getSelected: typeof SelectedActions.requestGet
-  clearSelected: typeof SelectedActions.clear
-}
+
 interface IProps extends RouteComponentProps<IParams>, IStateProps, IDispatchProps {}
 
 export const Location: React.FC<IProps> = ({ history, match, getSelected, selected, fetching, clearSelected }) => {
@@ -62,16 +48,3 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
     </Layout.App>
   )
 }
-
-export default withRouter(
-  connect<IStateProps, IDispatchProps, {}, TAppState>(
-    state => ({
-      selected: getSelectedLocation(state),
-      fetching: getSelectedFetching(state),
-    }),
-    {
-      getSelected: SelectedActions.requestGet,
-      clearSelected: SelectedActions.clear,
-    },
-  )(Location),
-)

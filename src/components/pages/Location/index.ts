@@ -1,1 +1,1 @@
-export { default as Location } from "./Location"
+export { LocationContainer as Location } from "./Location.container"

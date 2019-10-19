@@ -1,21 +1,11 @@
 import React, { useCallback, useMemo } from "react"
-import { connect } from "react-redux"
-
-import { TAppState } from "store/entities"
-import { FiltersActions, getFilters } from "store/entities/locations"
 
 import * as Styled from "./Legend.styled"
-
-interface IStateProps {
-  filters: ReturnType<typeof getFilters>
-}
-interface IDispatchProps {
-  toggle: typeof FiltersActions.toggle
-}
+import { IStateProps, IDispatchProps } from "./Legend.container"
 
 interface IProps extends IStateProps, IDispatchProps {}
 
-export const Sider: React.FC<IProps> = ({ filters, toggle }) => {
+export const Legend: React.FC<IProps> = ({ filters, toggle }) => {
   const handleChange = useCallback(
     ({ target: { value } }) => {
       toggle(value)
@@ -56,12 +46,3 @@ export const Sider: React.FC<IProps> = ({ filters, toggle }) => {
     </Styled.Container>
   )
 }
-
-export default connect<IStateProps, IDispatchProps, {}, TAppState>(
-  state => ({
-    filters: getFilters(state),
-  }),
-  {
-    toggle: FiltersActions.toggle,
-  },
-)(Sider)

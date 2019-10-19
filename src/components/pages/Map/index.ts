@@ -1,1 +1,1 @@
-export { default as Map } from "./Map"
+export { MapContainer as Map } from "./Map.container"

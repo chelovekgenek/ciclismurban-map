@@ -80,5 +80,3 @@ export const Content: React.FC<IProps> = () => {
     </GoogleMap>
   )
 }
-
-export default Content

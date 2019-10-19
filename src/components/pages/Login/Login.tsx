@@ -1,25 +1,15 @@
 import React, { useEffect } from "react"
-import { connect } from "react-redux"
-import { withFormik, FormikProps } from "formik"
+import { Link } from "react-router-dom"
+import { FormikProps } from "formik"
 
 import { Input } from "components/generic/form"
 import * as Layout from "components/generic/layout"
-import { validateFormik } from "helpers"
-import { UserModel, ExposeGroup, LoginForm } from "models/user"
-import { LoginActions, getFetching, getError } from "store/entities/user"
-import { TAppState } from "store/entities"
+import { LoginForm } from "models/user"
 
 import * as Styled from "./Login.styled"
-import { Link } from "react-router-dom"
+import { IStateProps, IDispatchProps } from "./Login.container"
 
-interface IStateProps {
-  fetching: ReturnType<typeof getFetching>
-  responseError: ReturnType<typeof getError>
-}
-interface IDispatchProps {
-  login: typeof LoginActions.request
-}
-interface IProps extends IStateProps, IDispatchProps {}
+export interface IProps extends IStateProps, IDispatchProps {}
 
 export const Login: React.FC<IProps & FormikProps<LoginForm>> = ({
   responseError,
@@ -47,20 +37,3 @@ export const Login: React.FC<IProps & FormikProps<LoginForm>> = ({
     </Layout.Form>
   )
 }
-
-export default connect<IStateProps, IDispatchProps, IProps, TAppState>(
-  state => ({
-    fetching: getFetching(state),
-    responseError: getError(state),
-  }),
-  {
-    login: LoginActions.request,
-  },
-)(
-  withFormik<IProps, LoginForm>({
-    mapPropsToValues: () => new LoginForm(),
-    handleSubmit: (values, { props }) => props.login(values),
-    validate: validateFormik(UserModel, [ExposeGroup.LOGIN]),
-    validateOnBlur: true,
-  })(Login),
-)

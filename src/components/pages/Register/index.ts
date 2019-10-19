@@ -1,1 +1,1 @@
-export { default as Register } from "./Register"
+export { RegisterContainer as Register } from "./Register.container"

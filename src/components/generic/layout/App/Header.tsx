@@ -1,20 +1,10 @@
 import React, { useMemo } from "react"
-import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
 import { Divider, Dropdown, Menu, Icon } from "components/generic/ui"
 
 import * as Styled from "./Header.style"
-import { getAuthenticated, getEmail, LogoutAction } from "store/entities/user"
-import { TAppState } from "store/entities"
-
-interface IDispatchProps {
-  logout: typeof LogoutAction
-}
-interface IStateProps {
-  authenticated: ReturnType<typeof getAuthenticated>
-  email: ReturnType<typeof getEmail>
-}
+import { IStateProps, IDispatchProps } from "./Header.container"
 
 interface IProps extends IStateProps, IDispatchProps {}
 
@@ -53,13 +43,3 @@ export const Header: React.FC<IProps> = ({ authenticated, email, logout }) => (
     </Styled.SectionRight>
   </Styled.Container>
 )
-
-export default connect<IStateProps, IDispatchProps, {}, TAppState>(
-  state => ({
-    authenticated: getAuthenticated(state),
-    email: getEmail(state),
-  }),
-  {
-    logout: LogoutAction,
-  },
-)(Header)

@@ -2,7 +2,7 @@ import React from "react"
 
 import * as Guard from "components/generic/guard"
 
-import Header from "./Header"
+import { HeaderContainer as Header } from "./Header.container"
 import Sider from "./Sider"
 import ContentHeader from "./ContentHeader"
 

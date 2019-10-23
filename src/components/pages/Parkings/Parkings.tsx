@@ -11,7 +11,7 @@ export const Parkings: React.FC<IProps> = ({ parkings, fetching, getParkings, de
     title="Парковки"
     fetching={fetching}
     locations={parkings}
-    links={{ create: "/parkings/new", getInfo: uuid => `/parkings/${uuid}` }}
+    links={{ create: "/parking", getInfo: uuid => `/parking/${uuid}` }}
     getLocations={getParkings}
     deleteLocation={deleteParking}
   />

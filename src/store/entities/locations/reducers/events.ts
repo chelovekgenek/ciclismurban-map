@@ -19,10 +19,16 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(EventsGetActions.request, EventsCreateActions.request, EventsDeleteActions.request, state => ({
-    ...state,
-    fetching: true,
-  })),
+  on(
+    EventsGetActions.request,
+    EventsCreateActions.request,
+    EventsUpdateActions.request,
+    EventsDeleteActions.request,
+    (state: IState) => ({
+      ...state,
+      fetching: true,
+    }),
+  ),
   on(
     EventsGetActions.failure,
     EventsCreateActions.failure,
@@ -39,6 +45,11 @@ export default reducer(
     ...state,
     fetching: false,
     data: state.data.concat(payload),
+  })),
+  on(EventsUpdateActions.success, (state, { payload }) => ({
+    ...state,
+    fetching: false,
+    data: state.data.map(item => (item.uuid === payload.uuid ? payload : item)),
   })),
   on(EventsDeleteActions.success, (state, { payload }) => ({
     ...state,

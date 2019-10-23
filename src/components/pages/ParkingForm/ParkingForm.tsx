@@ -4,18 +4,18 @@ import { RouteComponentProps } from "react-router-dom"
 import { isEmpty } from "lodash-es"
 
 import { App } from "components/generic/layout"
-import { Input, Textarea, GoogleMap, DateTimePicker, Upload } from "components/generic/form"
+import { Input, Textarea, GoogleMap, Upload } from "components/generic/form"
 import { Button } from "components/generic/ui"
 
-import { IStateProps, IDispatchProps } from "./EventForm.container"
-import { EventFormValues } from "./EventForm.helper"
+import { IStateProps, IDispatchProps } from "./ParkingForm.container"
+import { ParkingFormValues } from "./ParkingForm.helper"
 
 interface RouteParams {
   id: string
 }
 export interface IProps extends IStateProps, IDispatchProps, RouteComponentProps<RouteParams> {}
 
-export const EventForm: React.FC<IProps & FormikProps<EventFormValues>> = ({
+export const ParkingForm: React.FC<IProps & FormikProps<ParkingFormValues>> = ({
   submitForm,
   resetForm,
   isValid,
@@ -24,11 +24,11 @@ export const EventForm: React.FC<IProps & FormikProps<EventFormValues>> = ({
   selected,
   getSelected,
   clearSelected,
-  events,
+  parkings,
 }) => {
   useEffect(() => {
     if (match.params.id) {
-      getSelected({ entity: "events", uuid: match.params.id })
+      getSelected({ entity: "parkings", uuid: match.params.id })
     }
     return () => {
       clearSelected()
@@ -42,13 +42,13 @@ export const EventForm: React.FC<IProps & FormikProps<EventFormValues>> = ({
       </Button>
     )
     const submit = (
-      <Button key="2" type="primary" onClick={submitForm} disabled={!isValid} loading={events.fetching}>
+      <Button key="2" type="primary" onClick={submitForm} disabled={!isValid} loading={parkings.fetching}>
         Сохранить
       </Button>
     )
     return selected.data ? [reset, submit] : [submit]
-  }, [selected.data, events.fetching, isValid, submitForm, resetForm, touched])
-  const title = useMemo(() => (selected.data ? "Редактировать событие" : "Новое событие"), [selected.data])
+  }, [selected.data, parkings.fetching, isValid, submitForm, resetForm, touched])
+  const title = useMemo(() => (selected.data ? "Редактировать парковку" : "Новая парковка"), [selected.data])
 
   return (
     <App
@@ -62,7 +62,6 @@ export const EventForm: React.FC<IProps & FormikProps<EventFormValues>> = ({
       <Form>
         <Input label="Название" name="title" />
         <Textarea label="Описание" name="description" autosize={{ minRows: 1, maxRows: 4 }} />
-        <DateTimePicker label="Дата" name="startedAt" />
         <Upload label="Изображение" name="image" />
         <GoogleMap name="point" />
       </Form>

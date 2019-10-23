@@ -1,0 +1,38 @@
+[
+  {
+    "uuid": "bd3953f9-d75a-4ae1-99b8-909fbb17ae84",
+    "title": "ParkingA",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "image": "https://avatars.mds.yandex.net/get-pdb/788379/1bfafa86-d6e6-4570-bfdf-1e43066fb20d/s375",
+    "point": {
+      "lat": 47.025553,
+      "lng": 28.826798
+    },
+    "createdAt": "2019-07-31T23:13:54.096Z",
+    "updatedAt": "2019-07-31T23:13:54.096Z"
+  },
+  {
+    "uuid": "ca3260b1-319a-4ef6-ac83-105f2cedb52b",
+    "title": "ParkingB",
+    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+    "image": "https://static.businessworld.in/article/article_extra_large_image/1490175707_RblFrV_shutterstock_426709153-470.jpg",
+    "point": {
+      "lat": 47.020681,
+      "lng": 28.829218
+    },
+    "createdAt": "2019-07-31T23:15:31.626Z",
+    "updatedAt": "2019-07-31T23:15:31.626Z"
+  },
+  {
+    "uuid": "beda3ad1-62f9-4021-90d1-4afecf628772",
+    "title": "ParkingZZ",
+    "description": "description 123",
+    "image": "https://ciclismurban.s3.eu-central-1.amazonaws.com/files/5ebc70a4-9382-4a16-ab59-fc8f8efdb803.jpg",
+    "point": {
+      "lat": 47.01869966590876,
+      "lng": 28.813028338501
+    },
+    "createdAt": "2019-10-23T21:23:06.652Z",
+    "updatedAt": "2019-10-23T21:25:30.991Z"
+  }
+]

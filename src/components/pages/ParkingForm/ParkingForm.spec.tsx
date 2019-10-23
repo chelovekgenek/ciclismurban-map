@@ -2,20 +2,20 @@ import React from "react"
 import { shallow } from "enzyme"
 
 import formProps from "mocks/formik-form-props"
-import events from "mocks/events.json"
+import parkings from "mocks/parkings.json"
 
-import { EventForm } from "./EventForm"
-import { EventFormValues } from "./EventForm.helper"
+import { ParkingForm } from "./ParkingForm"
+import { ParkingFormValues } from "./ParkingForm.helper"
 
-describe("pages/EventForm", () => {
-  const initialValues = new EventFormValues()
-  const render = (props: Partial<React.ComponentProps<typeof EventForm>> = {}) =>
+describe("pages/ParkingForm", () => {
+  const initialValues = new ParkingFormValues()
+  const render = (props: Partial<React.ComponentProps<typeof ParkingForm>> = {}) =>
     shallow(
-      <EventForm
+      <ParkingForm
         {...formProps}
         initialValues={initialValues}
         values={initialValues}
-        events={{ fetching: false }}
+        parkings={{ fetching: false }}
         selected={{ fetching: false }}
         getSelected={jest.fn() as any}
         clearSelected={jest.fn() as any}
@@ -31,7 +31,7 @@ describe("pages/EventForm", () => {
     expect(render()).toMatchSnapshot()
   })
   it("should match snapshot if `selected.data` is provided", () => {
-    expect(render({ selected: { data: events[0] } as any })).toMatchSnapshot()
+    expect(render({ selected: { data: parkings[0] } as any })).toMatchSnapshot()
   })
   it("should retreive dataset by `match.params.id`", () => {
     // TODO https://github.com/airbnb/enzyme/issues/2091
@@ -40,10 +40,10 @@ describe("pages/EventForm", () => {
     //   getSelected: jest.fn() as any,
     // }
     // render(props)
-    // expect(props.getSelected).toHaveBeenCalledWith({ entity: "events" })
+    // expect(props.getSelected).toHaveBeenCalledWith({ entity: "parkings" })
   })
   it("should be able to reset form if touched", () => {
-    const wrapper = render({ selected: { data: events[0] } as any, touched: { title: true } })
+    const wrapper = render({ selected: { data: parkings[0] } as any, touched: { title: true } })
     expect((wrapper.find("App").prop("content") as any).actions[0].props.disabled).toBe(false)
   })
 })

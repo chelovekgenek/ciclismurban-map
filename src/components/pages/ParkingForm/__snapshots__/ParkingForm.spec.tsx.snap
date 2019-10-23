@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/ParkingForm should match snapshot 1`] = `
+<App
+  content={
+    Object {
+      "actions": Array [
+        <Button
+          block={false}
+          disabled={true}
+          ghost={false}
+          htmlType="button"
+          loading={false}
+          onClick={[MockFunction]}
+          type="primary"
+        >
+          Сохранить
+        </Button>,
+      ],
+      "title": "Новая парковка",
+      "useHeader": true,
+      "useLayout": true,
+    }
+  }
+>
+  <Form>
+    <Input
+      label="Название"
+      name="title"
+    />
+    <Textarea
+      autosize={
+        Object {
+          "maxRows": 4,
+          "minRows": 1,
+        }
+      }
+      label="Описание"
+      name="description"
+    />
+    <Upload
+      label="Изображение"
+      name="image"
+    />
+    <GoogleMap
+      name="point"
+    />
+  </Form>
+</App>
+`;
+
+exports[`pages/ParkingForm should match snapshot if \`selected.data\` is provided 1`] = `
+<App
+  content={
+    Object {
+      "actions": Array [
+        <Button
+          block={false}
+          disabled={true}
+          ghost={false}
+          htmlType="button"
+          loading={false}
+          onClick={[Function]}
+        >
+          Сбросить
+        </Button>,
+        <Button
+          block={false}
+          disabled={true}
+          ghost={false}
+          htmlType="button"
+          loading={false}
+          onClick={[MockFunction]}
+          type="primary"
+        >
+          Сохранить
+        </Button>,
+      ],
+      "title": "Редактировать парковку",
+      "useHeader": true,
+      "useLayout": true,
+    }
+  }
+>
+  <Form>
+    <Input
+      label="Название"
+      name="title"
+    />
+    <Textarea
+      autosize={
+        Object {
+          "maxRows": 4,
+          "minRows": 1,
+        }
+      }
+      label="Описание"
+      name="description"
+    />
+    <Upload
+      label="Изображение"
+      name="image"
+    />
+    <GoogleMap
+      name="point"
+    />
+  </Form>
+</App>
+`;

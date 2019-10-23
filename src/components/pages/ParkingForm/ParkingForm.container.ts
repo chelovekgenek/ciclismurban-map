@@ -3,53 +3,53 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 
 import {
-  EventsCreateActions,
-  getEventsFetching,
   SelectedActions,
   getSelectedRoot,
-  EventsUpdateActions,
+  ParkingsCreateActions,
+  ParkingsUpdateActions,
+  getParkingsFetching,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
-import { ExposeGroup, EventModel } from "models/location"
+import { ExposeGroup, ParkingModel } from "models/location"
 import { validateFormik, handleLocationFormSubmit } from "helpers"
 
-import { EventFormValues } from "./EventForm.helper"
-import { IProps, EventForm } from "./EventForm"
+import { ParkingForm, IProps } from "./ParkingForm"
+import { ParkingFormValues } from "./ParkingForm.helper"
 
 export type IStateProps = {
-  events: {
-    fetching: ReturnType<typeof getEventsFetching>
+  parkings: {
+    fetching: ReturnType<typeof getParkingsFetching>
   }
   selected: ReturnType<typeof getSelectedRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof EventsCreateActions.request
-  update: typeof EventsUpdateActions.request
+  create: typeof ParkingsCreateActions.request
+  update: typeof ParkingsUpdateActions.request
   getSelected: typeof SelectedActions.requestGet
   clearSelected: typeof SelectedActions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, IProps, TAppState>(
   state => ({
-    events: {
-      fetching: getEventsFetching(state),
+    parkings: {
+      fetching: getParkingsFetching(state),
     },
     selected: getSelectedRoot(state),
   }),
   {
-    create: EventsCreateActions.request,
-    update: EventsUpdateActions.request,
+    create: ParkingsCreateActions.request,
+    update: ParkingsUpdateActions.request,
     getSelected: SelectedActions.requestGet,
     clearSelected: SelectedActions.clear,
   },
 )
-const hocWithFormik = withFormik<IProps, EventFormValues>({
+const hocWithFormik = withFormik<IProps, ParkingFormValues>({
   enableReinitialize: true,
-  mapPropsToValues: props => new EventFormValues(props.selected.data as EventModel),
+  mapPropsToValues: props => new ParkingFormValues(props.selected.data as ParkingModel),
   handleSubmit: handleLocationFormSubmit,
   validate: v => {
-    let errors = validateFormik(EventModel, [ExposeGroup.WRITE], ["image"])(v)
+    let errors = validateFormik(ParkingModel, [ExposeGroup.WRITE], ["image"])(v)
     if (!v.image) {
       errors.image = "Image must be provided"
     }
@@ -58,4 +58,4 @@ const hocWithFormik = withFormik<IProps, EventFormValues>({
   validateOnBlur: true,
 })
 
-export const EventFormContainer = withRouter(hocConnect(hocWithFormik(EventForm)))
+export const ParkingFormContainer = withRouter(hocConnect(hocWithFormik(ParkingForm)))

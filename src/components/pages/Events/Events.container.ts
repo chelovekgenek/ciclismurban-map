@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { getEventsLocations, EventsActions, getEventsFetching } from "store/entities/locations"
+import { getEventsLocations, EventsGetActions, getEventsFetching, EventsDeleteActions } from "store/entities/locations"
 import { TAppState } from "store/entities"
 
 import { Events } from "./Events"
@@ -9,8 +9,8 @@ export interface IStateProps {
   fetching: ReturnType<typeof getEventsFetching>
 }
 export interface IDispatchProps {
-  getEvents: typeof EventsActions.requestGet
-  deleteEvent: typeof EventsActions.requestDelete
+  getEvents: typeof EventsGetActions.request
+  deleteEvent: typeof EventsDeleteActions.request
 }
 
 export const EventsContainer = connect<IStateProps, IDispatchProps, {}, TAppState>(
@@ -19,7 +19,7 @@ export const EventsContainer = connect<IStateProps, IDispatchProps, {}, TAppStat
     fetching: getEventsFetching(state),
   }),
   {
-    getEvents: EventsActions.requestGet,
-    deleteEvent: EventsActions.requestDelete,
+    getEvents: EventsGetActions.request,
+    deleteEvent: EventsDeleteActions.request,
   },
 )(Events)

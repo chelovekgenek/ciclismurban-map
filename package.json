@@ -24,8 +24,10 @@
   "dependencies": {
     "@ciclismurban/api": "1.0.21",
     "@types/antd": "^1.0.0",
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/googlemaps": "^3.37.0",
-    "@types/jest": "24.0.15",
+    "@types/jest": "^24.0.19",
     "@types/lodash-es": "^4.17.3",
     "@types/moment": "^2.13.0",
     "@types/node": "12.6.8",
@@ -41,6 +43,9 @@
     "antd": "3.19.8",
     "axios": "^0.19.0",
     "class-validator": "^0.9.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
     "formik": "^1.5.8",
     "history": "^4.9.0",
     "lodash": "^4.17.15",
@@ -53,7 +58,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.2.0",
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
@@ -79,6 +84,14 @@
     "extends": [
       "react-app",
       "tslint-config-prettier"
+    ]
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es)"
     ]
   },
   "husky": {

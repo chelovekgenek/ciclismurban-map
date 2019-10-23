@@ -9,14 +9,14 @@ export enum SelectedTypes {
   CLEAR = "LOCATION__SELECTED__CLEAR",
 }
 
-type TRequiredSelectedState = Required<ISelectedState>
-type TRequestGetSelectedPayload = {
-  entity: TRequiredSelectedState["entity"]
-  uuid: TRequiredSelectedState["data"]["uuid"]
+type TState = Required<ISelectedState>
+type TRequestGetPayload = {
+  entity: TState["entity"]
+  uuid: TState["data"]["uuid"]
 }
 export const SelectedActions = {
-  requestGet: action(SelectedTypes.GET__REQUEST, payload<TRequestGetSelectedPayload>()),
-  successGet: action(SelectedTypes.GET__SUCCESS, payload<TRequiredSelectedState["data"]>()),
-  failureGet: action(SelectedTypes.GET__FAILURE, payload<TRequiredSelectedState["error"]>()),
+  requestGet: action(SelectedTypes.GET__REQUEST, payload<TRequestGetPayload>()),
+  successGet: action(SelectedTypes.GET__SUCCESS, payload<TState["data"]>()),
+  failureGet: action(SelectedTypes.GET__FAILURE, payload<TState["error"]>()),
   clear: action(SelectedTypes.CLEAR),
 }

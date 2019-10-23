@@ -11,7 +11,7 @@ export const Events: React.FC<IProps> = ({ events, fetching, getEvents, deleteEv
     title="События"
     fetching={fetching}
     locations={events}
-    links={{ create: "/events/new", getInfo: uuid => `/events/${uuid}` }}
+    links={{ create: "/event", getInfo: uuid => `/event/${uuid}` }}
     getLocations={getEvents}
     deleteLocation={deleteEvent}
   />

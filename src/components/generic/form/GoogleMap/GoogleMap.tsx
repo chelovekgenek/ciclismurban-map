@@ -12,15 +12,16 @@ interface IProps {
 
 export const GoogleMap: React.FC<IProps> = ({ name }) => (
   <Field name={name}>
-    {({ field: { value }, form: { setFieldValue } }: FieldProps) => (
+    {({ field: { value }, form: { setFieldValue, setFieldTouched } }: FieldProps) => (
       <Styled.MapContainer>
         <SharedGoogleMap defaultZoom={MapOptions.zoom} defaultCenter={MapOptions.position}>
           <SharedGoogleMap.Marker
             draggable
             position={value}
-            onDragEnd={({ latLng }: google.maps.MouseEvent) =>
+            onDragEnd={({ latLng }: google.maps.MouseEvent) => {
               setFieldValue(name, { lat: latLng.lat(), lng: latLng.lng() })
-            }
+              setFieldTouched(name, true)
+            }}
           />
         </SharedGoogleMap>
       </Styled.MapContainer>

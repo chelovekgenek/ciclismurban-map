@@ -16,6 +16,7 @@ interface IProps {
 export const Upload: React.FC<IProps> = ({ name, label }) => (
   <Field name={name}>
     {({ field, form }: FieldProps) => {
+      const src = field.value instanceof File ? URL.createObjectURL(field.value) : field.value
       return (
         <FormItem label={label} touched={form.touched[field.name]} error={form.errors[field.name]}>
           <Styled.Upload
@@ -26,11 +27,12 @@ export const Upload: React.FC<IProps> = ({ name, label }) => (
             showUploadList={false}
             onChange={({ file }: UploadChangeParam<UploadFile>) => {
               form.setFieldValue(name, file.originFileObj)
+              form.setFieldTouched(name, true)
             }}
             customRequest={() => {}}
           >
             {field.value ? (
-              <img src={URL.createObjectURL(field.value)} alt="avatar" style={{ width: "100%" }} />
+              <img src={src} alt="avatar" style={{ width: "100%" }} />
             ) : (
               <div>
                 <Icon type="plus" />

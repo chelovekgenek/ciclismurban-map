@@ -2,7 +2,9 @@ import { reducer, on } from "ts-action"
 
 import { EventModel } from "models/location"
 
-import { EventsActions } from "../actions"
+import { EventsGetActions, EventsCreateActions, EventsDeleteActions, EventsUpdateActions } from "../actions"
+
+//TODO https://github.com/cartant/ts-action/issues/46
 
 export interface IState {
   data: EventModel[]
@@ -17,22 +19,28 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(EventsActions.requestGet, EventsActions.requestCreate, EventsActions.requestDelete, state => ({
+  on(EventsGetActions.request, EventsCreateActions.request, EventsDeleteActions.request, state => ({
     ...state,
     fetching: true,
   })),
-  on(EventsActions.failureGet, EventsActions.failureCreate, EventsActions.failureDelete, (state, { payload }) => ({
-    ...state,
-    fetching: false,
-    error: payload,
-  })),
-  on(EventsActions.successGet, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
-  on(EventsActions.successCreate, (state, { payload }) => ({
+  on(
+    EventsGetActions.failure,
+    EventsCreateActions.failure,
+    EventsUpdateActions.request,
+    EventsDeleteActions.failure,
+    (state: IState, { payload }: any) => ({
+      ...state,
+      fetching: false,
+      error: payload,
+    }),
+  ),
+  on(EventsGetActions.success, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
+  on(EventsCreateActions.success, (state, { payload }) => ({
     ...state,
     fetching: false,
     data: state.data.concat(payload),
   })),
-  on(EventsActions.successDelete, (state, { payload }) => ({
+  on(EventsDeleteActions.success, (state, { payload }) => ({
     ...state,
     data: state.data.filter(item => item.uuid !== payload),
     fetching: false,

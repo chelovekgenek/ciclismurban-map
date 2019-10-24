@@ -14,6 +14,7 @@ import {
   EventsDeleteActions,
   EventsUpdateActions,
   EventsUpdateTypes,
+  SelectedActions,
 } from "../actions"
 import { createEvent, uploadFile, getEvents, deleteEvent, updateEvent } from "../api"
 
@@ -44,6 +45,7 @@ function* handleUpdate({ payload: { uuid, payload } }: ReturnType<typeof EventsU
     })
     const { data }: AxiosResponse<EventModel> = yield call(updateEvent, uuid, reqPayload)
     yield put(EventsUpdateActions.success(data))
+    yield put(SelectedActions.set(data))
   } catch (e) {
     yield put(EventsUpdateActions.failure(e))
   }

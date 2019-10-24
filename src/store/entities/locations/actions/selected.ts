@@ -2,10 +2,14 @@ import { action, payload } from "ts-action"
 
 import { IState as ISelectedState } from "../reducers/selected"
 
+export enum SelectedGetTypes {
+  REQUEST = "LOCATION__SELECTED__GET__REQUEST",
+  SUCCESS = "LOCATION__SELECTED__GET__SUCCESS",
+  FAILURE = "LOCATION__SELECTED__GET__FAILURE",
+}
+
 export enum SelectedTypes {
-  GET__REQUEST = "LOCATION__SELECTED__GET__REQUEST",
-  GET__SUCCESS = "LOCATION__SELECTED__GET__SUCCESS",
-  GET__FAILURE = "LOCATION__SELECTED__GET__FAILURE",
+  SET = "LOCATION__SELECTED__SET",
   CLEAR = "LOCATION__SELECTED__CLEAR",
 }
 
@@ -14,9 +18,13 @@ type TRequestGetPayload = {
   entity: TState["entity"]
   uuid: TState["data"]["uuid"]
 }
+export const SelectedGetActions = {
+  request: action(SelectedGetTypes.REQUEST, payload<TRequestGetPayload>()),
+  success: action(SelectedGetTypes.SUCCESS, payload<TState["data"]>()),
+  failure: action(SelectedGetTypes.FAILURE, payload<TState["error"]>()),
+}
+
 export const SelectedActions = {
-  requestGet: action(SelectedTypes.GET__REQUEST, payload<TRequestGetPayload>()),
-  successGet: action(SelectedTypes.GET__SUCCESS, payload<TState["data"]>()),
-  failureGet: action(SelectedTypes.GET__FAILURE, payload<TState["error"]>()),
+  set: action(SelectedTypes.SET, payload<TState["data"]>()),
   clear: action(SelectedTypes.CLEAR),
 }

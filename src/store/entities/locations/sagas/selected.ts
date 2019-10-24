@@ -3,11 +3,12 @@ import { AxiosResponse } from "axios"
 
 import { LocationModel } from "models/location"
 
-import { SelectedTypes, SelectedActions } from "../actions"
+import { SelectedGetActions, SelectedGetTypes } from "../actions"
 import { getParkingById, getServiceById, getShopById, getEventById } from "../api"
 import { TAcceptedEntity } from "../types"
 
-function* handleGet({ payload }: ReturnType<typeof SelectedActions.requestGet>) {
+type HandleGetAction = ReturnType<typeof SelectedGetActions.request>
+function* handleGet({ payload }: HandleGetAction) {
   const mapEntityByApiCall: { [key in TAcceptedEntity]: (id: string) => Promise<AxiosResponse<any>> } = {
     events: getEventById,
     parkings: getParkingById,
@@ -16,12 +17,12 @@ function* handleGet({ payload }: ReturnType<typeof SelectedActions.requestGet>) 
   }
   try {
     const { data }: AxiosResponse<LocationModel> = yield call(mapEntityByApiCall[payload.entity], payload.uuid)
-    yield put(SelectedActions.successGet(data))
+    yield put(SelectedGetActions.success(data))
   } catch (e) {
-    yield put(SelectedActions.failureGet(e))
+    yield put(SelectedGetActions.failure(e))
   }
 }
 
 export function* watcher() {
-  yield takeLatest(SelectedTypes.GET__REQUEST, handleGet)
+  yield takeLatest(SelectedGetTypes.REQUEST, handleGet)
 }

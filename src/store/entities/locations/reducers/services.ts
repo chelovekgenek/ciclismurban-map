@@ -1,11 +1,11 @@
 import { reducer, on } from "ts-action"
 
-import { LocationModel } from "models/location"
+import { ServiceModel } from "models/location"
 
-import { ServicesActions } from "../actions"
+import { ServicesGetActions, ServicesCreateActions, ServicesUpdateActions, ServicesDeleteActions } from "../actions"
 
 export interface IState {
-  data: LocationModel[]
+  data: ServiceModel[]
   fetching: boolean
   error?: Error
 }
@@ -17,7 +17,41 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(ServicesActions.requestGet, state => ({ ...state, fetching: true })),
-  on(ServicesActions.successGet, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
-  on(ServicesActions.failureGet, (state, { payload }) => ({ ...state, fetching: false, error: payload })),
+  on(
+    ServicesGetActions.request,
+    ServicesCreateActions.request,
+    ServicesUpdateActions.request,
+    ServicesDeleteActions.request,
+    (state: IState) => ({
+      ...state,
+      fetching: true,
+    }),
+  ),
+  on(
+    ServicesGetActions.failure,
+    ServicesCreateActions.failure,
+    ServicesUpdateActions.request,
+    ServicesDeleteActions.failure,
+    (state: IState, { payload }: any) => ({
+      ...state,
+      fetching: false,
+      error: payload,
+    }),
+  ),
+  on(ServicesGetActions.success, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
+  on(ServicesCreateActions.success, (state, { payload }) => ({
+    ...state,
+    fetching: false,
+    data: state.data.concat(payload),
+  })),
+  on(ServicesUpdateActions.success, (state, { payload }) => ({
+    ...state,
+    fetching: false,
+    data: state.data.map(item => (item.uuid === payload.uuid ? payload : item)),
+  })),
+  on(ServicesDeleteActions.success, (state, { payload }) => ({
+    ...state,
+    data: state.data.filter(item => item.uuid !== payload),
+    fetching: false,
+  })),
 )

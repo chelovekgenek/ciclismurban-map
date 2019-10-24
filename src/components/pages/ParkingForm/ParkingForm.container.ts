@@ -8,6 +8,7 @@ import {
   ParkingsCreateActions,
   ParkingsUpdateActions,
   getParkingsFetching,
+  SelectedGetActions,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { ExposeGroup, ParkingModel } from "models/location"
@@ -26,7 +27,7 @@ export type IStateProps = {
 export interface IDispatchProps {
   create: typeof ParkingsCreateActions.request
   update: typeof ParkingsUpdateActions.request
-  getSelected: typeof SelectedActions.requestGet
+  getSelected: typeof SelectedGetActions.request
   clearSelected: typeof SelectedActions.clear
 }
 
@@ -40,7 +41,7 @@ const hocConnect = connect<IStateProps, IDispatchProps, IProps, TAppState>(
   {
     create: ParkingsCreateActions.request,
     update: ParkingsUpdateActions.request,
-    getSelected: SelectedActions.requestGet,
+    getSelected: SelectedGetActions.request,
     clearSelected: SelectedActions.clear,
   },
 )

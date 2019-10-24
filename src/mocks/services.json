@@ -1,0 +1,38 @@
+[
+  {
+    "uuid": "a8ec2111-f270-47c4-aeee-3c735e26e689",
+    "title": "ServiceA",
+    "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+    "image": "https://previews.123rf.com/images/kostymo/kostymo1707/kostymo170700115/82270238-logo-bike-service-a-bicycle-sprocket-and-hand-holding-a-wrench-on-the-sides-repair-tune-mountain-bik.jpg",
+    "point": {
+      "lat": 47.0265833,
+      "lng": 28.8183946
+    },
+    "createdAt": "2019-07-31T23:17:36.069Z",
+    "updatedAt": "2019-07-31T23:17:36.069Z"
+  },
+  {
+    "uuid": "0da5a5d5-850c-4780-a0be-81e5494cb45e",
+    "title": "ServiceB",
+    "description": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+    "image": "https://www.sefiles.net/merchant/1809/images/site/service-center-hp-slimC1.jpg?t=1527182509653",
+    "point": {
+      "lat": 47.01933,
+      "lng": 28.831819
+    },
+    "createdAt": "2019-07-31T23:18:23.005Z",
+    "updatedAt": "2019-07-31T23:18:23.005Z"
+  },
+  {
+    "uuid": "98a6bae0-1264-4fc2-8bad-7e47a111ea61",
+    "title": "ServiceC",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    "image": "https://cdn.shopify.com/s/files/1/0267/5681/products/Bicycle_Service-01-03-03.png?v=1527502897",
+    "point": {
+      "lat": 47.025933,
+      "lng": 28.84
+    },
+    "createdAt": "2019-07-31T23:19:47.083Z",
+    "updatedAt": "2019-07-31T23:19:47.083Z"
+  }
+]

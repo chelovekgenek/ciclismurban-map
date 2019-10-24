@@ -1,7 +1,7 @@
 import { reducer, on } from "ts-action"
 
 import { TAcceptedEntity } from "../types"
-import { SelectedActions } from "../actions"
+import { SelectedActions, SelectedGetActions } from "../actions"
 import { LocationModel } from "models/location"
 
 export interface IState {
@@ -17,13 +17,13 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(SelectedActions.requestGet, (state, { payload }) => ({ ...state, entity: payload.entity, fetching: true })),
-  on(SelectedActions.successGet, (state, { payload }) => ({
+  on(SelectedGetActions.request, (state, { payload }) => ({ ...state, entity: payload.entity, fetching: true })),
+  on(SelectedGetActions.success, SelectedActions.set, (state, { payload }) => ({
     ...state,
     fetching: false,
     data: payload,
     error: undefined,
   })),
-  on(SelectedActions.failureGet, (state, { payload }) => ({ ...initialState, error: payload })),
+  on(SelectedGetActions.failure, (state, { payload }) => ({ ...initialState, error: payload })),
   on(SelectedActions.clear, () => initialState),
 )

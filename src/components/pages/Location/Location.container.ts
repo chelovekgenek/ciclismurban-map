@@ -1,8 +1,9 @@
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 
-import { getSelectedLocation, getSelectedFetching, SelectedActions } from "store/entities/locations"
+import { getSelectedLocation, getSelectedFetching, SelectedActions, SelectedGetActions } from "store/entities/locations"
 import { TAppState } from "store/entities"
+
 import { Location } from "./Location"
 
 export interface IStateProps {
@@ -10,7 +11,7 @@ export interface IStateProps {
   fetching: ReturnType<typeof getSelectedFetching>
 }
 export interface IDispatchProps {
-  getSelected: typeof SelectedActions.requestGet
+  getSelected: typeof SelectedGetActions.request
   clearSelected: typeof SelectedActions.clear
 }
 
@@ -21,7 +22,7 @@ export const LocationContainer = withRouter(
       fetching: getSelectedFetching(state),
     }),
     {
-      getSelected: SelectedActions.requestGet,
+      getSelected: SelectedGetActions.request,
       clearSelected: SelectedActions.clear,
     },
   )(Location),

@@ -14,6 +14,7 @@ import {
   ParkingsDeleteActions,
   ParkingsCreateActions,
   ParkingsUpdateActions,
+  SelectedActions,
 } from "../actions"
 import { getParkings, uploadFile, createParking, updateParking, deleteParking } from "../api"
 
@@ -44,6 +45,7 @@ function* handleUpdate({ payload: { uuid, payload } }: ReturnType<typeof Parking
     })
     const { data }: AxiosResponse<ParkingModel> = yield call(updateParking, uuid, reqPayload)
     yield put(ParkingsUpdateActions.success(data))
+    yield put(SelectedActions.set(data))
   } catch (e) {
     yield put(ParkingsUpdateActions.failure(e))
   }

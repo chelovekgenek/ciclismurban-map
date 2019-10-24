@@ -3,54 +3,54 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 
 import {
-  EventsCreateActions,
-  getEventsFetching,
   SelectedActions,
   getSelectedRoot,
-  EventsUpdateActions,
+  getServicesFetching,
+  ServicesCreateActions,
+  ServicesUpdateActions,
   SelectedGetActions,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
-import { ExposeGroup, EventModel } from "models/location"
+import { ExposeGroup, ServiceModel } from "models/location"
 import { validateFormik, handleLocationFormSubmit } from "helpers"
 
-import { EventFormValues } from "./EventForm.helper"
-import { IProps, EventForm } from "./EventForm"
+import { IProps, ServiceForm } from "./ServiceForm"
+import { ServiceFormValues } from "./ServiceForm.helper"
 
 export type IStateProps = {
-  events: {
-    fetching: ReturnType<typeof getEventsFetching>
+  services: {
+    fetching: ReturnType<typeof getServicesFetching>
   }
   selected: ReturnType<typeof getSelectedRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof EventsCreateActions.request
-  update: typeof EventsUpdateActions.request
+  create: typeof ServicesCreateActions.request
+  update: typeof ServicesUpdateActions.request
   getSelected: typeof SelectedGetActions.request
   clearSelected: typeof SelectedActions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, IProps, TAppState>(
   state => ({
-    events: {
-      fetching: getEventsFetching(state),
+    services: {
+      fetching: getServicesFetching(state),
     },
     selected: getSelectedRoot(state),
   }),
   {
-    create: EventsCreateActions.request,
-    update: EventsUpdateActions.request,
+    create: ServicesCreateActions.request,
+    update: ServicesUpdateActions.request,
     getSelected: SelectedGetActions.request,
     clearSelected: SelectedActions.clear,
   },
 )
-const hocWithFormik = withFormik<IProps, EventFormValues>({
+const hocWithFormik = withFormik<IProps, ServiceFormValues>({
   enableReinitialize: true,
-  mapPropsToValues: props => new EventFormValues(props.selected.data as EventModel),
+  mapPropsToValues: props => new ServiceFormValues(props.selected.data as ServiceModel),
   handleSubmit: handleLocationFormSubmit,
   validate: v => {
-    let errors = validateFormik(EventModel, [ExposeGroup.WRITE], ["image"])(v)
+    let errors = validateFormik(ServiceModel, [ExposeGroup.WRITE], ["image"])(v)
     if (!v.image) {
       errors.image = "Image must be provided"
     }
@@ -59,4 +59,4 @@ const hocWithFormik = withFormik<IProps, EventFormValues>({
   validateOnBlur: true,
 })
 
-export const EventFormContainer = withRouter(hocConnect(hocWithFormik(EventForm)))
+export const ServiceFormContainer = withRouter(hocConnect(hocWithFormik(ServiceForm)))

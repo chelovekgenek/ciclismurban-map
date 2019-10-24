@@ -13,5 +13,10 @@
     "title": "Парковки",
     "link": "/parkings",
     "icon": "car"
+  },
+  {
+    "title": "Сервисы",
+    "link": "/services",
+    "icon": "setting"
   }
 ]

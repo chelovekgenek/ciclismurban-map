@@ -21,6 +21,9 @@ export const Router = () => (
       <Route exact path="/services" component={Page.Services} />
       <Route exact path="/service" component={Page.ServiceForm} />
       <Route path="/service/:id" component={Page.ServiceForm} />
+      <Route exact path="/shops" component={Page.Shops} />
+      <Route exact path="/shop" component={Page.ShopForm} />
+      <Route path="/shop/:id" component={Page.ShopForm} />
     </Guard.Authentication>
     <Redirect to="/" />
   </Switch>

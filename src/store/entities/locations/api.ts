@@ -1,5 +1,5 @@
 import { request } from "helpers"
-import { EventModel, ParkingModel, ServiceModel } from "models/location"
+import { EventModel, ParkingModel, ServiceModel, ShopModel } from "models/location"
 
 export const getEvents = async () => request.get("/events")
 export const getParkings = async () => request.get("/parkings")
@@ -24,6 +24,10 @@ export const createService = async (payload: Partial<ServiceModel>) => request.p
 export const updateService = async (id: string, payload: Partial<ServiceModel>) =>
   request.patch(`/services/${id}`, payload)
 export const deleteService = async (id: string) => request.delete(`/services/${id}`)
+
+export const createShop = async (payload: Partial<ShopModel>) => request.post("/shops", payload)
+export const updateShop = async (id: string, payload: Partial<ShopModel>) => request.patch(`/shops/${id}`, payload)
+export const deleteShop = async (id: string) => request.delete(`/shops/${id}`)
 
 export const uploadFile = async (file: string) => {
   const form = new FormData()

@@ -18,5 +18,10 @@
     "title": "Сервисы",
     "link": "/services",
     "icon": "setting"
+  },
+  {
+    "title": "Магазины",
+    "link": "/shops",
+    "icon": "shop"
   }
 ]

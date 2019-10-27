@@ -1,10 +1,19 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:10.15.3
-    steps:
-      - checkout
-      - run: npx yarn install --production=true
-      - run: npx yarn build
-      - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master --force
+version: 2.1
+
+orbs:
+  common: ciclismurban/common@0.0.1
+
+workflows:
+  build-deploy:
+    jobs:
+      - common/build:
+          filters:
+            branches:
+              only:
+                - master
+      - common/deploy-master:
+          requires:
+            - common/build
+          filters:
+            branches:
+              only: master

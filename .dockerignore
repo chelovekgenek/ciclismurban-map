@@ -1,2 +1,8 @@
+# folders
 node_modules
 build
+.circleci
+
+# files
+yarn-error.log
+.env

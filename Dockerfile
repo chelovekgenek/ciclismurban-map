@@ -1,10 +1,18 @@
 FROM node:10.15.3
 
+ARG CONFIG
+
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN yarn install --production=true --silent
+ADD ./config/$CONFIG ./.env
+
+RUN yarn install --silent
 RUN yarn build
+RUN rm -rf node_modules
+RUN yarn install --production=true --silent
+
+EXPOSE 5000/tcp
 
 CMD [ "yarn", "start" ]

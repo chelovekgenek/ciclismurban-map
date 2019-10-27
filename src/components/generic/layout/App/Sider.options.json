@@ -7,21 +7,25 @@
   {
     "title": "Cобытия",
     "link": "/events",
-    "icon": "compass"
+    "icon": "compass",
+    "routes": ["/events", "/event", "/event/:id"]
   },
   {
     "title": "Парковки",
     "link": "/parkings",
-    "icon": "car"
+    "icon": "car",
+    "routes": ["/parkings", "/parking", "/parking/:id"]
   },
   {
     "title": "Сервисы",
     "link": "/services",
-    "icon": "setting"
+    "icon": "setting",
+    "routes": ["/services", "/service", "/service/:id"]
   },
   {
     "title": "Магазины",
     "link": "/shops",
-    "icon": "shop"
+    "icon": "shop",
+    "routes": ["/shops", "/shop", "/shop/:id"]
   }
 ]

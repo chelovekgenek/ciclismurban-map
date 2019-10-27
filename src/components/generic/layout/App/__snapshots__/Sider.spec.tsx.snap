@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/ServiceForm should match snapshot 1`] = `
+<Styled(Sider)
+  collapsed={false}
+  collapsible={true}
+  onCollapse={[Function]}
+>
+  <Styled(Menu)
+    selectedKeys={Array []}
+  >
+    <Styled(MenuItem)
+      key="/"
+      onClick={[Function]}
+    >
+      <Icon
+        type="environment"
+      />
+      <span>
+        Карта
+      </span>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/events"
+      onClick={[Function]}
+    >
+      <Icon
+        type="compass"
+      />
+      <span>
+        Cобытия
+      </span>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/parkings"
+      onClick={[Function]}
+    >
+      <Icon
+        type="car"
+      />
+      <span>
+        Парковки
+      </span>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/services"
+      onClick={[Function]}
+    >
+      <Icon
+        type="setting"
+      />
+      <span>
+        Сервисы
+      </span>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/shops"
+      onClick={[Function]}
+    >
+      <Icon
+        type="shop"
+      />
+      <span>
+        Магазины
+      </span>
+    </Styled(MenuItem)>
+  </Styled(Menu)>
+</Styled(Sider)>
+`;

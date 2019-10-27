@@ -8,11 +8,13 @@ COPY . .
 
 ADD ./config/$CONFIG ./.env
 
-RUN yarn install --silent
-RUN yarn build
-RUN rm -rf node_modules
-RUN yarn install --production=true --silent
+RUN \
+  yarn install --silent &&\
+  yarn build &&\
+  rm -rf node_modules &&\
+  yarn install --production=true --silent &&\
+  rm -rf `yarn cache dir`
 
-EXPOSE 5000/tcp
+EXPOSE 80/tcp
 
 CMD [ "yarn", "start" ]

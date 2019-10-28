@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  common: ciclismurban/common@0.2.2
+  common: ciclismurban/common@0.2.3
 
 workflows:
   build-deploy:

@@ -10,8 +10,8 @@ import { format } from "./helpers"
 
 describe("pages/DailyRangeSchedule", () => {
   const defaultValues = {
-    from: moment("2019-10-29T12:00:00.000+00:00").utcOffset(0),
-    to: moment("2019-10-29T20:00:00.000+00:00").utcOffset(0),
+    from: moment("2019-10-29T12:00:00.000Z"),
+    to: moment("2019-10-29T20:00:00.000Z"),
   }
   const defaultProps = {
     value: { from: format(defaultValues.from), to: format(defaultValues.to) },
@@ -28,12 +28,7 @@ describe("pages/DailyRangeSchedule", () => {
     value: Moment,
   ) => {
     const wrapper = render(wrapperValues)
-    return wrapper.find(TimePicker).findWhere(w =>
-      moment(w.prop("value"))
-        .utcOffset(0)
-        .add(1, "hour")
-        .isSame(value),
-    )
+    return wrapper.find(TimePicker).findWhere(w => moment(w.prop("value")).isSame(value))
   }
 
   it("should match snapshot if value was not passed", () => {

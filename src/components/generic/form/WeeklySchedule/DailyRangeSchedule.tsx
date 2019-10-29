@@ -8,7 +8,7 @@ import { WeeklyScheduleModel } from "models/location"
 
 import * as Styles from "./DailyRangeSchedule.styled"
 import options from "./options.json"
-import { parse } from "./helpers"
+import { parse, format } from "./helpers"
 
 interface IProps {
   value?: WeeklyScheduleModel[keyof WeeklyScheduleModel][number]
@@ -21,20 +21,20 @@ export const DailyRangeSchedule: React.FC<IProps> = ({ value, onAdd, onCancel, o
   const from = useMemo(() => (value ? parse(value.from) : undefined), [value])
   const to = useMemo(() => (value ? parse(value.to) : undefined), [value])
   const handleFromChange = useCallback(
-    (_time: Moment, timeStr: string) =>
+    (time: Moment) =>
       onChange &&
       onChange({
-        from: timeStr,
+        from: format(time),
         to: value!.to,
       }),
     [value, onChange],
   )
   const handleToChange = useCallback(
-    (_time: Moment, timeStr: string) =>
+    (time: Moment) =>
       onChange &&
       onChange({
         from: value!.from,
-        to: timeStr,
+        to: format(time),
       }),
     [value, onChange],
   )

@@ -88,7 +88,7 @@ exports[`pages/DailyRangeSchedule should match snapshot if value was passed 1`] 
       onChange={[Function]}
       placement="bottomLeft"
       transitionName="slide-up"
-      value={"2019-10-29T20:00:00.000Z"}
+      value={"2019-10-29T19:00:00.000Z"}
     />
   </Col>
   <Col

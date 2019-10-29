@@ -10,8 +10,8 @@ import { format } from "./helpers"
 
 describe("pages/DailyRangeSchedule", () => {
   const defaultValues = {
-    from: moment("2019-10-29T11:00:00.000Z"),
-    to: moment("2019-10-29T20:00:00.000Z"),
+    from: moment("2019-10-29T12:00:00.000+00:00").utcOffset(0),
+    to: moment("2019-10-29T20:00:00.000+00:00").utcOffset(0),
   }
   const defaultProps = {
     value: { from: format(defaultValues.from), to: format(defaultValues.to) },
@@ -28,7 +28,12 @@ describe("pages/DailyRangeSchedule", () => {
     value: Moment,
   ) => {
     const wrapper = render(wrapperValues)
-    return wrapper.find(TimePicker).findWhere(w => moment(w.prop("value")).isSame(value))
+    return wrapper.find(TimePicker).findWhere(w =>
+      moment(w.prop("value"))
+        .utcOffset(0)
+        .add(1, "hour")
+        .isSame(value),
+    )
   }
 
   it("should match snapshot if value was not passed", () => {
@@ -62,8 +67,8 @@ describe("pages/DailyRangeSchedule", () => {
     const timepicker = getTimepickerByValue(props, defaultValues.from)
     timepicker.simulate("change", defaultValues.to, defaultProps.value.to)
     expect(props.onChange).toBeCalledWith({
-      from: "21:00",
-      to: "21:00",
+      from: "20:00",
+      to: "20:00",
     })
   })
   it('should call onChange at "to" input', () => {

@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/WeeklySchedule should match snapshot 1`] = `
+<FormItem
+  label="weekly-schedule"
+>
+  <Row
+    gutter={0}
+    key="mon"
+  >
+    <Col
+      span={3}
+    >
+      Пн
+    </Col>
+    <Col
+      span={21}
+    >
+      <DailyRangeSchedule
+        key="0"
+        onAdd={[Function]}
+        onCancel={[Function]}
+        onChange={[Function]}
+        value={
+          Object {
+            "from": "08:00",
+            "to": "20:00",
+          }
+        }
+      />
+    </Col>
+  </Row>
+  <Row
+    gutter={0}
+    key="tue"
+  >
+    <Col
+      span={3}
+    >
+      Вт
+    </Col>
+    <Col
+      span={21}
+    >
+      <DailyRangeSchedule
+        key="0"
+        onAdd={[Function]}
+        onCancel={[Function]}
+        onChange={[Function]}
+        value={
+          Object {
+            "from": "08:00",
+            "to": "20:00",
+          }
+        }
+      />
+    </Col>
+  </Row>
+  <Row
+    gutter={0}
+    key="wed"
+  >
+    <Col
+      span={3}
+    >
+      Ср
+    </Col>
+    <Col
+      span={21}
+    >
+      <DailyRangeSchedule
+        key="0"
+        onAdd={[Function]}
+        onCancel={[Function]}
+        onChange={[Function]}
+        value={
+          Object {
+            "from": "08:00",
+            "to": "20:00",
+          }
+        }
+      />
+    </Col>
+  </Row>
+  <Row
+    gutter={0}
+    key="thu"
+  >
+    <Col
+      span={3}
+    >
+      Чт
+    </Col>
+    <Col
+      span={21}
+    >
+      <DailyRangeSchedule
+        key="0"
+        onAdd={[Function]}
+        onCancel={[Function]}
+        onChange={[Function]}
+        value={
+          Object {
+            "from": "08:00",
+            "to": "20:00",
+          }
+        }
+      />
+    </Col>
+  </Row>
+  <Row
+    gutter={0}
+    key="fri"
+  >
+    <Col
+      span={3}
+    >
+      Пт
+    </Col>
+    <Col
+      span={21}
+    >
+      <DailyRangeSchedule
+        onAdd={[Function]}
+      />
+    </Col>
+  </Row>
+  <Row
+    gutter={0}
+    key="sat"
+  >
+    <Col
+      span={3}
+    >
+      Сб
+    </Col>
+    <Col
+      span={21}
+    >
+      <DailyRangeSchedule
+        key="0"
+        onCancel={[Function]}
+        onChange={[Function]}
+        value={
+          Object {
+            "from": "08:00",
+            "to": "12:00",
+          }
+        }
+      />
+      <DailyRangeSchedule
+        key="1"
+        onAdd={[Function]}
+        onCancel={[Function]}
+        onChange={[Function]}
+        value={
+          Object {
+            "from": "14:00",
+            "to": "20:00",
+          }
+        }
+      />
+    </Col>
+  </Row>
+  <Row
+    gutter={0}
+    key="sun"
+  >
+    <Col
+      span={3}
+    >
+      Вс
+    </Col>
+    <Col
+      span={21}
+    >
+      <DailyRangeSchedule
+        onAdd={[Function]}
+      />
+    </Col>
+  </Row>
+</FormItem>
+`;

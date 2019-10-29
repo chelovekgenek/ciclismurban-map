@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/DailyRangeSchedule should match snapshot if value was not passed 1`] = `
+<Row
+  gutter={0}
+>
+  <Col
+    span={9}
+  >
+    <styled.div>
+      -
+    </styled.div>
+  </Col>
+  <Col
+    span={9}
+  >
+    <styled.div>
+      -
+    </styled.div>
+  </Col>
+  <Col
+    span={6}
+  >
+    <Styled(ButtonGroup)>
+      <Button
+        block={false}
+        disabled={true}
+        ghost={false}
+        htmlType="button"
+        icon="minus"
+        loading={false}
+      />
+      <Button
+        block={false}
+        disabled={true}
+        ghost={false}
+        htmlType="button"
+        icon="plus"
+        loading={false}
+      />
+    </Styled(ButtonGroup)>
+  </Col>
+</Row>
+`;
+
+exports[`pages/DailyRangeSchedule should match snapshot if value was passed 1`] = `
+<Row
+  gutter={0}
+>
+  <Col
+    span={9}
+  >
+    <TimePicker
+      align={
+        Object {
+          "offset": Array [
+            0,
+            -2,
+          ],
+        }
+      }
+      disabled={false}
+      focusOnOpen={true}
+      format="HH:mm"
+      hideDisabledOptions={false}
+      onChange={[Function]}
+      placement="bottomLeft"
+      transitionName="slide-up"
+      value={"2019-10-29T11:00:00.000Z"}
+    />
+  </Col>
+  <Col
+    span={9}
+  >
+    <TimePicker
+      align={
+        Object {
+          "offset": Array [
+            0,
+            -2,
+          ],
+        }
+      }
+      disabled={false}
+      focusOnOpen={true}
+      format="HH:mm"
+      hideDisabledOptions={false}
+      onChange={[Function]}
+      placement="bottomLeft"
+      transitionName="slide-up"
+      value={"2019-10-29T20:00:00.000Z"}
+    />
+  </Col>
+  <Col
+    span={6}
+  >
+    <Styled(ButtonGroup)>
+      <Button
+        block={false}
+        disabled={true}
+        ghost={false}
+        htmlType="button"
+        icon="minus"
+        loading={false}
+      />
+      <Button
+        block={false}
+        disabled={true}
+        ghost={false}
+        htmlType="button"
+        icon="plus"
+        loading={false}
+      />
+    </Styled(ButtonGroup)>
+  </Col>
+</Row>
+`;

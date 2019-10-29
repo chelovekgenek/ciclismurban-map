@@ -37,7 +37,7 @@ export const ShopForm: React.FC<IProps & FormikProps<ShopFormValues>> = ({
 
   const actions = useMemo(() => {
     const reset = (
-      <Button key="1" onClick={() => resetForm(selected.data)} disabled={isEmpty(touched)}>
+      <Button key="1" onClick={() => resetForm(selected.data as ShopFormValues)} disabled={isEmpty(touched)}>
         Сбросить
       </Button>
     )

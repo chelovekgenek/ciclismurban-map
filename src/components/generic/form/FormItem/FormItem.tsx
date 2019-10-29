@@ -26,7 +26,7 @@ export const FormItem: React.FC<IProps> = ({ children, label, touched, error }) 
     {!isNil(label) ? (
       <Row type="flex">
         <Col span={3}>{label}</Col>
-        <Col span={9}>{children}</Col>
+        <Col span={10}>{children}</Col>
       </Row>
     ) : (
       children

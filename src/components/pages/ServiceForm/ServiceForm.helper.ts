@@ -1,5 +1,5 @@
 import { MapOptions } from "helpers"
-import { ServiceModel } from "models/location"
+import { ServiceModel, WeeklyScheduleModel } from "models/location"
 
 export class ServiceFormValues extends ServiceModel {
   constructor(props?: ServiceModel) {
@@ -10,6 +10,7 @@ export class ServiceFormValues extends ServiceModel {
       this.description = props.description
       this.point = props.point
       this.image = props.image
+      this.schedule = props.schedule
     }
   }
 
@@ -17,4 +18,13 @@ export class ServiceFormValues extends ServiceModel {
   description = ""
   point = MapOptions.position
   image = ""
+  schedule: WeeklyScheduleModel = {
+    mon: [],
+    tue: [],
+    wed: [],
+    thu: [],
+    fri: [],
+    sat: [],
+    sun: [],
+  }
 }

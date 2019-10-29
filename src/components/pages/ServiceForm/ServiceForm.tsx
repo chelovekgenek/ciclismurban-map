@@ -4,11 +4,12 @@ import { RouteComponentProps } from "react-router-dom"
 import { isEmpty } from "lodash-es"
 
 import { App } from "components/generic/layout"
-import { Input, Textarea, GoogleMap, Upload } from "components/generic/form"
+import { Input, Textarea, GoogleMap, Upload, WeeklySchedule } from "components/generic/form"
 import { Button } from "components/generic/ui"
 
 import { IStateProps, IDispatchProps } from "./ServiceForm.container"
 import { ServiceFormValues } from "./ServiceForm.helper"
+import { ServiceModel } from "models/location"
 
 interface RouteParams {
   id: string
@@ -37,7 +38,7 @@ export const ServiceForm: React.FC<IProps & FormikProps<ServiceFormValues>> = ({
 
   const actions = useMemo(() => {
     const reset = (
-      <Button key="1" onClick={() => resetForm(selected.data)} disabled={isEmpty(touched)}>
+      <Button key="1" onClick={() => resetForm(selected.data as ServiceModel)} disabled={isEmpty(touched)}>
         Сбросить
       </Button>
     )
@@ -49,7 +50,6 @@ export const ServiceForm: React.FC<IProps & FormikProps<ServiceFormValues>> = ({
     return selected.data ? [reset, submit] : [submit]
   }, [selected.data, services.fetching, isValid, submitForm, resetForm, touched])
   const title = useMemo(() => (selected.data ? "Редактировать сервис" : "Новый сервис"), [selected.data])
-
   return (
     <App
       content={{
@@ -62,6 +62,7 @@ export const ServiceForm: React.FC<IProps & FormikProps<ServiceFormValues>> = ({
       <Form>
         <Input label="Название" name="title" />
         <Textarea label="Описание" name="description" autosize={{ minRows: 1, maxRows: 4 }} />
+        <WeeklySchedule label="Время работы" name="schedule" />
         <Upload label="Изображение" name="image" />
         <GoogleMap name="point" />
       </Form>

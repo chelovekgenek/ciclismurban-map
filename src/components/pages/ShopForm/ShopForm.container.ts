@@ -12,7 +12,7 @@ import {
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { ExposeGroup, ShopModel } from "models/location"
-import { validateFormik, handleLocationFormSubmit } from "helpers"
+import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { IProps, ShopForm } from "./ShopForm"
 import { ShopFormValues } from "./ShopForm.helper"
@@ -49,13 +49,7 @@ const hocWithFormik = withFormik<IProps, ShopFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new ShopFormValues(props.selected.data as ShopModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: v => {
-    let errors = validateFormik(ShopModel, [ExposeGroup.WRITE], ["image"])(v)
-    if (!v.image) {
-      errors.image = "Image must be provided"
-    }
-    return errors
-  },
+  validate: getHandlerLocationFormValidate(ShopModel, [ExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

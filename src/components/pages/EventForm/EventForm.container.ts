@@ -12,7 +12,7 @@ import {
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { ExposeGroup, EventModel } from "models/location"
-import { validateFormik, handleLocationFormSubmit } from "helpers"
+import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { EventFormValues } from "./EventForm.helper"
 import { IProps, EventForm } from "./EventForm"
@@ -49,13 +49,7 @@ const hocWithFormik = withFormik<IProps, EventFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new EventFormValues(props.selected.data as EventModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: v => {
-    let errors = validateFormik(EventModel, [ExposeGroup.WRITE], ["image"])(v)
-    if (!v.image) {
-      errors.image = "Image must be provided"
-    }
-    return errors
-  },
+  validate: getHandlerLocationFormValidate(EventModel, [ExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

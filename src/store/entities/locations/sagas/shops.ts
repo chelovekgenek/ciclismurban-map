@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios"
 import { extend } from "lodash-es"
 
 import { history } from "store/history"
-import { LocationModel, ShopModel } from "models/location"
+import { ShopModel } from "models/location"
 
 import { getShops, deleteShop, updateShop, uploadFile, createShop } from "../api"
 import {
@@ -20,7 +20,7 @@ import {
 
 function* handleGet() {
   try {
-    const { data }: AxiosResponse<LocationModel[]> = yield call(getShops)
+    const { data }: AxiosResponse<ShopModel[]> = yield call(getShops)
     yield put(ShopsGetActions.success(data))
   } catch (e) {
     yield put(ShopsGetActions.failure(e))

@@ -1,6 +1,7 @@
 export {
   LocationModel,
   PointModel,
+  WeeklyScheduleModel,
   ExposeGroup,
   EventModel,
   ParkingModel,

@@ -38,6 +38,10 @@ exports[`pages/ServiceForm should match snapshot 1`] = `
       label="Описание"
       name="description"
     />
+    <WeeklyScheduleWrapper
+      label="Время работы"
+      name="schedule"
+    />
     <Upload
       label="Изображение"
       name="image"
@@ -96,6 +100,10 @@ exports[`pages/ServiceForm should match snapshot if \`selected.data\` is provide
       }
       label="Описание"
       name="description"
+    />
+    <WeeklyScheduleWrapper
+      label="Время работы"
+      name="schedule"
     />
     <Upload
       label="Изображение"

@@ -1,5 +1,5 @@
 import { MapOptions } from "helpers"
-import { ShopModel } from "models/location"
+import { ShopModel, WeeklyScheduleModel } from "models/location"
 
 export class ShopFormValues extends ShopModel {
   constructor(props?: ShopModel) {
@@ -10,6 +10,7 @@ export class ShopFormValues extends ShopModel {
       this.description = props.description
       this.point = props.point
       this.image = props.image
+      this.schedule = props.schedule
     }
   }
 
@@ -17,4 +18,13 @@ export class ShopFormValues extends ShopModel {
   description = ""
   point = MapOptions.position
   image = ""
+  schedule: WeeklyScheduleModel = {
+    mon: [],
+    tue: [],
+    wed: [],
+    thu: [],
+    fri: [],
+    sat: [],
+    sun: [],
+  }
 }

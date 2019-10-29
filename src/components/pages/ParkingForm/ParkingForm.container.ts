@@ -12,7 +12,7 @@ import {
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { ExposeGroup, ParkingModel } from "models/location"
-import { validateFormik, handleLocationFormSubmit } from "helpers"
+import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { ParkingForm, IProps } from "./ParkingForm"
 import { ParkingFormValues } from "./ParkingForm.helper"
@@ -49,13 +49,7 @@ const hocWithFormik = withFormik<IProps, ParkingFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new ParkingFormValues(props.selected.data as ParkingModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: v => {
-    let errors = validateFormik(ParkingModel, [ExposeGroup.WRITE], ["image"])(v)
-    if (!v.image) {
-      errors.image = "Image must be provided"
-    }
-    return errors
-  },
+  validate: getHandlerLocationFormValidate(ParkingModel, [ExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

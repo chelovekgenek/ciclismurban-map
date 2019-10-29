@@ -18,11 +18,12 @@
     "start": "dotenv -- serve -s build",
     "watch": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@ciclismurban/api": "1.0.21",
+    "@ciclismurban/api": "1.1.1",
     "antd": "3.19.8",
     "axios": "^0.19.0",
     "class-validator": "^0.9.1",
@@ -109,6 +110,7 @@
     "*.{ts,tsx}": [
       "tslint -p tsconfig.json",
       "prettier --write",
+      "yarn test",
       "git add"
     ]
   }

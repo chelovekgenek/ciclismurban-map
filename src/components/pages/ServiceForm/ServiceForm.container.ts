@@ -12,7 +12,7 @@ import {
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { ExposeGroup, ServiceModel } from "models/location"
-import { validateFormik, handleLocationFormSubmit } from "helpers"
+import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { IProps, ServiceForm } from "./ServiceForm"
 import { ServiceFormValues } from "./ServiceForm.helper"
@@ -49,13 +49,7 @@ const hocWithFormik = withFormik<IProps, ServiceFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new ServiceFormValues(props.selected.data as ServiceModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: v => {
-    let errors = validateFormik(ServiceModel, [ExposeGroup.WRITE], ["image"])(v)
-    if (!v.image) {
-      errors.image = "Image must be provided"
-    }
-    return errors
-  },
+  validate: getHandlerLocationFormValidate(ServiceModel, [ExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

@@ -101,7 +101,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && yarn test"
     }
   },
   "lint-staged": {
@@ -112,7 +112,6 @@
     "*.{ts,tsx}": [
       "tslint -p tsconfig.json",
       "prettier --write",
-      "yarn test",
       "git add"
     ]
   }

@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router-dom"
 import { isEmpty } from "lodash-es"
 
 import { App } from "components/generic/layout"
-import { Input, Textarea, GoogleMap, Upload } from "components/generic/form"
+import { Input, Textarea, GoogleMap, Upload, WeeklySchedule } from "components/generic/form"
 import { Button } from "components/generic/ui"
 
 import { IStateProps, IDispatchProps } from "./ShopForm.container"
@@ -62,6 +62,7 @@ export const ShopForm: React.FC<IProps & FormikProps<ShopFormValues>> = ({
       <Form>
         <Input label="Название" name="title" />
         <Textarea label="Описание" name="description" autosize={{ minRows: 1, maxRows: 4 }} />
+        <WeeklySchedule label="Время работы" name="schedule" />
         <Upload label="Изображение" name="image" />
         <GoogleMap name="point" />
       </Form>

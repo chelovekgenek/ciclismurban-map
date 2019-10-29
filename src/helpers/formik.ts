@@ -1,11 +1,10 @@
 import { FormikBag } from "formik"
-import { has } from "lodash-es"
+import { get } from "lodash-es"
 
 import { getSelectedRoot } from "store/entities/locations"
 import { difference } from "./difference"
 import { validateFormik } from "./validator"
 import { LocationModel } from "models/location"
-import { T } from "antd/lib/upload/utils"
 import { ClassType } from "class-transformer/ClassTransformer"
 
 interface IProps {
@@ -23,10 +22,10 @@ export const handleLocationFormSubmit = (values: Object, { props }: FormikBag<IP
 }
 
 export const getHandlerLocationFormValidate = <T = LocationModel>(model: ClassType<Object>, groups: string[]) => (
-  value: T,
+  values: T,
 ) => {
-  let errors = validateFormik(model, groups, ["image"])(value)
-  if (!has(value, "image")) {
+  let errors = validateFormik(model, groups, ["image"])(values)
+  if (!get(values, "image")) {
     errors.image = "Image must be provided"
   }
   return errors

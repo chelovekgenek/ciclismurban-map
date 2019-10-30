@@ -2,6 +2,7 @@ import React from "react"
 import { Route, RouteProps, Redirect } from "react-router-dom"
 
 import { IStateProps } from "./ProtectedRoute.container"
+import { indexRoutePath } from "./Router.options"
 
 interface IProps extends IStateProps, Omit<RouteProps, "component"> {
   component: React.ElementType<{ [key: string]: any }>
@@ -23,7 +24,7 @@ export const ProtectedRoute: React.FC<IProps> = ({
       if (authenticated && attempts > 0) {
         return <Component {...props} />
       }
-      return <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      return <Redirect to={{ pathname: indexRoutePath, state: { from: props.location } }} />
     }}
   />
 )

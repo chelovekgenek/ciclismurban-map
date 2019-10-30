@@ -5,10 +5,9 @@ import { getAuthenticated } from "store/entities/user"
 
 interface IProps {
   children: React.ReactNode
-  redirect?: boolean
 }
 
-export const Authentication: React.FC<IProps> = ({ children, redirect }) => {
+export const Authentication: React.FC<IProps> = ({ children }) => {
   const authenticated = useSelector(getAuthenticated)
   if (!authenticated) {
     return null

@@ -7,6 +7,7 @@ import { RegisterActions, LoginActions, LoginByTokenActions, LogoutAction } from
 export interface IState {
   authenticated: boolean
   fetching: boolean
+  attempts: number
   token?: string
   data?: UserModel
   error?: number
@@ -15,6 +16,7 @@ export interface IState {
 const initialState: IState = {
   authenticated: false,
   fetching: false,
+  attempts: 0,
 }
 
 export default reducer(
@@ -26,11 +28,13 @@ export default reducer(
   })),
   on(RegisterActions.success, LoginActions.success, LoginByTokenActions.success, (state, { payload }) => ({
     ...initialState,
+    attempts: state.attempts + 1,
     authenticated: true,
     ...payload,
   })),
-  on(RegisterActions.failure, LoginActions.failure, (_state, { payload }) => ({
+  on(RegisterActions.failure, LoginActions.failure, (state, { payload }) => ({
     ...initialState,
+    attempts: state.attempts + 1,
     error: payload,
   })),
   on(LoginByTokenActions.failure, LogoutAction, () => initialState),

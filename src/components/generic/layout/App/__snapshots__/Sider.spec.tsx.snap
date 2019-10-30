@@ -11,58 +11,63 @@ exports[`pages/ServiceForm should match snapshot 1`] = `
   >
     <Styled(MenuItem)
       key="/"
-      onClick={[Function]}
     >
       <Icon
         type="environment"
       />
-      <span>
+      <Link
+        to="/"
+      >
         Карта
-      </span>
+      </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/events"
-      onClick={[Function]}
     >
       <Icon
         type="compass"
       />
-      <span>
+      <Link
+        to="/events"
+      >
         Cобытия
-      </span>
+      </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/parkings"
-      onClick={[Function]}
     >
       <Icon
         type="car"
       />
-      <span>
+      <Link
+        to="/parkings"
+      >
         Парковки
-      </span>
+      </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/services"
-      onClick={[Function]}
     >
       <Icon
         type="setting"
       />
-      <span>
+      <Link
+        to="/services"
+      >
         Сервисы
-      </span>
+      </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/shops"
-      onClick={[Function]}
     >
       <Icon
         type="shop"
       />
-      <span>
+      <Link
+        to="/shops"
+      >
         Магазины
-      </span>
+      </Link>
     </Styled(MenuItem)>
   </Styled(Menu)>
 </Styled(Sider)>

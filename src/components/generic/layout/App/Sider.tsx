@@ -1,17 +1,15 @@
-import React, { useState, useCallback, useMemo } from "react"
-import { withRouter, RouteComponentProps } from "react-router-dom"
+import React, { useState, useMemo } from "react"
+import { withRouter, RouteComponentProps, Link } from "react-router-dom"
 
 import { Icon } from "components/generic/ui"
-import { ClickParam } from "antd/lib/menu"
 
 import options from "./Sider.options.json"
 import * as Styled from "./Sider.styled"
 
 interface IProps extends RouteComponentProps {}
 
-export const Sider: React.FC<IProps> = ({ history, match }) => {
+export const Sider: React.FC<IProps> = ({ match }) => {
   const [collapsed, setCollapsed] = useState(false)
-  const handleClickItem = useCallback(({ key }: ClickParam) => history.push(key), [history])
   const selected = useMemo(() => {
     for (let option of options) {
       if (option.link === match.path || (option.routes && option.routes.includes(match.path))) {
@@ -24,9 +22,9 @@ export const Sider: React.FC<IProps> = ({ history, match }) => {
     <Styled.Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
       <Styled.Menu selectedKeys={selected}>
         {options.map(item => (
-          <Styled.MenuItem key={item.link} onClick={handleClickItem}>
+          <Styled.MenuItem key={item.link}>
             <Icon type={item.icon} />
-            <span>{item.title}</span>
+            <Link to={item.link}>{item.title}</Link>
           </Styled.MenuItem>
         ))}
       </Styled.Menu>

@@ -19,9 +19,17 @@ export const Menu = styled(Shared.Menu)`
 export const MenuItem = styled(Shared.Menu.Item)`
   &.ant-menu-item {
     color: white;
+    &.ant-menu-item-selected > a,
+    &.ant-menu-item-selected > i {
+      color: cadetblue;
+    }
     &.ant-menu-item-selected,
     &:hover {
       background-color: #154961 !important;
+    }
+    & > a {
+      display: initial;
+      color: white;
     }
   }
 `

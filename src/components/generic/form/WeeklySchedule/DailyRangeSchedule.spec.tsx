@@ -6,7 +6,7 @@ import { TimePicker } from "antd"
 import { Button } from "components/generic/ui"
 
 import { DailyRangeSchedule } from "./DailyRangeSchedule"
-import { format } from "./helpers"
+import * as helpers from "./helpers"
 
 describe("pages/DailyRangeSchedule", () => {
   const defaultValues = {
@@ -14,7 +14,7 @@ describe("pages/DailyRangeSchedule", () => {
     to: moment("2019-10-29T20:00:00.000Z"),
   }
   const defaultProps = {
-    value: { from: format(defaultValues.from), to: format(defaultValues.to) },
+    value: { from: helpers.format(defaultValues.from), to: helpers.format(defaultValues.to) },
   }
   const render = (props: Partial<React.ComponentProps<typeof DailyRangeSchedule>> = {}) =>
     shallow(<DailyRangeSchedule {...defaultProps} {...props} />)
@@ -31,6 +31,21 @@ describe("pages/DailyRangeSchedule", () => {
     return wrapper.find(TimePicker).findWhere(w => moment(w.prop("value")).isSame(value))
   }
 
+  const spy = jest.spyOn(helpers, "parse")
+  beforeAll(() => {
+    spy.mockImplementation(v => {
+      if (v === defaultProps.value.from) {
+        return defaultValues.from
+      }
+      if (v === defaultProps.value.to) {
+        return defaultValues.to
+      }
+      return moment()
+    })
+  })
+  afterAll(() => {
+    spy.mockRestore()
+  })
   it("should match snapshot if value was not passed", () => {
     expect(render({ value: undefined })).toMatchSnapshot()
   })

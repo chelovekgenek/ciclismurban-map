@@ -58,13 +58,11 @@
     "typescript": "3.5.3"
   },
   "devDependencies": {
-    "@types/antd": "^1.0.0",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/googlemaps": "^3.37.0",
     "@types/jest": "^24.0.19",
     "@types/lodash-es": "^4.17.3",
-    "@types/moment": "^2.13.0",
     "@types/moment-timezone": "^0.5.12",
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",
@@ -74,7 +72,6 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/react-router-redux": "^5.0.18",
     "@types/recompose": "^0.30.6",
-    "@types/reselect": "^2.2.0",
     "@types/styled-components": "^4.1.18",
     "husky": "^3.0.1",
     "lint-staged": "^9.2.1",
@@ -101,7 +98,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && yarn test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

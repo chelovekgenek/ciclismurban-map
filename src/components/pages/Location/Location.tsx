@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router"
 import { Layout } from "components/generic"
 import { Empty, Spinner, GoogleMap } from "components/generic/ui"
 import { TAcceptedEntity, ACCEPTED_ENTITIES } from "store/entities/locations"
+import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import * as Styled from "./Location.styled"
 import { IStateProps, IDispatchProps } from "./Location.container"
@@ -19,7 +20,7 @@ export const Location: React.FC<IProps> = ({ history, match, getSelected, select
   useEffect(() => {
     const { entity, id } = match.params
     if (!ACCEPTED_ENTITIES.includes(entity)) {
-      return history.replace("/")
+      return history.replace(ROUTES_INDEX_PATH)
     }
 
     getSelected({ entity, uuid: id })

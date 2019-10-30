@@ -1,7 +1,9 @@
 import React from "react"
 import { Route, Switch, Redirect } from "react-router-dom"
 
-import options, { indexRoutePath } from "./Router.options"
+import { ROUTES_INDEX_PATH } from "constants/routes"
+
+import options from "./Router.options"
 import ProtectedRoute from "./ProtectedRoute.container"
 
 export const Router = () => (
@@ -17,6 +19,6 @@ export const Router = () => (
         />
       )
     })}
-    <Redirect to={indexRoutePath} />
+    <Redirect to={ROUTES_INDEX_PATH} />
   </Switch>
 )

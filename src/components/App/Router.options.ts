@@ -1,7 +1,5 @@
 import * as Page from "components/pages"
 
-export const indexRoutePath = "/"
-
 export default [
   { protected: false, exact: true, path: "/", component: Page.Map },
   { protected: false, exact: false, path: "/locations/:entity/:id", component: Page.Location },

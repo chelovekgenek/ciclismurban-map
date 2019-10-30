@@ -1,4 +1,5 @@
 import { connect } from "react-redux"
+import { RouteProps } from "react-router-dom"
 
 import { TAppState } from "store/entities"
 import { getFetching, getAttempts, getAuthenticated } from "store/entities/user"
@@ -11,7 +12,7 @@ export interface IStateProps {
   authenticated: ReturnType<typeof getAuthenticated>
 }
 
-export default connect<IStateProps, {}, {}, TAppState>(state => ({
+export default connect<IStateProps, {}, RouteProps, TAppState>(state => ({
   fetching: getFetching(state),
   attempts: getAttempts(state),
   authenticated: getAuthenticated(state),

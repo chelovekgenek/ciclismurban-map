@@ -1,10 +1,12 @@
 import { Store } from "redux"
 import { matchPath } from "react-router-dom"
+
+import routes from "components/App/Router.options"
+import { ROUTES_INDEX_PATH } from "constants/routes"
+
 import { getFilters, CurrentActions } from "./entities/locations"
 import { getToken, LoginByTokenActions } from "./entities/user"
 import { history } from "./history"
-
-import routes, { indexRoutePath } from "components/App/Router.options"
 
 export const handleBoot = ({ dispatch, getState }: Store) => () =>
   new Promise(() => {
@@ -20,7 +22,7 @@ export const handleBoot = ({ dispatch, getState }: Store) => () =>
     } else {
       const currentRoute = routes.find(item => matchPath(history.location.pathname, item))
       if (currentRoute) {
-        history.replace(indexRoutePath)
+        history.replace(ROUTES_INDEX_PATH)
       }
     }
   })

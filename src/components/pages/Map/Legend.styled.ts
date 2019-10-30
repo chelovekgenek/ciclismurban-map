@@ -1,13 +1,6 @@
 import styled from "styled-components"
 
-import { Grid } from "components/generic/layout"
 import { Checkbox } from "components/generic/ui"
-
-export const Col = styled(Grid.Col)`
-  & > .ant-row {
-    margin-bottom: 0.6rem;
-  }
-`
 
 export const Container = styled.div`
   width: max-content;

@@ -9,7 +9,7 @@ import { getToken, LoginByTokenActions } from "./entities/user"
 import { history } from "./history"
 
 export const handleBoot = ({ dispatch, getState }: Store) => () =>
-  new Promise(() => {
+  new Promise(resolve => {
     const state = getState()
     const filters = getFilters(state)
     const token = getToken(state)
@@ -25,4 +25,5 @@ export const handleBoot = ({ dispatch, getState }: Store) => () =>
         history.replace(ROUTES_INDEX_PATH)
       }
     }
+    resolve()
   })

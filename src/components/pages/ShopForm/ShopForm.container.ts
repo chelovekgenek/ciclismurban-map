@@ -31,7 +31,7 @@ export interface IDispatchProps {
   clearSelected: typeof SelectedActions.clear
 }
 
-const hocConnect = connect<IStateProps, IDispatchProps, IProps, TAppState>(
+const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     shops: {
       fetching: getShopsFetching(state),

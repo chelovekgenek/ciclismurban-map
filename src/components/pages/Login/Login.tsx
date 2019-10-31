@@ -3,11 +3,13 @@ import { Link } from "react-router-dom"
 import { FormikProps } from "formik"
 
 import { Input } from "components/generic/form"
+import { Divider } from "components/generic/ui"
 import * as Layout from "components/generic/layout"
 import { LoginForm } from "models/user"
 
 import * as Styled from "./Login.styled"
 import { IStateProps, IDispatchProps } from "./Login.container"
+import { LoginGoogleButtonContainer as LoginGoogleButton } from "./LoginGoogleButton.container"
 
 export interface IProps extends IStateProps, IDispatchProps {}
 
@@ -31,9 +33,11 @@ export const Login: React.FC<IProps & FormikProps<LoginForm>> = ({
       <Styled.Button type="primary" htmlType="submit" disabled={!isValid} loading={fetching}>
         Войти
       </Styled.Button>
-      <p>
-        Или <Link to="/register">зарегестрироваться</Link>
-      </p>
+      <LoginGoogleButton />
+      <Divider>или</Divider>
+      <Styled.CenterText>
+        <Link to="/register">зарегестрироваться</Link>
+      </Styled.CenterText>
     </Layout.Form>
   )
 }

@@ -1,8 +1,8 @@
-import { reducer, on } from "ts-action"
+import { reducer, on, union } from "ts-action"
 
 import { UserModel } from "models/user"
 
-import { RegisterActions, LoginActions, LoginByTokenActions, LogoutAction } from "./actions"
+import { RegisterActions, LoginActions, LoginByTokenActions, LogoutAction, LoginByGoogleActions } from "./actions"
 
 export interface IState {
   authenticated: boolean
@@ -13,7 +13,7 @@ export interface IState {
   error?: number
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   authenticated: false,
   fetching: false,
   attempts: 0,
@@ -21,21 +21,27 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(RegisterActions.request, LoginActions.request, LoginByTokenActions.request, state => ({
-    ...state,
-    error: undefined,
-    fetching: true,
-  })),
-  on(RegisterActions.success, LoginActions.success, LoginByTokenActions.success, (state, { payload }) => ({
-    ...initialState,
-    attempts: state.attempts + 1,
-    authenticated: true,
-    ...payload,
-  })),
+  on(
+    ...union(RegisterActions.request, LoginActions.request, LoginByTokenActions.request, LoginByGoogleActions.request),
+    state => ({
+      ...state,
+      error: undefined,
+      fetching: true,
+    }),
+  ),
+  on(
+    ...union(RegisterActions.success, LoginActions.success, LoginByTokenActions.success, LoginByGoogleActions.success),
+    (state, { payload }) => ({
+      ...initialState,
+      attempts: state.attempts + 1,
+      authenticated: true,
+      ...payload,
+    }),
+  ),
   on(RegisterActions.failure, LoginActions.failure, (state, { payload }) => ({
     ...initialState,
     attempts: state.attempts + 1,
     error: payload,
   })),
-  on(LoginByTokenActions.failure, LogoutAction, () => initialState),
+  on(LoginByTokenActions.failure, LoginByGoogleActions.failure, LogoutAction, () => initialState),
 )

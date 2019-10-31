@@ -1,10 +1,8 @@
-import { reducer, on } from "ts-action"
+import { reducer, on, union } from "ts-action"
 
 import { EventModel } from "models/location"
 
 import { EventsGetActions, EventsCreateActions, EventsDeleteActions, EventsUpdateActions } from "../actions"
-
-//TODO https://github.com/cartant/ts-action/issues/46
 
 export interface IState {
   data: EventModel[]
@@ -20,21 +18,25 @@ const initialState: IState = {
 export default reducer(
   initialState,
   on(
-    EventsGetActions.request,
-    EventsCreateActions.request,
-    EventsUpdateActions.request,
-    EventsDeleteActions.request,
-    (state: IState) => ({
+    ...union(
+      EventsGetActions.request,
+      EventsCreateActions.request,
+      EventsUpdateActions.request,
+      EventsDeleteActions.request,
+    ),
+    state => ({
       ...state,
       fetching: true,
     }),
   ),
   on(
-    EventsGetActions.failure,
-    EventsCreateActions.failure,
-    EventsUpdateActions.request,
-    EventsDeleteActions.failure,
-    (state: IState, { payload }: any) => ({
+    ...union(
+      EventsGetActions.failure,
+      EventsCreateActions.failure,
+      EventsUpdateActions.failure,
+      EventsDeleteActions.failure,
+    ),
+    (state, { payload }) => ({
       ...state,
       fetching: false,
       error: payload,

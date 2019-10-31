@@ -23,7 +23,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@ciclismurban/api": "1.1.1",
+    "@ciclismurban/api": "1.1.2",
     "antd": "3.19.8",
     "axios": "^0.19.0",
     "class-validator": "^0.9.1",
@@ -39,6 +39,7 @@
     "moment-timezone": "^0.5.27",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-google-login": "^5.0.7",
     "react-google-maps": "^9.4.5",
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
@@ -50,11 +51,12 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.5",
+    "redux-saga-test-plan": "^4.0.0-rc.3",
     "reflect-metadata": "^0.1.13",
     "reselect": "^4.0.0",
     "serve": "^11.2.0",
     "styled-components": "^4.3.2",
-    "ts-action": "^10.1.0",
+    "ts-action": "11.0.0",
     "typescript": "3.5.3"
   },
   "devDependencies": {

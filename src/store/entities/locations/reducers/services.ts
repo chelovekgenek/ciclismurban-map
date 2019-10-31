@@ -1,4 +1,4 @@
-import { reducer, on } from "ts-action"
+import { reducer, on, union } from "ts-action"
 
 import { ServiceModel } from "models/location"
 
@@ -18,21 +18,25 @@ const initialState: IState = {
 export default reducer(
   initialState,
   on(
-    ServicesGetActions.request,
-    ServicesCreateActions.request,
-    ServicesUpdateActions.request,
-    ServicesDeleteActions.request,
-    (state: IState) => ({
+    ...union(
+      ServicesGetActions.request,
+      ServicesCreateActions.request,
+      ServicesUpdateActions.request,
+      ServicesDeleteActions.request,
+    ),
+    state => ({
       ...state,
       fetching: true,
     }),
   ),
   on(
-    ServicesGetActions.failure,
-    ServicesCreateActions.failure,
-    ServicesUpdateActions.request,
-    ServicesDeleteActions.failure,
-    (state: IState, { payload }: any) => ({
+    ...union(
+      ServicesGetActions.failure,
+      ServicesCreateActions.failure,
+      ServicesUpdateActions.failure,
+      ServicesDeleteActions.failure,
+    ),
+    (state, { payload }) => ({
       ...state,
       fetching: false,
       error: payload,

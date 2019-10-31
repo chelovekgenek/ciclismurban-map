@@ -1,4 +1,4 @@
-import { reducer, on } from "ts-action"
+import { reducer, on, union } from "ts-action"
 
 import { ShopModel } from "models/location"
 
@@ -18,21 +18,25 @@ const initialState: IState = {
 export default reducer(
   initialState,
   on(
-    ShopsGetActions.request,
-    ShopsCreateActions.request,
-    ShopsUpdateActions.request,
-    ShopsDeleteActions.request,
-    (state: IState) => ({
+    ...union(
+      ShopsGetActions.request,
+      ShopsCreateActions.request,
+      ShopsUpdateActions.request,
+      ShopsDeleteActions.request,
+    ),
+    state => ({
       ...state,
       fetching: true,
     }),
   ),
   on(
-    ShopsGetActions.failure,
-    ShopsCreateActions.failure,
-    ShopsUpdateActions.request,
-    ShopsDeleteActions.failure,
-    (state: IState, { payload }: any) => ({
+    ...union(
+      ShopsGetActions.failure,
+      ShopsCreateActions.failure,
+      ShopsUpdateActions.failure,
+      ShopsDeleteActions.failure,
+    ),
+    (state, { payload }) => ({
       ...state,
       fetching: false,
       error: payload,

@@ -8,5 +8,11 @@ export const Icon = styled(UI.Icon)`
 
 export const Button = styled(UI.Button)`
   width: 100%;
-  margin-bottom: 1.2rem;
+  &:not(:last-of-type) {
+    margin-bottom: 1.2rem;
+  }
+`
+
+export const CenterText = styled.div`
+  text-align: center;
 `

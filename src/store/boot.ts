@@ -21,7 +21,7 @@ export const handleBoot = ({ dispatch, getState }: Store) => () =>
       dispatch(LoginByTokenActions.request())
     } else {
       const currentRoute = routes.find(item => matchPath(history.location.pathname, item))
-      if (currentRoute) {
+      if (currentRoute && currentRoute.protected) {
         history.replace(ROUTES_INDEX_PATH)
       }
     }

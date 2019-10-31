@@ -1,4 +1,4 @@
-import { reducer, on } from "ts-action"
+import { reducer, on, union } from "ts-action"
 
 import { ParkingModel } from "models/location"
 
@@ -18,21 +18,25 @@ const initialState: IState = {
 export default reducer(
   initialState,
   on(
-    ParkingsGetActions.request,
-    ParkingsCreateActions.request,
-    ParkingsUpdateActions.request,
-    ParkingsDeleteActions.request,
-    (state: IState) => ({
+    ...union(
+      ParkingsGetActions.request,
+      ParkingsCreateActions.request,
+      ParkingsUpdateActions.request,
+      ParkingsDeleteActions.request,
+    ),
+    state => ({
       ...state,
       fetching: true,
     }),
   ),
   on(
-    ParkingsGetActions.failure,
-    ParkingsCreateActions.failure,
-    ParkingsUpdateActions.request,
-    ParkingsDeleteActions.failure,
-    (state: IState, { payload }: any) => ({
+    ...union(
+      ParkingsGetActions.failure,
+      ParkingsCreateActions.failure,
+      ParkingsUpdateActions.failure,
+      ParkingsDeleteActions.failure,
+    ),
+    (state, { payload }) => ({
       ...state,
       fetching: false,
       error: payload,

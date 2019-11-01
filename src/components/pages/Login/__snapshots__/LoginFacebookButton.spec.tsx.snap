@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginFacebookButton should match snapshot 1`] = `
+<t
+  appId="735813363592084"
+  authType=""
+  autoLoad={true}
+  callback={[Function]}
+  cookie={false}
+  disableMobileRedirect={false}
+  fields="name"
+  isMobile={false}
+  language="en_US"
+  onFailure={[Function]}
+  redirectUri="http://localhost/"
+  render={[Function]}
+  responseType="code"
+  returnScopes={false}
+  scope="public_profile,email"
+  state="facebookdirect"
+  version="2.3"
+  xfbml={false}
+/>
+`;

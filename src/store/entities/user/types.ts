@@ -22,4 +22,10 @@ export enum LoginByGoogleTypes {
   FAILURE = "USER__LOGIN__GOOGLE__FAILURE",
 }
 
+export enum LoginByFacebookTypes {
+  REQUEST = "USER__LOGIN__FACEBOOK__REQUEST",
+  SUCCESS = "USER__LOGIN__FACEBOOK__SUCCESS",
+  FAILURE = "USER__LOGIN__FACEBOOK__FAILURE",
+}
+
 export const LogoutType = "USER__LOGOUT"

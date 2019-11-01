@@ -1,16 +1,20 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import * as UI from "components/generic/ui"
 
 export const Icon = styled(UI.Icon)`
   color: rgba(0, 0, 0, 0.25);
 `
-
-export const Button = styled(UI.Button)`
+interface IButtonProps {
+  marginBottom?: boolean
+}
+export const Button = styled(UI.Button)<IButtonProps>`
   width: 100%;
-  &:not(:last-of-type) {
-    margin-bottom: 1.2rem;
-  }
+  ${({ marginBottom = false }) =>
+    marginBottom &&
+    css`
+      margin-bottom: 1.2rem;
+    `}
 `
 
 export const CenterText = styled.div`

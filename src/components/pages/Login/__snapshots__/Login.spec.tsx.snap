@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/Login should match snapshot 1`] = `
+<Form
+  onSubmit={[MockFunction]}
+>
+  <h2>
+    Вход
+  </h2>
+  <Input
+    name="email"
+    placeholder="Email"
+    prefix={
+      <ForwardRef(Styled(Icon))
+        type="user"
+      />
+    }
+    type="email"
+  />
+  <Input
+    name="password"
+    placeholder="Password"
+    prefix={
+      <ForwardRef(Styled(Icon))
+        type="lock"
+      />
+    }
+    type="password"
+  />
+  <Styled(Button)
+    disabled={true}
+    htmlType="submit"
+    loading={false}
+    marginBottom={true}
+    type="primary"
+  >
+    Войти
+  </Styled(Button)>
+  <Row
+    gutter={0}
+    justify="space-between"
+    type="flex"
+  >
+    <Col
+      span={11}
+    >
+      <Connect(LoginGoogleButton) />
+    </Col>
+    <Col
+      span={11}
+    >
+      <Connect(LoginFacebookButton) />
+    </Col>
+  </Row>
+  <Divider>
+    или
+  </Divider>
+  <styled.div>
+    <Link
+      to="/register"
+    >
+      зарегестрироваться
+    </Link>
+  </styled.div>
+</Form>
+`;

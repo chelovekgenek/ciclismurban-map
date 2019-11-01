@@ -5,43 +5,52 @@ import { AxiosResponse } from "axios"
 import { AuthResponseModel } from "models/user"
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
-import { LoginActions, LoginByTokenActions, RegisterActions, LoginByGoogleActions } from "./actions"
-import { RegisterTypes, LoginByTokenTypes, LogoutType, LoginTypes, LoginByGoogleTypes } from "./types"
+import * as action from "./actions"
+import * as type from "./types"
 import * as api from "./api"
 
-export function* handleLogin({ payload }: ReturnType<typeof LoginActions.request>) {
+export function* handleLogin({ payload }: ReturnType<typeof action.LoginActions.request>) {
   try {
     const { data }: AxiosResponse<AuthResponseModel> = yield call(api.login, payload)
-    yield put(LoginActions.success(data))
+    yield put(action.LoginActions.success(data))
   } catch (e) {
-    yield put(LoginActions.failure(e.response.status))
+    yield put(action.LoginActions.failure(e.response.status))
   }
 }
 
 export function* handleLoginByToken() {
   try {
     const { data }: AxiosResponse<AuthResponseModel> = yield call(api.loginByToken)
-    yield put(LoginByTokenActions.success(data))
+    yield put(action.LoginByTokenActions.success(data))
   } catch (e) {
-    yield put(LoginByTokenActions.failure())
+    yield put(action.LoginByTokenActions.failure())
   }
 }
 
-export function* handleLoginByGoogle({ payload }: ReturnType<typeof LoginByGoogleActions.request>) {
+export function* handleLoginByGoogle({ payload }: ReturnType<typeof action.LoginByGoogleActions.request>) {
   try {
     const { data }: AxiosResponse<AuthResponseModel> = yield call(api.loginByGoogle, payload)
-    yield put(LoginByGoogleActions.success(data))
+    yield put(action.LoginByGoogleActions.success(data))
   } catch (e) {
-    yield put(LoginByGoogleActions.failure())
+    yield put(action.LoginByGoogleActions.failure())
   }
 }
 
-export function* handleRegister({ payload }: ReturnType<typeof RegisterActions.request>) {
+export function* handleLoginByFacebook({ payload }: ReturnType<typeof action.LoginByFacebookActions.request>) {
+  try {
+    const { data }: AxiosResponse<AuthResponseModel> = yield call(api.loginByFacebook, payload)
+    yield put(action.LoginByFacebookActions.success(data))
+  } catch (e) {
+    yield put(action.LoginByFacebookActions.failure())
+  }
+}
+
+export function* handleRegister({ payload }: ReturnType<typeof action.RegisterActions.request>) {
   try {
     const { data }: AxiosResponse<AuthResponseModel> = yield call(api.register, payload)
-    yield put(RegisterActions.success(data))
+    yield put(action.RegisterActions.success(data))
   } catch (e) {
-    yield put(RegisterActions.failure(e.response.status))
+    yield put(action.RegisterActions.failure(e.response.status))
   }
 }
 
@@ -50,12 +59,19 @@ export function* replaceToIndexRoute() {
 }
 
 export default function*() {
-  yield takeLatest(RegisterTypes.REQUEST, handleRegister)
-  yield takeLatest(LoginTypes.REQUEST, handleLogin)
-  yield takeLatest(LoginByTokenTypes.REQUEST, handleLoginByToken)
-  yield takeLatest(LoginByGoogleTypes.REQUEST, handleLoginByGoogle)
+  yield takeLatest(type.RegisterTypes.REQUEST, handleRegister)
+  yield takeLatest(type.LoginTypes.REQUEST, handleLogin)
+  yield takeLatest(type.LoginByTokenTypes.REQUEST, handleLoginByToken)
+  yield takeLatest(type.LoginByGoogleTypes.REQUEST, handleLoginByGoogle)
+  yield takeLatest(type.LoginByFacebookTypes.REQUEST, handleLoginByFacebook)
   yield takeLatest(
-    [LogoutType, LoginTypes.SUCCESS, LoginByGoogleTypes.SUCCESS, RegisterTypes.SUCCESS],
+    [
+      type.LogoutType,
+      type.LoginTypes.SUCCESS,
+      type.LoginByGoogleTypes.SUCCESS,
+      type.LoginByFacebookTypes.SUCCESS,
+      type.RegisterTypes.SUCCESS,
+    ],
     replaceToIndexRoute,
   )
 }

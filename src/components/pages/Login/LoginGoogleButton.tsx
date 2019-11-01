@@ -1,19 +1,15 @@
 import React, { useState, useCallback } from "react"
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginProps } from "react-google-login"
 
-import * as LoginStyles from "./Login.styled"
 import { IDispatchProps } from "./LoginGoogleButton.container"
+import * as LoginStyles from "./Login.styled"
 
 interface IProps extends IDispatchProps {}
 
 export const LoginGoogleButton: React.FC<IProps> = ({ login }) => {
   const [disabled, setDisabled] = useState(false)
   const handleSuccess = useCallback<GoogleLoginProps["onSuccess"]>(
-    r => {
-      if ((r as GoogleLoginResponse).tokenObj) {
-        login((r as GoogleLoginResponse).tokenObj.id_token)
-      }
-    },
+    r => (r as GoogleLoginResponse).tokenObj && login((r as GoogleLoginResponse).tokenObj.id_token),
     [login],
   )
   const handleFailure = useCallback(() => setDisabled(true), [])

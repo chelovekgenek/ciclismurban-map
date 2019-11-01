@@ -1,6 +1,13 @@
 import { action, payload } from "ts-action"
 
-import { RegisterTypes, LoginTypes, LoginByTokenTypes, LogoutType, LoginByGoogleTypes } from "./types"
+import {
+  RegisterTypes,
+  LoginTypes,
+  LoginByTokenTypes,
+  LogoutType,
+  LoginByGoogleTypes,
+  LoginByFacebookTypes,
+} from "./types"
 import { IState } from "./reducer"
 import { AuthResponseModel, LoginForm } from "models/user"
 
@@ -26,6 +33,12 @@ export const LoginByGoogleActions = {
   request: action(LoginByGoogleTypes.REQUEST, payload<string>()),
   success: action(LoginByGoogleTypes.SUCCESS, payload<TLoginSuccessPayload>()),
   failure: action(LoginByGoogleTypes.FAILURE),
+}
+
+export const LoginByFacebookActions = {
+  request: action(LoginByFacebookTypes.REQUEST, payload<string>()),
+  success: action(LoginByFacebookTypes.SUCCESS, payload<TLoginSuccessPayload>()),
+  failure: action(LoginByFacebookTypes.FAILURE),
 }
 
 export const RegisterActions = {

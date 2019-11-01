@@ -2,7 +2,14 @@ import { reducer, on, union } from "ts-action"
 
 import { UserModel } from "models/user"
 
-import { RegisterActions, LoginActions, LoginByTokenActions, LogoutAction, LoginByGoogleActions } from "./actions"
+import {
+  RegisterActions,
+  LoginActions,
+  LoginByTokenActions,
+  LogoutAction,
+  LoginByGoogleActions,
+  LoginByFacebookActions,
+} from "./actions"
 
 export interface IState {
   authenticated: boolean
@@ -22,7 +29,13 @@ export const initialState: IState = {
 export default reducer(
   initialState,
   on(
-    ...union(RegisterActions.request, LoginActions.request, LoginByTokenActions.request, LoginByGoogleActions.request),
+    ...union(
+      RegisterActions.request,
+      LoginActions.request,
+      LoginByTokenActions.request,
+      LoginByGoogleActions.request,
+      LoginByFacebookActions.request,
+    ),
     state => ({
       ...state,
       error: undefined,
@@ -30,7 +43,13 @@ export default reducer(
     }),
   ),
   on(
-    ...union(RegisterActions.success, LoginActions.success, LoginByTokenActions.success, LoginByGoogleActions.success),
+    ...union(
+      RegisterActions.success,
+      LoginActions.success,
+      LoginByTokenActions.success,
+      LoginByGoogleActions.success,
+      LoginByFacebookActions.success,
+    ),
     (state, { payload }) => ({
       ...initialState,
       attempts: state.attempts + 1,
@@ -43,5 +62,8 @@ export default reducer(
     attempts: state.attempts + 1,
     error: payload,
   })),
-  on(LoginByTokenActions.failure, LoginByGoogleActions.failure, LogoutAction, () => initialState),
+  on(
+    ...union(LoginByTokenActions.failure, LoginByGoogleActions.failure, LoginByFacebookActions.failure, LogoutAction),
+    () => initialState,
+  ),
 )

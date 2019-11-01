@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginFacebookButton should match snapshot 1`] = `
+<e
+  accessType="online"
+  buttonText="Sign in with Google"
+  clientId="900137834161-n0kou6bi45thoqauun42u6m1fn7k21gi.apps.googleusercontent.com"
+  cookiePolicy="single_host_origin"
+  disabledStyle={
+    Object {
+      "opacity": 0.6,
+    }
+  }
+  fetchBasicProfile={true}
+  icon={true}
+  isSignedIn={false}
+  jsSrc="https://apis.google.com/js/api.js"
+  onFailure={[Function]}
+  onRequest={[Function]}
+  onSuccess={[Function]}
+  prompt=""
+  render={[Function]}
+  scope="profile email"
+  tag="button"
+  theme="light"
+  type="button"
+  uxMode="popup"
+/>
+`;

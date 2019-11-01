@@ -12,7 +12,7 @@ request.interceptors.request.use(config => {
   const token = getToken(store.getState())
 
   if (token) {
-    config.headers["Authorization"] = token
+    Object.assign(config.headers, packToken(token))
   }
 
   return config
@@ -28,3 +28,7 @@ request.interceptors.response.use(
     return Promise.reject(error)
   },
 )
+
+export const packToken = (token: string) => ({
+  Authorization: `Bearer ${token}`,
+})

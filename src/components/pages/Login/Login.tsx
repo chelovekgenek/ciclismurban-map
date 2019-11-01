@@ -10,6 +10,7 @@ import { LoginForm } from "models/user"
 import * as Styled from "./Login.styled"
 import { IStateProps, IDispatchProps } from "./Login.container"
 import { LoginGoogleButtonContainer as LoginGoogleButton } from "./LoginGoogleButton.container"
+import { LoginFacebookButtonContainer as LoginFacebookButton } from "./LoginFacebookButton.container"
 
 export interface IProps extends IStateProps, IDispatchProps {}
 
@@ -30,10 +31,17 @@ export const Login: React.FC<IProps & FormikProps<LoginForm>> = ({
       <h2>Вход</h2>
       <Input name="email" type="email" placeholder="Email" prefix={<Styled.Icon type="user" />} />
       <Input name="password" type="password" placeholder="Password" prefix={<Styled.Icon type="lock" />} />
-      <Styled.Button type="primary" htmlType="submit" disabled={!isValid} loading={fetching}>
+      <Styled.Button type="primary" htmlType="submit" disabled={!isValid} loading={fetching} marginBottom>
         Войти
       </Styled.Button>
-      <LoginGoogleButton />
+      <Layout.Grid.Row type="flex" justify="space-between">
+        <Layout.Grid.Col span={11}>
+          <LoginGoogleButton />
+        </Layout.Grid.Col>
+        <Layout.Grid.Col span={11}>
+          <LoginFacebookButton />
+        </Layout.Grid.Col>
+      </Layout.Grid.Row>
       <Divider>или</Divider>
       <Styled.CenterText>
         <Link to="/register">зарегестрироваться</Link>

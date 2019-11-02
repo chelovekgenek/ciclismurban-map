@@ -4,7 +4,7 @@ exports[`LoginFacebookButton should match snapshot 1`] = `
 <t
   appId="735813363592084"
   authType=""
-  autoLoad={true}
+  autoLoad={false}
   callback={[Function]}
   cookie={false}
   disableMobileRedirect={false}

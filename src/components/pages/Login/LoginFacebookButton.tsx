@@ -14,7 +14,7 @@ export const LoginFacebookButton: React.FC<IProps> = ({ login }) => {
   return (
     <FacebookLogin
       appId={process.env.REACT_APP_FACEBOOK_OAUTH_KEY as string}
-      autoLoad
+      autoLoad={false}
       render={(renderProps: any) => (
         <LoginStyles.Button icon="facebook" onClick={renderProps.onClick} disabled={renderProps.disabled || disabled}>
           Facebook

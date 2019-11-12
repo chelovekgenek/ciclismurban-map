@@ -4,7 +4,7 @@ import { shallow } from "enzyme"
 import { Sider } from "./Sider"
 import * as Styles from "./Sider.styled"
 
-describe("pages/ServiceForm", () => {
+describe("Sider", () => {
   const render = (props: Partial<React.ComponentProps<typeof Sider>> = {}) =>
     shallow(<Sider match={{ params: {} } as any} history={{} as any} location={{} as any} {...props} />)
   it("should match snapshot", () => {
@@ -30,5 +30,10 @@ describe("pages/ServiceForm", () => {
       match: { path: "/event/:id", isExact: true, url: "/event/12345", params: { id: "12345" } },
     })
     expect(wrapper.find(Styles.Menu).prop("selectedKeys")).toEqual(["/events"])
+  })
+  it("should hide title if scrollbar is collapsed", () => {
+    const wrapper = render()
+    ;(wrapper.find(Styles.Sider).prop("onCollapse") as Function)(true)
+    expect(wrapper).toMatchSnapshot()
   })
 })

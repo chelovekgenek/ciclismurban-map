@@ -23,8 +23,10 @@ export const Sider: React.FC<IProps> = ({ match }) => {
       <Styled.Menu selectedKeys={selected}>
         {options.map(item => (
           <Styled.MenuItem key={item.link}>
-            <Icon type={item.icon} />
-            <Link to={item.link}>{item.title}</Link>
+            <Link to={item.link}>
+              <Icon type={item.icon} />
+              {!collapsed && item.title}
+            </Link>
           </Styled.MenuItem>
         ))}
       </Styled.Menu>

@@ -1,6 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pages/ServiceForm should match snapshot 1`] = `
+exports[`Sider should hide title if scrollbar is collapsed 1`] = `
+<Styled(Sider)
+  collapsed={true}
+  collapsible={true}
+  onCollapse={[Function]}
+>
+  <Styled(Menu)
+    selectedKeys={Array []}
+  >
+    <Styled(MenuItem)
+      key="/"
+    >
+      <Link
+        to="/"
+      >
+        <Icon
+          type="environment"
+        />
+      </Link>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/events"
+    >
+      <Link
+        to="/events"
+      >
+        <Icon
+          type="compass"
+        />
+      </Link>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/parkings"
+    >
+      <Link
+        to="/parkings"
+      >
+        <Icon
+          type="car"
+        />
+      </Link>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/services"
+    >
+      <Link
+        to="/services"
+      >
+        <Icon
+          type="setting"
+        />
+      </Link>
+    </Styled(MenuItem)>
+    <Styled(MenuItem)
+      key="/shops"
+    >
+      <Link
+        to="/shops"
+      >
+        <Icon
+          type="shop"
+        />
+      </Link>
+    </Styled(MenuItem)>
+  </Styled(Menu)>
+</Styled(Sider)>
+`;
+
+exports[`Sider should match snapshot 1`] = `
 <Styled(Sider)
   collapsed={false}
   collapsible={true}
@@ -12,60 +80,60 @@ exports[`pages/ServiceForm should match snapshot 1`] = `
     <Styled(MenuItem)
       key="/"
     >
-      <Icon
-        type="environment"
-      />
       <Link
         to="/"
       >
+        <Icon
+          type="environment"
+        />
         Карта
       </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/events"
     >
-      <Icon
-        type="compass"
-      />
       <Link
         to="/events"
       >
+        <Icon
+          type="compass"
+        />
         Cобытия
       </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/parkings"
     >
-      <Icon
-        type="car"
-      />
       <Link
         to="/parkings"
       >
+        <Icon
+          type="car"
+        />
         Парковки
       </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/services"
     >
-      <Icon
-        type="setting"
-      />
       <Link
         to="/services"
       >
+        <Icon
+          type="setting"
+        />
         Сервисы
       </Link>
     </Styled(MenuItem)>
     <Styled(MenuItem)
       key="/shops"
     >
-      <Icon
-        type="shop"
-      />
       <Link
         to="/shops"
       >
+        <Icon
+          type="shop"
+        />
         Магазины
       </Link>
     </Styled(MenuItem)>

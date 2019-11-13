@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage"
 
 import locations from "./locations/reducer"
 import auth from "./auth/reducer"
+import me from "./me/reducer"
 
 const rootPersistConfig = {
   key: "root",
@@ -21,6 +22,7 @@ const authPersistConfig = {
 const appReducers = combineReducers({
   router,
   locations,
+  me,
   auth: persistReducer(authPersistConfig, auth),
 })
 

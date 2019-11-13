@@ -9,6 +9,7 @@ import * as action from "./actions"
 import userReducer, { initialState as userInitialState } from "./reducer"
 import * as api from "./api"
 import { wrapCall } from "helpers/saga"
+import { MeGetActions } from "../me"
 
 describe("auth.saga", () => {
   const mockResponse = {
@@ -139,6 +140,12 @@ describe("auth.saga", () => {
         })
         .run()
     })
+  })
+  describe("retreiveMe", () => {
+    it("should call replace", async () =>
+      expectSaga(saga.retreiveMe)
+        .put(MeGetActions.request())
+        .run())
   })
   describe("replaceToIndexRoute", () => {
     it("should call replace", async () =>

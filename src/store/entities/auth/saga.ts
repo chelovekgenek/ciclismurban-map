@@ -7,6 +7,7 @@ import { ROUTES_INDEX_PATH } from "constants/routes"
 import * as action from "./actions"
 import * as type from "./types"
 import * as api from "./api"
+import { MeGetActions } from "../me"
 
 export function* handleLogin({ payload }: ReturnType<typeof action.LoginActions.request>) {
   try {
@@ -53,6 +54,10 @@ export function* handleRegister({ payload }: ReturnType<typeof action.RegisterAc
   }
 }
 
+export function* retreiveMe() {
+  yield put(MeGetActions.request())
+}
+
 export function* replaceToIndexRoute() {
   yield call(history.replace, { pathname: ROUTES_INDEX_PATH })
 }
@@ -63,6 +68,16 @@ export default function*() {
   yield takeLatest(type.LoginByTokenTypes.REQUEST, handleLoginByToken)
   yield takeLatest(type.LoginByGoogleTypes.REQUEST, handleLoginByGoogle)
   yield takeLatest(type.LoginByFacebookTypes.REQUEST, handleLoginByFacebook)
+  yield takeLatest(
+    [
+      type.LoginTypes.SUCCESS,
+      type.LoginByTokenTypes.SUCCESS,
+      type.LoginByGoogleTypes.SUCCESS,
+      type.LoginByFacebookTypes.SUCCESS,
+      type.RegisterTypes.SUCCESS,
+    ],
+    retreiveMe,
+  )
   yield takeLatest(
     [
       type.LogoutType,

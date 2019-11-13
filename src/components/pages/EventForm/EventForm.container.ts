@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
+import { EventModel, LocationExposeGroup } from "@ciclismurban/models"
 
 import {
   EventsCreateActions,
@@ -11,7 +12,6 @@ import {
   SelectedGetActions,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
-import { ExposeGroup, EventModel } from "models/location"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { EventFormValues } from "./EventForm.helper"
@@ -49,7 +49,7 @@ const hocWithFormik = withFormik<IProps, EventFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new EventFormValues(props.selected.data as EventModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: getHandlerLocationFormValidate(EventModel, [ExposeGroup.WRITE]),
+  validate: getHandlerLocationFormValidate(EventModel, [LocationExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

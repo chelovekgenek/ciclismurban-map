@@ -4,7 +4,7 @@ import { shallow } from "enzyme"
 import formProps from "mocks/formik-form-props"
 import services from "mocks/services.json"
 
-import { ServiceFormValues } from "./ServiceForm.helper"
+import { ServiceFormValues } from "./ServiceForm.scheme"
 import { ServiceForm } from "./ServiceForm"
 
 describe("pages/ServiceForm", () => {

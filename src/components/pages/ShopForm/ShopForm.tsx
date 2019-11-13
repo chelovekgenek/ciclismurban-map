@@ -8,7 +8,7 @@ import { Input, Textarea, GoogleMap, Upload, WeeklySchedule } from "components/g
 import { Button } from "components/generic/ui"
 
 import { IStateProps, IDispatchProps } from "./ShopForm.container"
-import { ShopFormValues } from "./ShopForm.helper"
+import { ShopFormValues } from "./ShopForm.scheme"
 
 interface RouteParams {
   id: string

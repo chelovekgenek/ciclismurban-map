@@ -1,9 +1,9 @@
 import { takeLatest, put, take, race, call, delay } from "redux-saga/effects"
+import { PointModel } from "@ciclismurban/models"
 
 import { getCurrentLatLng } from "helpers"
 
 import { CurrentTypes, CurrentActions, FiltersActions } from "../actions"
-import { PointModel } from "models/location"
 
 function* handlePolling() {
   while (true) {

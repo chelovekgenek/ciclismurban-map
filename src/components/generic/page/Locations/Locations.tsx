@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo, useEffect } from "react"
 import { RouteComponentProps } from "react-router"
+import { LocationModel } from "@ciclismurban/models"
 
 import { Button, Table, Icon, Popconfirm } from "components/generic/ui"
 import { App } from "components/generic/layout"
 import { getGMapLink } from "helpers"
-import { LocationModel } from "models/location"
 
 interface IProps extends RouteComponentProps {
   title: string

@@ -23,7 +23,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@ciclismurban/api": "1.1.2",
+    "@ciclismurban/models": "1.1.0",
     "antd": "3.19.8",
     "axios": "^0.19.0",
     "class-validator": "^0.9.1",

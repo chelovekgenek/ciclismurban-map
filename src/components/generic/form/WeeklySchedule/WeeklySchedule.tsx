@@ -1,13 +1,13 @@
 import React, { useMemo } from "react"
 import { Field, FieldProps } from "formik"
 import { pullAt, cloneDeep } from "lodash-es"
+import { WeeklyScheduleModel } from "@ciclismurban/models"
 
 import { Grid } from "components/generic/layout"
 import { FormItem } from "../FormItem"
 
 import options from "./options.json"
 import { DailyRangeSchedule } from "./DailyRangeSchedule"
-import { WeeklyScheduleModel } from "models/location"
 
 const defaultValue = {
   from: "08:00",

@@ -1,5 +1,7 @@
 import { action, payload } from "ts-action"
 
+import { LoginForm } from "components/pages/Login/LoginForm.scheme"
+
 import {
   RegisterTypes,
   LoginTypes,
@@ -7,9 +9,9 @@ import {
   LogoutType,
   LoginByGoogleTypes,
   LoginByFacebookTypes,
+  AuthResponseModel,
 } from "./types"
 import { IState } from "./reducer"
-import { AuthResponseModel, LoginForm } from "models/user"
 
 export type TRequiredState = Required<IState>
 

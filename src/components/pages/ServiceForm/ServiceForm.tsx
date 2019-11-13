@@ -2,14 +2,14 @@ import React, { useEffect, useMemo } from "react"
 import { Form, FormikProps } from "formik"
 import { RouteComponentProps } from "react-router-dom"
 import { isEmpty } from "lodash-es"
+import { ServiceModel } from "@ciclismurban/models"
 
 import { App } from "components/generic/layout"
 import { Input, Textarea, GoogleMap, Upload, WeeklySchedule } from "components/generic/form"
 import { Button } from "components/generic/ui"
 
 import { IStateProps, IDispatchProps } from "./ServiceForm.container"
-import { ServiceFormValues } from "./ServiceForm.helper"
-import { ServiceModel } from "models/location"
+import { ServiceFormValues } from "./ServiceForm.scheme"
 
 interface RouteParams {
   id: string

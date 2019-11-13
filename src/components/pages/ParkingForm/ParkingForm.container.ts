@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
+import { ParkingModel, LocationExposeGroup } from "@ciclismurban/models"
 
 import {
   SelectedActions,
@@ -11,11 +12,10 @@ import {
   SelectedGetActions,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
-import { ExposeGroup, ParkingModel } from "models/location"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { ParkingForm, IProps } from "./ParkingForm"
-import { ParkingFormValues } from "./ParkingForm.helper"
+import { ParkingFormValues } from "./ParkingForm.scheme"
 
 export type IStateProps = {
   parkings: {
@@ -49,7 +49,7 @@ const hocWithFormik = withFormik<IProps, ParkingFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new ParkingFormValues(props.selected.data as ParkingModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: getHandlerLocationFormValidate(ParkingModel, [ExposeGroup.WRITE]),
+  validate: getHandlerLocationFormValidate(ParkingModel, [LocationExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

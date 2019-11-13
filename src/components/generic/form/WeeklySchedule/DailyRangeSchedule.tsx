@@ -1,10 +1,10 @@
 import React, { useMemo, useCallback } from "react"
 import { TimePicker } from "antd"
 import { Moment } from "moment"
+import { WeeklyScheduleModel } from "@ciclismurban/models"
 
 import { Grid } from "components/generic/layout"
 import { Button } from "components/generic/ui"
-import { WeeklyScheduleModel } from "models/location"
 
 import * as Styles from "./DailyRangeSchedule.styled"
 import options from "./options.json"

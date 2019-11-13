@@ -5,7 +5,7 @@ import formProps from "mocks/formik-form-props"
 import parkings from "mocks/parkings.json"
 
 import { ParkingForm } from "./ParkingForm"
-import { ParkingFormValues } from "./ParkingForm.helper"
+import { ParkingFormValues } from "./ParkingForm.scheme"
 
 describe("pages/ParkingForm", () => {
   const initialValues = new ParkingFormValues()

@@ -1,6 +1,5 @@
 import { reducer, on, union } from "ts-action"
-
-import { ServiceModel } from "models/location"
+import { ServiceModel } from "@ciclismurban/models"
 
 import { ServicesGetActions, ServicesCreateActions, ServicesUpdateActions, ServicesDeleteActions } from "../actions"
 

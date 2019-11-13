@@ -4,7 +4,7 @@ import { shallow } from "enzyme"
 import formProps from "mocks/formik-form-props"
 import shops from "mocks/shops.json"
 
-import { ShopFormValues } from "./ShopForm.helper"
+import { ShopFormValues } from "./ShopForm.scheme"
 import { ShopForm } from "./ShopForm"
 
 describe("pages/ShopForm", () => {

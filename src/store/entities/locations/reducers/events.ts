@@ -1,6 +1,6 @@
 import { reducer, on, union } from "ts-action"
 
-import { EventModel } from "models/location"
+import { EventModel } from "@ciclismurban/models"
 
 import { EventsGetActions, EventsCreateActions, EventsDeleteActions, EventsUpdateActions } from "../actions"
 

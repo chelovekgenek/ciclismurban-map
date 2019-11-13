@@ -29,3 +29,7 @@ export enum LoginByFacebookTypes {
 }
 
 export const LogoutType = "USER__LOGOUT"
+
+export interface AuthResponseModel {
+  token: string
+}

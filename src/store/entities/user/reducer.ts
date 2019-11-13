@@ -1,6 +1,5 @@
 import { reducer, on, union } from "ts-action"
-
-import { UserModel } from "models/user"
+import { UserModel } from "@ciclismurban/models"
 
 import {
   RegisterActions,

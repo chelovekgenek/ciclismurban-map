@@ -1,5 +1,5 @@
 import { reducer, on } from "ts-action"
-import { PointModel } from "models/location"
+import { PointModel } from "@ciclismurban/models"
 
 import { CurrentActions } from "../actions"
 

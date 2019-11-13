@@ -1,5 +1,5 @@
 import { request } from "helpers"
-import { EventModel, ParkingModel, ServiceModel, ShopModel } from "models/location"
+import { EventModel, ParkingModel, ServiceModel, ShopModel } from "@ciclismurban/models"
 
 export const getEvents = async () => request.get("/events")
 export const getParkings = async () => request.get("/parkings")

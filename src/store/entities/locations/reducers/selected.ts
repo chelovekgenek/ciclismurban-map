@@ -1,8 +1,8 @@
 import { reducer, on } from "ts-action"
+import { LocationModel } from "@ciclismurban/models"
 
 import { TAcceptedEntity } from "../types"
 import { SelectedActions, SelectedGetActions } from "../actions"
-import { LocationModel } from "models/location"
 
 export interface IState {
   fetching: boolean

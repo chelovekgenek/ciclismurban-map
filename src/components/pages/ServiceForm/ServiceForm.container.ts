@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
+import { ServiceModel, LocationExposeGroup } from "@ciclismurban/models"
 
 import {
   SelectedActions,
@@ -11,11 +12,10 @@ import {
   SelectedGetActions,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
-import { ExposeGroup, ServiceModel } from "models/location"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { IProps, ServiceForm } from "./ServiceForm"
-import { ServiceFormValues } from "./ServiceForm.helper"
+import { ServiceFormValues } from "./ServiceForm.scheme"
 
 export type IStateProps = {
   services: {
@@ -49,7 +49,7 @@ const hocWithFormik = withFormik<IProps, ServiceFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new ServiceFormValues(props.selected.data as ServiceModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: getHandlerLocationFormValidate(ServiceModel, [ExposeGroup.WRITE]),
+  validate: getHandlerLocationFormValidate(ServiceModel, [LocationExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

@@ -1,9 +1,9 @@
 import { takeLatest, put, call } from "redux-saga/effects"
 import { AxiosResponse } from "axios"
 import { extend } from "lodash-es"
+import { ParkingModel } from "@ciclismurban/models"
 
 import { history } from "store/history"
-import { ParkingModel } from "models/location"
 
 import {
   ParkingsGetActions,

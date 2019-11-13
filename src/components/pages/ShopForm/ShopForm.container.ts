@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
+import { ShopModel, LocationExposeGroup } from "@ciclismurban/models"
 
 import {
   SelectedActions,
@@ -11,11 +12,10 @@ import {
   ShopsUpdateActions,
 } from "store/entities/locations"
 import { TAppState } from "store/entities"
-import { ExposeGroup, ShopModel } from "models/location"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
 import { IProps, ShopForm } from "./ShopForm"
-import { ShopFormValues } from "./ShopForm.helper"
+import { ShopFormValues } from "./ShopForm.scheme"
 
 export type IStateProps = {
   shops: {
@@ -49,7 +49,7 @@ const hocWithFormik = withFormik<IProps, ShopFormValues>({
   enableReinitialize: true,
   mapPropsToValues: props => new ShopFormValues(props.selected.data as ShopModel),
   handleSubmit: handleLocationFormSubmit,
-  validate: getHandlerLocationFormValidate(ShopModel, [ExposeGroup.WRITE]),
+  validate: getHandlerLocationFormValidate(ShopModel, [LocationExposeGroup.WRITE]),
   validateOnBlur: true,
 })
 

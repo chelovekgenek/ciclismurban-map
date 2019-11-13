@@ -1,5 +1,5 @@
+import { ServiceModel, WeeklyScheduleModel } from "@ciclismurban/models"
 import { MapOptions } from "helpers"
-import { ServiceModel, WeeklyScheduleModel } from "models/location"
 
 export class ServiceFormValues extends ServiceModel {
   constructor(props?: ServiceModel) {

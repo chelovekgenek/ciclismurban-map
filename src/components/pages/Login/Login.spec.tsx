@@ -2,9 +2,9 @@ import React from "react"
 import { shallow } from "enzyme"
 
 import formProps from "mocks/formik-form-props"
-import { LoginForm } from "models/user"
 
 import { Login } from "./Login"
+import { LoginForm } from "./LoginForm.scheme"
 
 describe("pages/Login", () => {
   const initialValues = new LoginForm()

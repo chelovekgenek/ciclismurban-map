@@ -1,6 +1,5 @@
 import { reducer, on, union } from "ts-action"
-
-import { ShopModel } from "models/location"
+import { ShopModel } from "@ciclismurban/models"
 
 import { ShopsGetActions, ShopsCreateActions, ShopsUpdateActions, ShopsDeleteActions } from "../actions"
 

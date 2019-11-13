@@ -1,5 +1,5 @@
+import { ShopModel, WeeklyScheduleModel } from "@ciclismurban/models"
 import { MapOptions } from "helpers"
-import { ShopModel, WeeklyScheduleModel } from "models/location"
 
 export class ShopFormValues extends ShopModel {
   constructor(props?: ShopModel) {

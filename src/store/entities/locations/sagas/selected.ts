@@ -1,7 +1,6 @@
 import { takeLatest, put, call } from "redux-saga/effects"
 import { AxiosResponse } from "axios"
-
-import { LocationModel } from "models/location"
+import { LocationModel } from "@ciclismurban/models"
 
 import { SelectedGetActions, SelectedGetTypes } from "../actions"
 import { getParkingById, getServiceById, getShopById, getEventById } from "../api"

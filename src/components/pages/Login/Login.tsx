@@ -5,7 +5,7 @@ import { FormikProps } from "formik"
 import { Input } from "components/generic/form"
 import { Divider } from "components/generic/ui"
 import * as Layout from "components/generic/layout"
-import { LoginForm } from "models/user"
+import { LoginForm } from "./LoginForm.scheme"
 
 import * as Styled from "./Login.styled"
 import { IStateProps, IDispatchProps } from "./Login.container"

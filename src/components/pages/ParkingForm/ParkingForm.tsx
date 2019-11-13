@@ -8,7 +8,7 @@ import { Input, Textarea, GoogleMap, Upload } from "components/generic/form"
 import { Button } from "components/generic/ui"
 
 import { IStateProps, IDispatchProps } from "./ParkingForm.container"
-import { ParkingFormValues } from "./ParkingForm.helper"
+import { ParkingFormValues } from "./ParkingForm.scheme"
 
 interface RouteParams {
   id: string

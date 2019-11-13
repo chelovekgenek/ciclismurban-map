@@ -1,12 +1,13 @@
 import { connect } from "react-redux"
 import { withFormik } from "formik"
+import { UserModel, UserExposeGroup } from "@ciclismurban/models"
 
 import { validateFormik } from "helpers"
-import { UserModel, ExposeGroup, LoginForm } from "models/user"
 import { LoginActions, getFetching, getError } from "store/entities/user"
 import { TAppState } from "store/entities"
 
 import { IProps, Login } from "./Login"
+import { LoginForm } from "./LoginForm.scheme"
 
 export interface IStateProps {
   fetching: ReturnType<typeof getFetching>
@@ -28,7 +29,7 @@ export const LoginContainer = connect<IStateProps, IDispatchProps, {}, TAppState
   withFormik<IProps, LoginForm>({
     mapPropsToValues: () => new LoginForm(),
     handleSubmit: (values, { props }) => props.login(values),
-    validate: validateFormik(UserModel, [ExposeGroup.LOGIN]),
+    validate: validateFormik(UserModel, [UserExposeGroup.LOGIN]),
     validateOnBlur: true,
   })(Login),
 )

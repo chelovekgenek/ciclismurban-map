@@ -2,7 +2,6 @@ import { takeLatest, call, put } from "redux-saga/effects"
 import { history } from "store/history"
 import { AxiosResponse } from "axios"
 
-import { AuthResponseModel } from "models/user"
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import * as action from "./actions"
@@ -11,7 +10,7 @@ import * as api from "./api"
 
 export function* handleLogin({ payload }: ReturnType<typeof action.LoginActions.request>) {
   try {
-    const { data }: AxiosResponse<AuthResponseModel> = yield call(api.login, payload)
+    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.login, payload)
     yield put(action.LoginActions.success(data))
   } catch (e) {
     yield put(action.LoginActions.failure(e.response.status))
@@ -20,7 +19,7 @@ export function* handleLogin({ payload }: ReturnType<typeof action.LoginActions.
 
 export function* handleLoginByToken() {
   try {
-    const { data }: AxiosResponse<AuthResponseModel> = yield call(api.loginByToken)
+    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.loginByToken)
     yield put(action.LoginByTokenActions.success(data))
   } catch (e) {
     yield put(action.LoginByTokenActions.failure())
@@ -29,7 +28,7 @@ export function* handleLoginByToken() {
 
 export function* handleLoginByGoogle({ payload }: ReturnType<typeof action.LoginByGoogleActions.request>) {
   try {
-    const { data }: AxiosResponse<AuthResponseModel> = yield call(api.loginByGoogle, payload)
+    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.loginByGoogle, payload)
     yield put(action.LoginByGoogleActions.success(data))
   } catch (e) {
     yield put(action.LoginByGoogleActions.failure())
@@ -38,7 +37,7 @@ export function* handleLoginByGoogle({ payload }: ReturnType<typeof action.Login
 
 export function* handleLoginByFacebook({ payload }: ReturnType<typeof action.LoginByFacebookActions.request>) {
   try {
-    const { data }: AxiosResponse<AuthResponseModel> = yield call(api.loginByFacebook, payload)
+    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.loginByFacebook, payload)
     yield put(action.LoginByFacebookActions.success(data))
   } catch (e) {
     yield put(action.LoginByFacebookActions.failure())
@@ -47,7 +46,7 @@ export function* handleLoginByFacebook({ payload }: ReturnType<typeof action.Log
 
 export function* handleRegister({ payload }: ReturnType<typeof action.RegisterActions.request>) {
   try {
-    const { data }: AxiosResponse<AuthResponseModel> = yield call(api.register, payload)
+    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.register, payload)
     yield put(action.RegisterActions.success(data))
   } catch (e) {
     yield put(action.RegisterActions.failure(e.response.status))

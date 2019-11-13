@@ -1,10 +1,10 @@
 import { FormikBag } from "formik"
 import { get } from "lodash-es"
+import { LocationModel } from "@ciclismurban/models"
 
 import { getSelectedRoot } from "store/entities/locations"
 import { difference } from "./difference"
 import { validateFormik } from "./validator"
-import { LocationModel } from "models/location"
 import { ClassType } from "class-transformer/ClassTransformer"
 
 interface IProps {

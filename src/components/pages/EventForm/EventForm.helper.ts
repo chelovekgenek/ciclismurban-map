@@ -1,7 +1,7 @@
 import moment from "moment"
+import { EventModel } from "@ciclismurban/models"
 
 import { MapOptions } from "helpers"
-import { EventModel } from "models/location"
 
 export class EventFormValues extends EventModel {
   constructor(props?: EventModel) {

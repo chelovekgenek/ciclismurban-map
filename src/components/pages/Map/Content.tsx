@@ -2,10 +2,10 @@ import React, { useMemo, useState, useCallback } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { truncate } from "lodash-es"
+import { LocationModel } from "@ciclismurban/models"
 
 import { GoogleMap } from "components/generic/ui"
 import { getFilteredLocations, getFilteredLocationsCount, getCurrentLocation } from "store/entities/locations"
-import { LocationModel } from "models/location"
 import { MapOptions } from "helpers"
 
 import ParkingIcon from "assets/parking.png"

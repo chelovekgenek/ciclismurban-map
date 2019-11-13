@@ -4,10 +4,10 @@ import { FormikProps } from "formik"
 
 import { Input } from "components/generic/form"
 import * as Layout from "components/generic/layout"
-import { LoginForm } from "models/user"
 
 import * as Styled from "./Register.styled"
 import { IStateProps, IDispatchProps } from "./Register.container"
+import { LoginForm } from "../Login/LoginForm.scheme"
 
 export interface IProps extends IStateProps, IDispatchProps {}
 

@@ -1,5 +1,5 @@
+import { ParkingModel } from "@ciclismurban/models"
 import { MapOptions } from "helpers"
-import { ParkingModel } from "models/location"
 
 export class ParkingFormValues extends ParkingModel {
   constructor(props?: ParkingModel) {

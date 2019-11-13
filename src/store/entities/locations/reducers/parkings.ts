@@ -1,6 +1,6 @@
 import { reducer, on, union } from "ts-action"
 
-import { ParkingModel } from "models/location"
+import { ParkingModel } from "@ciclismurban/models"
 
 import { ParkingsGetActions, ParkingsCreateActions, ParkingsUpdateActions, ParkingsDeleteActions } from "../actions"
 

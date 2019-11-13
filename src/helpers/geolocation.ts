@@ -1,6 +1,5 @@
 import { get } from "lodash-es"
-
-import { PointModel } from "models/location"
+import { PointModel } from "@ciclismurban/models"
 
 export const getCurrentLatLng = (): Promise<PointModel> =>
   new Promise((resolve, reject) => {

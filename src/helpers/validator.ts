@@ -1,7 +1,4 @@
-import {
-  transformAndValidateEntitySync,
-  IFlatValidationError,
-} from "@ciclismurban/api/dist/src/modules/commons/helpers/validator"
+import { transformAndValidateEntitySync, IFlatValidationError } from "@ciclismurban/models"
 import { ClassType } from "class-transformer/ClassTransformer"
 
 import { FormikValues } from "formik"

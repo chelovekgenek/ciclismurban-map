@@ -1,9 +1,9 @@
 import { takeLatest, put, call } from "redux-saga/effects"
 import { AxiosResponse } from "axios"
 import { extend } from "lodash-es"
+import { ShopModel } from "@ciclismurban/models"
 
 import { history } from "store/history"
-import { ShopModel } from "models/location"
 
 import { getShops, deleteShop, updateShop, uploadFile, createShop } from "../api"
 import {

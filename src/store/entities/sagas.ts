@@ -1,8 +1,8 @@
 import { all, fork } from "redux-saga/effects"
 
 import locations from "./locations/saga"
-import user from "./user/saga"
+import auth from "./auth/saga"
 
 export function* sagas() {
-  yield all([fork(locations), fork(user)])
+  yield all([fork(locations), fork(auth)])
 }

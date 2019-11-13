@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import { RouteProps } from "react-router-dom"
 
 import { TAppState } from "store/entities"
-import { getFetching, getAttempts, getAuthenticated } from "store/entities/user"
+import { getFetching, getAttempts, getAuthenticated } from "store/entities/auth"
 
 import { ProtectedRoute } from "./ProtectedRoute"
 

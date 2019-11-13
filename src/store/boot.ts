@@ -5,7 +5,7 @@ import routes from "components/App/Router.options"
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import { getFilters, CurrentActions } from "./entities/locations"
-import { getToken, LoginByTokenActions } from "./entities/user"
+import { getToken, LoginByTokenActions } from "./entities/auth"
 import { history } from "./history"
 
 export const handleBoot = ({ dispatch, getState }: Store) => () =>

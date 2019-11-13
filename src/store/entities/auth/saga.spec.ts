@@ -10,7 +10,7 @@ import userReducer, { initialState as userInitialState } from "./reducer"
 import * as api from "./api"
 import { wrapCall } from "helpers/saga"
 
-describe("user.saga", () => {
+describe("auth.saga", () => {
   const mockResponse = {
     data: {
       token: "secret",

@@ -4,7 +4,7 @@ import { routerReducer as router } from "react-router-redux"
 import storage from "redux-persist/lib/storage"
 
 import locations from "./locations/reducer"
-import user from "./user/reducer"
+import auth from "./auth/reducer"
 
 const rootPersistConfig = {
   key: "root",
@@ -12,8 +12,8 @@ const rootPersistConfig = {
   whitelist: ["locations"],
 }
 
-const userPersistConfig = {
-  key: "user",
+const authPersistConfig = {
+  key: "auth",
   storage: storage,
   whitelist: ["token"],
 }
@@ -21,7 +21,7 @@ const userPersistConfig = {
 const appReducers = combineReducers({
   router,
   locations,
-  user: persistReducer(userPersistConfig, user),
+  auth: persistReducer(authPersistConfig, auth),
 })
 
 export const reducers = persistReducer(rootPersistConfig, appReducers)

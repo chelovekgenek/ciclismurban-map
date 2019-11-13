@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 
-import { LoginByFacebookActions } from "store/entities/user"
+import { LoginByFacebookActions } from "store/entities/auth"
 import { TAppState } from "store/entities"
 
 import { LoginFacebookButton } from "./LoginFacebookButton"

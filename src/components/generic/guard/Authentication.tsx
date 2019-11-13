@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 
-import { getAuthenticated } from "store/entities/user"
+import { getAuthenticated } from "store/entities/auth"
 
 interface IProps {
   children: React.ReactNode

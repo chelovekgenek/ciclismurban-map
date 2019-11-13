@@ -3,7 +3,7 @@ import { withFormik } from "formik"
 import { UserModel, UserExposeGroup } from "@ciclismurban/models"
 
 import { validateFormik } from "helpers"
-import { getFetching, RegisterActions, getError } from "store/entities/user"
+import { getFetching, RegisterActions, getError } from "store/entities/auth"
 import { TAppState } from "store/entities"
 
 import { IProps, Register } from "./Register"

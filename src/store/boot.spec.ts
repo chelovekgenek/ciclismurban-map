@@ -2,7 +2,7 @@ import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import { handleBoot } from "./boot"
 import { CurrentActions } from "./entities/locations"
-import { LoginByTokenActions } from "./entities/user"
+import { LoginByTokenActions } from "./entities/auth"
 import { history } from "./history"
 
 describe("store.boot", () => {
@@ -12,7 +12,7 @@ describe("store.boot", () => {
         current: true,
       },
     },
-    user: {
+    auth: {
       token: "secret",
     },
   }
@@ -33,7 +33,7 @@ describe("store.boot", () => {
     const spyHistoryReplace = jest.spyOn(history, "replace")
     await handleBoot({
       ...defaultProps,
-      getState: jest.fn(() => ({ ...defaultState, user: { token: undefined } })),
+      getState: jest.fn(() => ({ ...defaultState, auth: { token: undefined } })),
     })()
     expect(spyHistoryReplace).toBeCalledWith(ROUTES_INDEX_PATH)
   })

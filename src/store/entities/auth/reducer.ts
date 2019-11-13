@@ -1,5 +1,4 @@
 import { reducer, on, union } from "ts-action"
-import { UserModel } from "@ciclismurban/models"
 
 import {
   RegisterActions,
@@ -15,7 +14,6 @@ export interface IState {
   fetching: boolean
   attempts: number
   token?: string
-  data?: UserModel
   error?: number
 }
 

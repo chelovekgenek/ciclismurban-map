@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getToken, LogoutAction } from "store/entities/user"
+import { getToken, LogoutAction } from "store/entities/auth"
 
 export const request = axios.create({
   baseURL: process.env.REACT_APP_API_URL,

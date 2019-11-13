@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
 import { LoginGoogleButton } from "./LoginGoogleButton"
-import { LoginByGoogleActions } from "store/entities/user"
+import { LoginByGoogleActions } from "store/entities/auth"
 import { TAppState } from "store/entities"
 
 export interface IDispatchProps {

@@ -1,6 +1,12 @@
 {
   "uuid": "e906f10a-dfe3-4cf4-9197-67b9de5ba91f",
   "email": "test@example.com",
+  "profile": {
+    "avatar": "url-to-user-avatar",
+    "description": "description",
+    "telegram": "telegram-id",
+    "facebook": "facebook-id"
+  },
   "createdAt": "2019-10-31T14:54:30.015Z",
   "updatedAt": "2019-10-31T14:54:30.015Z"
 }

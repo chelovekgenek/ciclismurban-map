@@ -3,33 +3,39 @@ import { Link } from "react-router-dom"
 
 import { Divider, Dropdown, Menu, Icon } from "components/generic/ui"
 
-import * as Styled from "./Header.style"
+import * as Styles from "./Header.style"
 import { IStateProps, IDispatchProps } from "./Header.container"
 
 interface IProps extends IStateProps, IDispatchProps {}
 
 export const Header: React.FC<IProps> = ({ authenticated, email, logout }) => (
-  <Styled.Container>
+  <Styles.Container>
     <Link to="/">
-      <Styled.Logo />
+      <Styles.Logo />
     </Link>
-    <Styled.SectionRight>
+    <Styles.SectionRight>
       {useMemo(
         () =>
           authenticated ? (
             <Dropdown
               overlay={
                 <Menu>
-                  <Menu.Item onClick={logout}>
-                    <Icon type="user" />
+                  <Styles.MenuItem>
+                    <Link to="/profile">
+                      <Icon type="user" />
+                      Профиль
+                    </Link>
+                  </Styles.MenuItem>
+                  <Styles.MenuItem onClick={logout}>
+                    <Icon type="logout" />
                     Выйти
-                  </Menu.Item>
+                  </Styles.MenuItem>
                 </Menu>
               }
             >
-              <Styled.Profile>
+              <Styles.Profile>
                 {email} <Icon type="down" />
-              </Styled.Profile>
+              </Styles.Profile>
             </Dropdown>
           ) : (
             <React.Fragment>
@@ -40,6 +46,6 @@ export const Header: React.FC<IProps> = ({ authenticated, email, logout }) => (
           ),
         [authenticated, email, logout],
       )}
-    </Styled.SectionRight>
-  </Styled.Container>
+    </Styles.SectionRight>
+  </Styles.Container>
 )

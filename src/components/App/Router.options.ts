@@ -2,6 +2,7 @@ import * as Page from "components/pages"
 
 export default [
   { protected: false, exact: true, path: "/", component: Page.Map },
+  { protected: false, exact: true, path: "/profile", component: Page.ProfileForm },
   { protected: false, exact: false, path: "/locations/:entity/:id", component: Page.Location },
   { protected: false, exact: true, path: "/login", component: Page.Login },
   { protected: false, exact: true, path: "/register", component: Page.Register },

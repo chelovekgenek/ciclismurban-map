@@ -4,6 +4,7 @@ import { extend } from "lodash-es"
 import { ParkingModel } from "@ciclismurban/models"
 
 import { history } from "store/history"
+import { uploadFile } from "store/commons"
 
 import {
   ParkingsGetActions,
@@ -16,7 +17,7 @@ import {
   ParkingsUpdateActions,
   SelectedActions,
 } from "../actions"
-import { getParkings, uploadFile, createParking, updateParking, deleteParking } from "../api"
+import { getParkings, createParking, updateParking, deleteParking } from "../api"
 
 function* handleGet() {
   try {
@@ -29,7 +30,7 @@ function* handleGet() {
 
 function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof ParkingsCreateActions.request>) {
   try {
-    const { data: link }: AxiosResponse<string> = yield call(uploadFile, image!)
+    const link: string = yield call(uploadFile, image!)
     const { data }: AxiosResponse<ParkingModel> = yield call(createParking, { ...payload, image: link })
     yield put(ParkingsCreateActions.success(data))
     yield call(history.replace, { pathname: "/parkings" })
@@ -41,7 +42,7 @@ function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof Par
 function* handleUpdate({ payload: { uuid, payload } }: ReturnType<typeof ParkingsUpdateActions.request>) {
   try {
     const reqPayload = extend(payload, {
-      image: payload.image ? (yield call(uploadFile, payload.image)).data : undefined,
+      image: yield call(uploadFile, payload.image),
     })
     const { data }: AxiosResponse<ParkingModel> = yield call(updateParking, uuid, reqPayload)
     yield put(ParkingsUpdateActions.success(data))

@@ -4,6 +4,7 @@ import { extend } from "lodash-es"
 import { ServiceModel } from "@ciclismurban/models"
 
 import { history } from "store/history"
+import { uploadFile } from "store/commons"
 
 import {
   ServicesGetActions,
@@ -16,7 +17,7 @@ import {
   ServicesDeleteActions,
   SelectedActions,
 } from "../actions"
-import { getServices, uploadFile, createService, updateService, deleteService } from "../api"
+import { getServices, createService, updateService, deleteService } from "../api"
 
 function* handleGet() {
   try {
@@ -30,7 +31,7 @@ function* handleGet() {
 type THandleCreateAction = ReturnType<typeof ServicesCreateActions.request>
 function* handleCreate({ payload: { image, ...payload } }: THandleCreateAction) {
   try {
-    const { data: link }: AxiosResponse<string> = yield call(uploadFile, image!)
+    const link: string = yield call(uploadFile, image!)
     const { data }: AxiosResponse<ServiceModel> = yield call(createService, { ...payload, image: link })
     yield put(ServicesCreateActions.success(data))
     yield call(history.replace, { pathname: "/services" })
@@ -43,7 +44,7 @@ type THandleUpdateAction = ReturnType<typeof ServicesUpdateActions.request>
 function* handleUpdate({ payload: { uuid, payload } }: THandleUpdateAction) {
   try {
     const reqPayload = extend(payload, {
-      image: payload.image ? (yield call(uploadFile, payload.image)).data : undefined,
+      image: yield call(uploadFile, payload.image),
     })
     const { data }: AxiosResponse<ServiceModel> = yield call(updateService, uuid, reqPayload)
     yield put(ServicesUpdateActions.success(data))

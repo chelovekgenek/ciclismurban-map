@@ -925,10 +925,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ciclismurban/models@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@ciclismurban/models/-/models-1.1.0.tgz#ff9bfc1fb0fc4119b25cb0aab8dcc001cfccdaf5"
-  integrity sha512-YeienY/btEJmexbe15/PBrrOuUP7By7a1m45U3Z/i76hLiR/2SWp/04tGE6c96VQJb0OJKRNermYD39gyGm0aQ==
+"@ciclismurban/models@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@ciclismurban/models/-/models-1.2.1.tgz#cf3739e5e7507dfceeaea6f99f60c9d16f0d67d0"
+  integrity sha512-vYGbnFB+6eFZ35mSpEEEVI+842V6slrz4UB45/ynQkP3ISu909ZjSRAB6ifsHtEhGs+LHg+Ak5vA2BvDJI2tlg==
   dependencies:
     class-transformer "^0.2.3"
     class-transformer-validator "^0.8.0"
@@ -2353,6 +2353,13 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
 
+axios-mock-adapter@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/axios-mock-adapter/-/axios-mock-adapter-1.17.0.tgz#0dbee43c606d4aaba5a43d88d96d6661a7cc3c04"
+  integrity sha512-q3efmwJUOO4g+wsLNSk9Ps1UlJoF3fQ3FSEe4uEEhkRtu7SoiAVPj8R3Hc/WP55MBTVFzaDP9QkdJhdVhP8A1Q==
+  dependencies:
+    deep-equal "^1.0.1"
+
 axios@^0.19.0:
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.0.tgz#8e09bff3d9122e133f7b8101c8fbdd00ed3d2ab8"
@@ -3063,14 +3070,6 @@ class-validator@^0.11.0:
     "@types/validator" "10.11.3"
     google-libphonenumber "^3.1.6"
     validator "12.0.0"
-
-class-validator@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.9.1.tgz#d60e58c5d14abca0a41bce38cf792ad4c46d1531"
-  integrity sha512-3wApflrd3ywVZyx4jaasGoFt8pmo4aGLPPAEKCKCsTRWVGPilahD88q3jQjRQwja50rl9a7rsP5LAxJYwGK8/Q==
-  dependencies:
-    google-libphonenumber "^3.1.6"
-    validator "10.4.0"
 
 classnames@2.x, classnames@^2.2.0, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6, classnames@~2.2.6:
   version "2.2.6"
@@ -12422,11 +12421,6 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
-
-validator@10.4.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-10.4.0.tgz#ee99a44afb3bb5ed350a159f056ca72a204cfc3c"
-  integrity sha512-Q/wBy3LB1uOyssgNlXSRmaf22NxjvDNZM2MtIQ4jaEOAB61xsh1TQxsq1CgzUMBV1lDrVMogIh8GjG1DYW0zLg==
 
 validator@12.0.0:
   version "12.0.0"

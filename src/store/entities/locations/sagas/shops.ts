@@ -4,8 +4,9 @@ import { extend } from "lodash-es"
 import { ShopModel } from "@ciclismurban/models"
 
 import { history } from "store/history"
+import { uploadFile } from "store/commons"
 
-import { getShops, deleteShop, updateShop, uploadFile, createShop } from "../api"
+import { getShops, deleteShop, updateShop, createShop } from "../api"
 import {
   ShopsGetActions,
   ShopsGetTypes,
@@ -30,7 +31,7 @@ function* handleGet() {
 type THandleCreateAction = ReturnType<typeof ShopsCreateActions.request>
 function* handleCreate({ payload: { image, ...payload } }: THandleCreateAction) {
   try {
-    const { data: link }: AxiosResponse<string> = yield call(uploadFile, image!)
+    const link: string = yield call(uploadFile, image!)
     const { data }: AxiosResponse<ShopModel> = yield call(createShop, { ...payload, image: link })
     yield put(ShopsCreateActions.success(data))
     yield call(history.replace, { pathname: "/shops" })
@@ -43,7 +44,7 @@ type THandleUpdateAction = ReturnType<typeof ShopsUpdateActions.request>
 function* handleUpdate({ payload: { uuid, payload } }: THandleUpdateAction) {
   try {
     const reqPayload = extend(payload, {
-      image: payload.image ? (yield call(uploadFile, payload.image)).data : undefined,
+      image: yield call(uploadFile, payload.image),
     })
     const { data }: AxiosResponse<ShopModel> = yield call(updateShop, uuid, reqPayload)
     yield put(ShopsUpdateActions.success(data))

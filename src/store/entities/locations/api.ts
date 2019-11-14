@@ -28,12 +28,3 @@ export const deleteService = async (id: string) => request.delete(`/services/${i
 export const createShop = async (payload: Partial<ShopModel>) => request.post("/shops", payload)
 export const updateShop = async (id: string, payload: Partial<ShopModel>) => request.patch(`/shops/${id}`, payload)
 export const deleteShop = async (id: string) => request.delete(`/shops/${id}`)
-
-export const uploadFile = async (file: string) => {
-  const form = new FormData()
-  form.set("file", file)
-
-  return request.post<string>("/files", form, {
-    headers: { "Content-Type": "multipart/form-data" },
-  })
-}

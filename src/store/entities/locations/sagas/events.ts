@@ -4,6 +4,7 @@ import { extend } from "lodash-es"
 import { EventModel } from "@ciclismurban/models"
 
 import { history } from "store/history"
+import { uploadFile } from "store/commons"
 
 import {
   EventsGetTypes,
@@ -16,7 +17,7 @@ import {
   EventsUpdateTypes,
   SelectedActions,
 } from "../actions"
-import { createEvent, uploadFile, getEvents, deleteEvent, updateEvent } from "../api"
+import { createEvent, getEvents, deleteEvent, updateEvent } from "../api"
 
 function* handleGet() {
   try {
@@ -29,7 +30,7 @@ function* handleGet() {
 
 function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof EventsCreateActions.request>) {
   try {
-    const { data: link }: AxiosResponse<string> = yield call(uploadFile, image!)
+    const link: string = yield call(uploadFile, image!)
     const { data }: AxiosResponse<EventModel> = yield call(createEvent, { ...payload, image: link })
     yield put(EventsCreateActions.success(data))
     yield call(history.replace, { pathname: "/events" })
@@ -41,7 +42,7 @@ function* handleCreate({ payload: { image, ...payload } }: ReturnType<typeof Eve
 function* handleUpdate({ payload: { uuid, payload } }: ReturnType<typeof EventsUpdateActions.request>) {
   try {
     const reqPayload = extend(payload, {
-      image: payload.image ? (yield call(uploadFile, payload.image)).data : undefined,
+      image: yield call(uploadFile, payload.image),
     })
     const { data }: AxiosResponse<EventModel> = yield call(updateEvent, uuid, reqPayload)
     yield put(EventsUpdateActions.success(data))

@@ -1,7 +1,7 @@
 import { reducer, on } from "ts-action"
 import { UserModel } from "@ciclismurban/models"
 
-import { MeGetActions } from "./actions"
+import { MeGetActions, MeUpdateProfileActions } from "./actions"
 import { LogoutAction } from "../auth"
 
 export interface IState {
@@ -16,16 +16,16 @@ export const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(MeGetActions.request, state => ({
+  on(MeGetActions.request, MeUpdateProfileActions.request, state => ({
     ...state,
     error: undefined,
     fetching: true,
   })),
-  on(MeGetActions.success, (state, { payload }) => ({
+  on(MeGetActions.success, MeUpdateProfileActions.success, (state, { payload }) => ({
     ...initialState,
     data: payload,
   })),
-  on(MeGetActions.failure, state => ({
+  on(MeGetActions.failure, MeUpdateProfileActions.failure, state => ({
     ...state,
     fetching: false,
     error: undefined,

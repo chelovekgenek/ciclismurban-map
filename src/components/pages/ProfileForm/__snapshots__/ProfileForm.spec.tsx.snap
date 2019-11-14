@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/ProfileForm should match snapshot 1`] = `
+<App
+  content={
+    Object {
+      "actions": Array [
+        <Button
+          block={false}
+          disabled={true}
+          ghost={false}
+          htmlType="button"
+          loading={false}
+          onClick={[Function]}
+        >
+          Сбросить
+        </Button>,
+        <Button
+          block={false}
+          disabled={true}
+          ghost={false}
+          htmlType="button"
+          loading={false}
+          onClick={[MockFunction]}
+          type="primary"
+        >
+          Сохранить
+        </Button>,
+      ],
+      "title": "Редактировать профиль",
+      "useHeader": true,
+      "useLayout": true,
+    }
+  }
+>
+  <Form>
+    <Upload
+      label="Изображение"
+      name="avatar"
+    />
+    <Textarea
+      autosize={
+        Object {
+          "maxRows": 4,
+          "minRows": 2,
+        }
+      }
+      label="Описание"
+      name="description"
+    />
+    <Input
+      label="Telegram"
+      name="telegram"
+    />
+    <Input
+      label="Facebook"
+      name="facebook"
+    />
+  </Form>
+</App>
+`;

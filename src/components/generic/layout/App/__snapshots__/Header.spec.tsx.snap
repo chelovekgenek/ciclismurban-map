@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should match snapshot if authenticated 1`] = `
+<Styled(Adapter)>
+  <Link
+    to="/"
+  >
+    <Styled(Component) />
+  </Link>
+  <styled.div>
+    <Avatar
+      src="link-to-pic"
+    />
+    <Dropdown
+      mouseEnterDelay={0.15}
+      mouseLeaveDelay={0.1}
+      overlay={
+        <Menu>
+          <ForwardRef(Styled(MenuItem))>
+            <ForwardRef
+              to="/profile"
+            >
+              <Icon
+                type="user"
+              />
+              Профиль
+            </ForwardRef>
+          </ForwardRef(Styled(MenuItem))>
+          <ForwardRef(Styled(MenuItem))
+            onClick={[MockFunction]}
+          >
+            <Icon
+              type="logout"
+            />
+            Выйти
+          </ForwardRef(Styled(MenuItem))>
+        </Menu>
+      }
+      placement="bottomLeft"
+    >
+      <styled.span>
+        test@example.com
+         
+        <Icon
+          type="down"
+        />
+      </styled.span>
+    </Dropdown>
+  </styled.div>
+</Styled(Adapter)>
+`;
+
+exports[`Header should match snapshot if not authenticated 1`] = `
+<Styled(Adapter)>
+  <Link
+    to="/"
+  >
+    <Styled(Component) />
+  </Link>
+  <styled.div>
+    <Link
+      to="/login"
+    >
+      Войти
+    </Link>
+    <Divider
+      type="vertical"
+    />
+    <Link
+      to="/register"
+    >
+      Зарегестрироваться
+    </Link>
+  </styled.div>
+</Styled(Adapter)>
+`;

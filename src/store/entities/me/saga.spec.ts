@@ -7,7 +7,7 @@ import * as saga from "./saga"
 import * as action from "./actions"
 import userReducer, { initialState as meInitialState } from "./reducer"
 import * as api from "./api"
-import { wrapCall } from "helpers/saga"
+import { wrapCall } from "helpers/testing-sagas"
 import { uploadFile } from "../../commons"
 
 describe("auth.saga", () => {

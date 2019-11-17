@@ -1,5 +1,3 @@
 export * from "./selected"
 export * from "./current"
-export * from "./parkings"
-export * from "./services"
 export * from "./shops"

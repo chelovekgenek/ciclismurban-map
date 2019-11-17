@@ -6,7 +6,7 @@ import selected from "./reducers/selected"
 
 import events from "./events/events.reducer"
 import parkings from "./parkings/parkings.reducer"
-import services from "./reducers/services"
+import services from "./services/services.reducer"
 import shops from "./reducers/shops"
 
 export default combineReducers({

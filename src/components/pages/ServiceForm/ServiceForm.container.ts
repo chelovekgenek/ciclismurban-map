@@ -3,14 +3,8 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ServiceModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import {
-  SelectedActions,
-  getSelectedRoot,
-  getServicesFetching,
-  ServicesCreateActions,
-  ServicesUpdateActions,
-  SelectedGetActions,
-} from "store/entities/locations"
+import { SelectedActions, SelectedGetActions, getSelectedRoot } from "store/entities/locations"
+import { Actions as ServicesActions, Selectors as ServicesSelectors } from "store/entities/locations/services"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -19,14 +13,14 @@ import { ServiceFormValues } from "./ServiceForm.scheme"
 
 export type IStateProps = {
   services: {
-    fetching: ReturnType<typeof getServicesFetching>
+    fetching: ReturnType<typeof ServicesSelectors.getFetching>
   }
   selected: ReturnType<typeof getSelectedRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof ServicesCreateActions.request
-  update: typeof ServicesUpdateActions.request
+  create: typeof ServicesActions.Create.request
+  update: typeof ServicesActions.Update.request
   getSelected: typeof SelectedGetActions.request
   clearSelected: typeof SelectedActions.clear
 }
@@ -34,13 +28,13 @@ export interface IDispatchProps {
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     services: {
-      fetching: getServicesFetching(state),
+      fetching: ServicesSelectors.getFetching(state),
     },
     selected: getSelectedRoot(state),
   }),
   {
-    create: ServicesCreateActions.request,
-    update: ServicesUpdateActions.request,
+    create: ServicesActions.Create.request,
+    update: ServicesActions.Update.request,
     getSelected: SelectedGetActions.request,
     clearSelected: SelectedActions.clear,
   },

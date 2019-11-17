@@ -1,26 +1,26 @@
 import { connect } from "react-redux"
 
-import { getShopsLocations, getShopsFetching, ShopsGetActions, ShopsDeleteActions } from "store/entities/locations"
+import { Actions as ShopsActions, Selectors as ShopsSelectors } from "store/entities/locations/shops"
 import { TAppState } from "store/entities"
 
 import { Shops } from "./Shops"
 
 export interface IStateProps {
-  shops: ReturnType<typeof getShopsLocations>
-  fetching: ReturnType<typeof getShopsFetching>
+  shops: ReturnType<typeof ShopsSelectors.getLocations>
+  fetching: ReturnType<typeof ShopsSelectors.getFetching>
 }
 export interface IDispatchProps {
-  getShops: typeof ShopsGetActions.request
-  deleteShop: typeof ShopsDeleteActions.request
+  getShops: typeof ShopsActions.Get.request
+  deleteShop: typeof ShopsActions.Delete.request
 }
 
 export const ShopsContainer = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
-    shops: getShopsLocations(state),
-    fetching: getShopsFetching(state),
+    shops: ShopsSelectors.getLocations(state),
+    fetching: ShopsSelectors.getFetching(state),
   }),
   {
-    getShops: ShopsGetActions.request,
-    deleteShop: ShopsDeleteActions.request,
+    getShops: ShopsActions.Get.request,
+    deleteShop: ShopsActions.Delete.request,
   },
 )(Shops)

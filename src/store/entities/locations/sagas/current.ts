@@ -3,7 +3,8 @@ import { PointModel } from "@ciclismurban/models"
 
 import { getCurrentLatLng } from "helpers"
 
-import { CurrentTypes, CurrentActions, FiltersActions } from "../actions"
+import { CurrentTypes, CurrentActions } from "../actions"
+import { Actions as FiltersActions } from "../filters"
 
 function* handlePolling() {
   while (true) {

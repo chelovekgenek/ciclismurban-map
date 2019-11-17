@@ -3,17 +3,18 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { EventModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import { getEventsFetching, SelectedActions, getSelectedRoot, SelectedGetActions } from "store/entities/locations"
+import { SelectedActions, getSelectedRoot, SelectedGetActions } from "store/entities/locations"
+import { Selectors as EventsSelectors } from "store/entities/locations/events"
 import { Actions as EventsActions } from "store/entities/locations/events"
-import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
+import { TAppState } from "store/entities"
 
 import { EventFormValues } from "./EventForm.helper"
 import { IProps, EventForm } from "./EventForm"
 
 export type IStateProps = {
   events: {
-    fetching: ReturnType<typeof getEventsFetching>
+    fetching: ReturnType<typeof EventsSelectors.getFetching>
   }
   selected: ReturnType<typeof getSelectedRoot>
 }
@@ -28,7 +29,7 @@ export interface IDispatchProps {
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     events: {
-      fetching: getEventsFetching(state),
+      fetching: EventsSelectors.getFetching(state),
     },
     selected: getSelectedRoot(state),
   }),

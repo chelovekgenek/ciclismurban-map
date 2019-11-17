@@ -4,14 +4,16 @@ import { matchPath } from "react-router-dom"
 import routes from "components/App/Router.options"
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
-import { getFilters, CurrentActions } from "./entities/locations"
+import { Selectors as FiltersSelectors } from "./entities/locations/filters"
+import { CurrentActions } from "./entities/locations"
 import { getToken, LoginByTokenActions } from "./entities/auth"
 import { history } from "./history"
+import { TAppState } from "./entities"
 
-export const handleBoot = ({ dispatch, getState }: Store) => () =>
+export const handleBoot = ({ dispatch, getState }: Store<TAppState>) => () =>
   new Promise(resolve => {
     const state = getState()
-    const filters = getFilters(state)
+    const filters = FiltersSelectors.getRoot(state)
     const token = getToken(state)
 
     if (filters.current) {

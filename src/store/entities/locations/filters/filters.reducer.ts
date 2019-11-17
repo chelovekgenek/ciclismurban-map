@@ -1,5 +1,6 @@
 import { reducer, on } from "ts-action"
-import { FiltersActions } from "../actions"
+
+import { Actions } from "./filters.actions"
 
 export interface IState {
   current: boolean
@@ -9,7 +10,7 @@ export interface IState {
   shops: boolean
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   current: false,
   events: false,
   parkings: true,
@@ -19,6 +20,6 @@ const initialState: IState = {
 
 export default reducer(
   initialState,
-  on(FiltersActions.toggle, (state, { payload }) => ({ ...state, [payload]: !state[payload] })),
-  on(FiltersActions.reset, () => initialState),
+  on(Actions.toggle, (state, { payload }) => ({ ...state, [payload]: !state[payload] })),
+  on(Actions.reset, () => initialState),
 )

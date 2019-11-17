@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
 
-import filters from "./reducers/filters"
+import filters from "./filters/filters.reducer"
 import current from "./reducers/current"
 import selected from "./reducers/selected"
 

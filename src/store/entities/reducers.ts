@@ -26,6 +26,6 @@ const appReducers = combineReducers({
   auth: persistReducer(authPersistConfig, auth),
 })
 
-export const reducers = persistReducer(rootPersistConfig, appReducers)
-
 export type TAppState = ReturnType<typeof appReducers>
+
+export const AppReducer = persistReducer(rootPersistConfig, appReducers)

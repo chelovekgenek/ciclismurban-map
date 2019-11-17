@@ -1,12 +1,12 @@
 import { connect } from "react-redux"
 
 import { TAppState } from "store/entities"
-import { FiltersActions, getFilters } from "store/entities/locations"
+import { Actions as FiltersActions, Selectors as FiltersSelectors } from "store/entities/locations/filters"
 
 import { Legend } from "./Legend"
 
 export interface IStateProps {
-  filters: ReturnType<typeof getFilters>
+  filters: ReturnType<typeof FiltersSelectors.getRoot>
 }
 export interface IDispatchProps {
   toggle: typeof FiltersActions.toggle
@@ -14,7 +14,7 @@ export interface IDispatchProps {
 
 export const LegendContainer = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
-    filters: getFilters(state),
+    filters: FiltersSelectors.getRoot(state),
   }),
   {
     toggle: FiltersActions.toggle,

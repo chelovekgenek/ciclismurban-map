@@ -7,7 +7,7 @@ import * as Actions from "./events.actions"
 export interface IState {
   data: EventModel[]
   fetching: boolean
-  error?: Error
+  error?: boolean
 }
 
 export const initialState: IState = {
@@ -21,14 +21,11 @@ export default reducer(
     ...state,
     fetching: true,
   })),
-  on(
-    ...union(Actions.Get.failure, Actions.Create.failure, Actions.Update.failure, Actions.Delete.failure),
-    (state, { payload }) => ({
-      ...state,
-      fetching: false,
-      error: payload,
-    }),
-  ),
+  on(...union(Actions.Get.failure, Actions.Create.failure, Actions.Update.failure, Actions.Delete.failure), state => ({
+    ...state,
+    fetching: false,
+    error: true,
+  })),
   on(Actions.Get.success, (state, { payload }) => ({ ...state, fetching: false, data: payload })),
   on(Actions.Create.success, (state, { payload }) => ({
     ...state,

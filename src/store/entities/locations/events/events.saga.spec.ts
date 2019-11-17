@@ -32,7 +32,7 @@ describe("locations/events/saga", () => {
         .withReducer(eventsReducer)
         .provide([{ call: wrapCall(Facades.getAll, () => new Promise((_r, reject) => reject())) }])
         .put(Actions.Get.failure())
-        .hasFinalState({ ...eventsInitialState, error: undefined })
+        .hasFinalState({ ...eventsInitialState, error: true })
         .run())
   })
   describe("handleCreate", () => {
@@ -63,7 +63,7 @@ describe("locations/events/saga", () => {
           { call: wrapCall(Facades.create, () => new Promise((_r, reject) => reject())) },
         ])
         .put(Actions.Create.failure())
-        .hasFinalState({ ...eventsInitialState, error: undefined })
+        .hasFinalState({ ...eventsInitialState, error: true })
         .run())
   })
   describe("handleUpdate", () => {
@@ -87,7 +87,7 @@ describe("locations/events/saga", () => {
         .withReducer(eventsReducer)
         .provide([{ call: wrapCall(Facades.updateById, () => new Promise((_r, reject) => reject())) }])
         .put(Actions.Update.failure())
-        .hasFinalState({ ...eventsInitialState, error: undefined })
+        .hasFinalState({ ...eventsInitialState, error: true })
         .run())
   })
   describe("handleDelete", () => {
@@ -111,7 +111,7 @@ describe("locations/events/saga", () => {
         .withReducer(eventsReducer)
         .provide([{ call: wrapCall(Facades.deleteById, () => new Promise((_r, reject) => reject())) }])
         .put(Actions.Delete.failure())
-        .hasFinalState({ ...eventsInitialState, error: undefined })
+        .hasFinalState({ ...eventsInitialState, error: true })
         .run())
   })
 })

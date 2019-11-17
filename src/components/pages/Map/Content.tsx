@@ -5,7 +5,8 @@ import { truncate } from "lodash-es"
 import { LocationModel } from "@ciclismurban/models"
 
 import { GoogleMap } from "components/generic/ui"
-import { getFilteredLocations, getFilteredLocationsCount, getCurrentLocation } from "store/entities/locations"
+import { getCurrentLocation } from "store/entities/locations"
+import { Selectors as FiltersSelectors } from "store/entities/locations/filters"
 import { MapOptions } from "helpers"
 
 import ParkingIcon from "assets/parking.png"
@@ -20,8 +21,8 @@ export const Content: React.FC<IProps> = () => {
   const [infoKey, setInfoKey] = useState<null | string>(null)
 
   const current = useSelector(getCurrentLocation)
-  const locations = useSelector(getFilteredLocations)
-  const locationsCount = useSelector(getFilteredLocationsCount)
+  const locations = useSelector(FiltersSelectors.getFilteredLocations)
+  const locationsCount = useSelector(FiltersSelectors.getFilteredLocationsCount)
 
   const renderMarkers = useCallback(
     (dataset: Array<LocationModel>, entity: string, icon?: string) =>

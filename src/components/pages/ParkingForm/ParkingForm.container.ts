@@ -3,14 +3,8 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ParkingModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import {
-  SelectedActions,
-  getSelectedRoot,
-  ParkingsCreateActions,
-  ParkingsUpdateActions,
-  getParkingsFetching,
-  SelectedGetActions,
-} from "store/entities/locations"
+import { SelectedActions, getSelectedRoot, SelectedGetActions } from "store/entities/locations"
+import { Actions as ParkingsActions, Selectors as ParkingsSelectors } from "store/entities/locations/parkings"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -19,14 +13,14 @@ import { ParkingFormValues } from "./ParkingForm.scheme"
 
 export type IStateProps = {
   parkings: {
-    fetching: ReturnType<typeof getParkingsFetching>
+    fetching: ReturnType<typeof ParkingsSelectors.getFetching>
   }
   selected: ReturnType<typeof getSelectedRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof ParkingsCreateActions.request
-  update: typeof ParkingsUpdateActions.request
+  create: typeof ParkingsActions.Create.request
+  update: typeof ParkingsActions.Update.request
   getSelected: typeof SelectedGetActions.request
   clearSelected: typeof SelectedActions.clear
 }
@@ -34,13 +28,13 @@ export interface IDispatchProps {
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     parkings: {
-      fetching: getParkingsFetching(state),
+      fetching: ParkingsSelectors.getFetching(state),
     },
     selected: getSelectedRoot(state),
   }),
   {
-    create: ParkingsCreateActions.request,
-    update: ParkingsUpdateActions.request,
+    create: ParkingsActions.Create.request,
+    update: ParkingsActions.Update.request,
     getSelected: SelectedGetActions.request,
     clearSelected: SelectedActions.clear,
   },

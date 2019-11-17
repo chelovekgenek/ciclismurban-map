@@ -4,7 +4,7 @@ import { watcher as current } from "./sagas/current"
 import filters from "./filters/filters.sagas"
 import { watcher as selected } from "./sagas/selected"
 import events from "./events/events.sagas"
-import { watcher as parkings } from "./sagas/parkings"
+import parkings from "./parkings/parkings.sagas"
 import { watcher as services } from "./sagas/services"
 import { watcher as shops } from "./sagas/shops"
 

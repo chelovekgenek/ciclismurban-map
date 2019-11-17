@@ -1,31 +1,26 @@
 import { connect } from "react-redux"
 
-import {
-  getParkingsLocations,
-  getParkingsFetching,
-  ParkingsGetActions,
-  ParkingsDeleteActions,
-} from "store/entities/locations"
+import { Actions as ParkingsActions, Selectors as ParkingsSelectors } from "store/entities/locations/parkings"
 import { TAppState } from "store/entities"
 
 import { Parkings } from "./Parkings"
 
 export interface IStateProps {
-  parkings: ReturnType<typeof getParkingsLocations>
-  fetching: ReturnType<typeof getParkingsFetching>
+  parkings: ReturnType<typeof ParkingsSelectors.getLocations>
+  fetching: ReturnType<typeof ParkingsSelectors.getFetching>
 }
 export interface IDispatchProps {
-  getParkings: typeof ParkingsGetActions.request
-  deleteParking: typeof ParkingsDeleteActions.request
+  getParkings: typeof ParkingsActions.Get.request
+  deleteParking: typeof ParkingsActions.Delete.request
 }
 
 export const ParkingsContainer = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
-    parkings: getParkingsLocations(state),
-    fetching: getParkingsFetching(state),
+    parkings: ParkingsSelectors.getLocations(state),
+    fetching: ParkingsSelectors.getFetching(state),
   }),
   {
-    getParkings: ParkingsGetActions.request,
-    deleteParking: ParkingsDeleteActions.request,
+    getParkings: ParkingsActions.Get.request,
+    deleteParking: ParkingsActions.Delete.request,
   },
 )(Parkings)

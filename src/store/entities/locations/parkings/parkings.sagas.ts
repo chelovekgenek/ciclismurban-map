@@ -6,7 +6,7 @@ import { ParkingModel } from "@ciclismurban/models"
 import { history } from "store/history"
 import { uploadFile } from "store/commons"
 
-import { SelectedActions } from "../actions"
+import { Actions as SelectedActions } from "../selected"
 import * as Types from "./parkings.types"
 import * as Actions from "./parkings.actions"
 import * as Facades from "./parkings.facades"

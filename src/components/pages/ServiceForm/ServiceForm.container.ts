@@ -3,8 +3,8 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ServiceModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import { SelectedActions, SelectedGetActions, getSelectedRoot } from "store/entities/locations"
 import { Actions as ServicesActions, Selectors as ServicesSelectors } from "store/entities/locations/services"
+import { Actions as SelectedActions, Selectors as SelectedSelectors } from "store/entities/locations/selected"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -15,13 +15,13 @@ export type IStateProps = {
   services: {
     fetching: ReturnType<typeof ServicesSelectors.getFetching>
   }
-  selected: ReturnType<typeof getSelectedRoot>
+  selected: ReturnType<typeof SelectedSelectors.getRoot>
 }
 
 export interface IDispatchProps {
   create: typeof ServicesActions.Create.request
   update: typeof ServicesActions.Update.request
-  getSelected: typeof SelectedGetActions.request
+  getSelected: typeof SelectedActions.Get.request
   clearSelected: typeof SelectedActions.clear
 }
 
@@ -30,12 +30,12 @@ const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
     services: {
       fetching: ServicesSelectors.getFetching(state),
     },
-    selected: getSelectedRoot(state),
+    selected: SelectedSelectors.getRoot(state),
   }),
   {
     create: ServicesActions.Create.request,
     update: ServicesActions.Update.request,
-    getSelected: SelectedGetActions.request,
+    getSelected: SelectedActions.Get.request,
     clearSelected: SelectedActions.clear,
   },
 )

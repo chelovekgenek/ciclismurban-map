@@ -3,9 +3,8 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { EventModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import { SelectedActions, getSelectedRoot, SelectedGetActions } from "store/entities/locations"
-import { Selectors as EventsSelectors } from "store/entities/locations/events"
-import { Actions as EventsActions } from "store/entities/locations/events"
+import { Selectors as EventsSelectors, Actions as EventsActions } from "store/entities/locations/events"
+import { Selectors as SelectedSelectors, Actions as SelectedActions } from "store/entities/locations/selected"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 import { TAppState } from "store/entities"
 
@@ -16,13 +15,13 @@ export type IStateProps = {
   events: {
     fetching: ReturnType<typeof EventsSelectors.getFetching>
   }
-  selected: ReturnType<typeof getSelectedRoot>
+  selected: ReturnType<typeof SelectedSelectors.getRoot>
 }
 
 export interface IDispatchProps {
   create: typeof EventsActions.Create.request
   update: typeof EventsActions.Update.request
-  getSelected: typeof SelectedGetActions.request
+  getSelected: typeof SelectedActions.Get.request
   clearSelected: typeof SelectedActions.clear
 }
 
@@ -31,12 +30,12 @@ const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
     events: {
       fetching: EventsSelectors.getFetching(state),
     },
-    selected: getSelectedRoot(state),
+    selected: SelectedSelectors.getRoot(state),
   }),
   {
     create: EventsActions.Create.request,
     update: EventsActions.Update.request,
-    getSelected: SelectedGetActions.request,
+    getSelected: SelectedActions.Get.request,
     clearSelected: SelectedActions.clear,
   },
 )

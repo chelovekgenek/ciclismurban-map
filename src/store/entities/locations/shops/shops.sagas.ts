@@ -9,7 +9,7 @@ import { uploadFile } from "store/commons"
 import * as Facades from "./shops.facades"
 import * as Actions from "./shops.actions"
 import * as Types from "./shops.types"
-import { SelectedActions } from "../actions"
+import { Actions as SelectedActions } from "../selected"
 
 export function* handleGet() {
   try {

@@ -1,7 +1,7 @@
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import { handleBoot } from "./boot"
-import { CurrentActions } from "./entities/locations"
+import { Position } from "./entities/me"
 import { LoginByTokenActions } from "./entities/auth"
 import { history } from "./history"
 
@@ -22,7 +22,7 @@ describe("store.boot", () => {
   }
   it("should dispatch polling if filters.current is enabled", async () => {
     await handleBoot(defaultProps)()
-    expect(defaultProps.dispatch).toBeCalledWith(CurrentActions.pollingStart())
+    expect(defaultProps.dispatch).toBeCalledWith(Position.Actions.Polling.start())
   })
   it("should dispatch login request if token exist", async () => {
     await handleBoot(defaultProps)()

@@ -5,7 +5,7 @@ import routes from "components/App/Router.options"
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import { Selectors as FiltersSelectors } from "./entities/locations/filters"
-import { CurrentActions } from "./entities/locations"
+import { Position } from "./entities/me"
 import { getToken, LoginByTokenActions } from "./entities/auth"
 import { history } from "./history"
 import { TAppState } from "./entities"
@@ -17,7 +17,7 @@ export const handleBoot = ({ dispatch, getState }: Store<TAppState>) => () =>
     const token = getToken(state)
 
     if (filters.current) {
-      dispatch(CurrentActions.pollingStart())
+      dispatch(Position.Actions.Polling.start())
     }
     if (token) {
       dispatch(LoginByTokenActions.request())

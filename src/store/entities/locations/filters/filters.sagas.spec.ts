@@ -12,7 +12,7 @@ describe("locations/filters/saga", () => {
     const action = Actions.toggle("current")
     it("should stop polling if `current` filter is disabled", async () => {
       const initialState = set(cloneDeep(initialAppState), "locations.filters.current", false)
-      const finalState = set(cloneDeep(initialAppState), "locations.current.polling", false)
+      const finalState = set(cloneDeep(initialAppState), "me.position.polling", false)
       return expectSaga(Sagas.handleToggle, action)
         .withReducer(AppReducer, initialState as any)
         .hasFinalState(finalState)
@@ -20,7 +20,7 @@ describe("locations/filters/saga", () => {
     })
     it("should start polling if `current` filter is enabled", async () => {
       const initialState = set(cloneDeep(initialAppState), "locations.filters.current", true)
-      const finalState = set(cloneDeep(initialState), "locations.current.polling", true)
+      const finalState = set(cloneDeep(initialState), "me.position.polling", true)
       return expectSaga(Sagas.handleToggle, action)
         .withReducer(AppReducer, initialState as any)
         .hasFinalState(finalState)

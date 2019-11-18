@@ -2,13 +2,12 @@
   "router": { "locationBeforeTransitions": null },
   "locations": {
     "filters": { "current": false, "events": false, "parkings": true, "services": true, "shops": true },
-    "current": { "polling": false, "fetching": false },
     "events": { "data": [], "fetching": false },
     "parkings": { "data": [], "fetching": false },
     "services": { "data": [], "fetching": false },
     "shops": { "data": [], "fetching": false },
     "selected": { "fetching": false }
   },
-  "me": { "user": { "fetching": false } },
+  "me": { "user": { "fetching": false }, "position": { "polling": false, "fetching": false } },
   "auth": { "authenticated": false, "fetching": false, "attempts": 0 }
 }

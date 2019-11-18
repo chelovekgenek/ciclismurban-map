@@ -7,7 +7,7 @@ import { ROUTES_INDEX_PATH } from "constants/routes"
 import * as action from "./actions"
 import * as type from "./types"
 import * as api from "./api"
-import { MeGetActions } from "../me"
+import { User } from "../me"
 
 export function* handleLogin({ payload }: ReturnType<typeof action.LoginActions.request>) {
   try {
@@ -55,7 +55,7 @@ export function* handleRegister({ payload }: ReturnType<typeof action.RegisterAc
 }
 
 export function* retreiveMe() {
-  yield put(MeGetActions.request())
+  yield put(User.Actions.Get.request())
 }
 
 export function* replaceToIndexRoute() {

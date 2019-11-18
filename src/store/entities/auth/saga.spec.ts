@@ -9,7 +9,7 @@ import * as action from "./actions"
 import userReducer, { initialState as userInitialState } from "./reducer"
 import * as api from "./api"
 import { wrapCall } from "helpers/testing-sagas"
-import { MeGetActions } from "../me"
+import { User } from "../me"
 
 describe("auth.saga", () => {
   const mockResponse = {
@@ -144,7 +144,7 @@ describe("auth.saga", () => {
   describe("retreiveMe", () => {
     it("should call replace", async () =>
       expectSaga(saga.retreiveMe)
-        .put(MeGetActions.request())
+        .put(User.Actions.Get.request())
         .run())
   })
   describe("replaceToIndexRoute", () => {

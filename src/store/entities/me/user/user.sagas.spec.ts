@@ -2,13 +2,13 @@ import { expectSaga } from "redux-saga-test-plan"
 import { call } from "redux-saga/effects"
 
 import user from "mocks/user.json"
-
-import * as saga from "./saga"
-import * as action from "./actions"
-import userReducer, { initialState as meInitialState } from "./reducer"
-import * as api from "./api"
 import { wrapCall } from "helpers/testing-sagas"
-import { uploadFile } from "../../commons"
+
+import * as Sagas from "./user.sagas"
+import * as Actions from "./user.actions"
+import * as Facades from "./user.facades"
+import userReducer, { initialState as meInitialState } from "./user.reducer"
+import { uploadFile } from "../../../commons"
 
 describe("auth.saga", () => {
   describe("handleGet", () => {
@@ -16,10 +16,10 @@ describe("auth.saga", () => {
       const mockResponse = {
         data: user,
       }
-      return expectSaga(saga.handleGet)
+      return expectSaga(Sagas.handleGet)
         .withReducer(userReducer)
-        .provide([[call(api.getMe), mockResponse]])
-        .put(action.MeGetActions.success(mockResponse.data as any))
+        .provide([[call(Facades.get), mockResponse]])
+        .put(Actions.Get.success(mockResponse.data as any))
         .hasFinalState({
           ...meInitialState,
           data: mockResponse.data,
@@ -27,26 +27,26 @@ describe("auth.saga", () => {
         .run()
     })
     it("should make request and mutate reducer accordingly, if response is failure", async () =>
-      expectSaga(saga.handleGet)
+      expectSaga(Sagas.handleGet)
         .withReducer(userReducer)
-        .provide([{ call: wrapCall(api.getMe, () => new Promise((_r, reject) => reject())) }])
-        .put(action.MeGetActions.failure())
+        .provide([{ call: wrapCall(Facades.get, () => new Promise((_r, reject) => reject())) }])
+        .put(Actions.Get.failure())
         .hasFinalState({ ...meInitialState, error: undefined })
         .run())
   })
   describe("handleUpdateProfile", () => {
-    const a = action.MeUpdateProfileActions.request(user.profile)
+    const action = Actions.UpdateProfile.request(user.profile)
     it("should make request and mutate reducer accordingly, if response is successful", async () => {
       const mockResponse = {
         data: user,
       }
-      return expectSaga(saga.handleUpdateProfile, a)
+      return expectSaga(Sagas.handleUpdateProfile, action)
         .withReducer(userReducer)
         .provide([
           [call(uploadFile, user.profile.avatar), undefined],
-          [call(api.updateMeProfile, user.profile), mockResponse],
+          [call(Facades.updateProfile, user.profile), mockResponse],
         ])
-        .put(action.MeUpdateProfileActions.success(mockResponse.data as any))
+        .put(Actions.UpdateProfile.success(mockResponse.data as any))
         .hasFinalState({
           ...meInitialState,
           data: mockResponse.data,
@@ -54,13 +54,13 @@ describe("auth.saga", () => {
         .run()
     })
     it("should make request and mutate reducer accordingly, if response is failure", async () =>
-      expectSaga(saga.handleUpdateProfile, a)
+      expectSaga(Sagas.handleUpdateProfile, action)
         .withReducer(userReducer)
         .provide([
           [call(uploadFile, user.profile.avatar), undefined],
-          { call: wrapCall(api.updateMeProfile, () => new Promise((_r, reject) => reject())) },
+          { call: wrapCall(Facades.updateProfile, () => new Promise((_r, reject) => reject())) },
         ])
-        .put(action.MeUpdateProfileActions.failure())
+        .put(Actions.UpdateProfile.failure())
         .hasFinalState({ ...meInitialState, error: undefined })
         .run())
   })

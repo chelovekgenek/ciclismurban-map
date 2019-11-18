@@ -9,6 +9,6 @@
     "shops": { "data": [], "fetching": false },
     "selected": { "fetching": false }
   },
-  "me": { "fetching": false },
+  "me": { "user": { "fetching": false } },
   "auth": { "authenticated": false, "fetching": false, "attempts": 0 }
 }

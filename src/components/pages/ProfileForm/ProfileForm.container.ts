@@ -5,26 +5,26 @@ import { UserExposeGroup, ProfileModel } from "@ciclismurban/models"
 
 import { TAppState } from "store/entities"
 import { validateFormik } from "helpers"
-import { getFetching, getProfile, MeUpdateProfileActions } from "store/entities/me"
+import { User } from "store/entities/me"
 
 import { IProps, ProfileForm } from "./ProfileForm"
 import { ProfileFormValues } from "./ProfileForm.scheme"
 
 export interface IStateProps {
-  fetching: ReturnType<typeof getFetching>
-  profile: ReturnType<typeof getProfile>
+  fetching: ReturnType<typeof User.Selectors.getFetching>
+  profile: ReturnType<typeof User.Selectors.getProfile>
 }
 export interface IDispatchProps {
-  save: typeof MeUpdateProfileActions.request
+  save: typeof User.Actions.UpdateProfile.request
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
-    fetching: getFetching(state),
-    profile: getProfile(state),
+    fetching: User.Selectors.getFetching(state),
+    profile: User.Selectors.getProfile(state),
   }),
   {
-    save: MeUpdateProfileActions.request,
+    save: User.Actions.UpdateProfile.request,
   },
 )
 const hocWithFormik = withFormik<IProps, ProfileFormValues>({

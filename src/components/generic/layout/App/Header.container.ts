@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 
 import { TAppState } from "store/entities"
 import { getAuthenticated, LogoutAction } from "store/entities/auth"
-import { getEmail, getProfileAvatar } from "store/entities/me"
+import { User } from "store/entities/me"
 
 import { Header } from "./Header"
 
@@ -11,15 +11,15 @@ export interface IDispatchProps {
 }
 export interface IStateProps {
   authenticated: ReturnType<typeof getAuthenticated>
-  email: ReturnType<typeof getEmail>
-  avatar: ReturnType<typeof getProfileAvatar>
+  email: ReturnType<typeof User.Selectors.getEmail>
+  avatar: ReturnType<typeof User.Selectors.getProfileAvatar>
 }
 
 export const HeaderContainer = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     authenticated: getAuthenticated(state),
-    email: getEmail(state),
-    avatar: getProfileAvatar(state),
+    email: User.Selectors.getEmail(state),
+    avatar: User.Selectors.getProfileAvatar(state),
   }),
   {
     logout: LogoutAction,

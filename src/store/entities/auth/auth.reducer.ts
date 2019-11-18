@@ -1,13 +1,6 @@
 import { reducer, on, union } from "ts-action"
 
-import {
-  RegisterActions,
-  LoginActions,
-  LoginByTokenActions,
-  LogoutAction,
-  LoginByGoogleActions,
-  LoginByFacebookActions,
-} from "./actions"
+import * as Actions from "./auth.actions"
 
 export interface IState {
   authenticated: boolean
@@ -27,11 +20,11 @@ export default reducer(
   initialState,
   on(
     ...union(
-      RegisterActions.request,
-      LoginActions.request,
-      LoginByTokenActions.request,
-      LoginByGoogleActions.request,
-      LoginByFacebookActions.request,
+      Actions.Register.request,
+      Actions.Login.request,
+      Actions.LoginByToken.request,
+      Actions.LoginByGoogle.request,
+      Actions.LoginByFacebook.request,
     ),
     state => ({
       ...state,
@@ -41,11 +34,11 @@ export default reducer(
   ),
   on(
     ...union(
-      RegisterActions.success,
-      LoginActions.success,
-      LoginByTokenActions.success,
-      LoginByGoogleActions.success,
-      LoginByFacebookActions.success,
+      Actions.Register.success,
+      Actions.Login.success,
+      Actions.LoginByToken.success,
+      Actions.LoginByGoogle.success,
+      Actions.LoginByFacebook.success,
     ),
     (state, { payload }) => ({
       ...initialState,
@@ -54,13 +47,18 @@ export default reducer(
       ...payload,
     }),
   ),
-  on(RegisterActions.failure, LoginActions.failure, (state, { payload }) => ({
+  on(Actions.Register.failure, Actions.Login.failure, (state, { payload }) => ({
     ...initialState,
     attempts: state.attempts + 1,
     error: payload,
   })),
   on(
-    ...union(LoginByTokenActions.failure, LoginByGoogleActions.failure, LoginByFacebookActions.failure, LogoutAction),
+    ...union(
+      Actions.LoginByToken.failure,
+      Actions.LoginByGoogle.failure,
+      Actions.LoginByFacebook.failure,
+      Actions.Logout,
+    ),
     () => initialState,
   ),
 )

@@ -1,4 +1,4 @@
-import { TAppState } from "../reducers"
+import { TAppState } from "store/entities"
 
 export const getRoot = (state: TAppState) => state.auth
 export const getFetching = (state: TAppState) => getRoot(state).fetching

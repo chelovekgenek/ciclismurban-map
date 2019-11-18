@@ -2,7 +2,7 @@ import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import { handleBoot } from "./boot"
 import { Position } from "./entities/me"
-import { LoginByTokenActions } from "./entities/auth"
+import * as Auth from "./entities/auth"
 import { history } from "./history"
 
 describe("store.boot", () => {
@@ -26,7 +26,7 @@ describe("store.boot", () => {
   })
   it("should dispatch login request if token exist", async () => {
     await handleBoot(defaultProps)()
-    expect(defaultProps.dispatch).toBeCalledWith(LoginByTokenActions.request())
+    expect(defaultProps.dispatch).toBeCalledWith(Auth.Actions.LoginByToken.request())
   })
   it("should redirect if token doesn't exist and user is on protected route", async () => {
     history.location.pathname = "/parkings"

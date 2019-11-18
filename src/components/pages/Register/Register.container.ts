@@ -3,27 +3,27 @@ import { withFormik } from "formik"
 import { UserModel, UserExposeGroup } from "@ciclismurban/models"
 
 import { validateFormik } from "helpers"
-import { getFetching, RegisterActions, getError } from "store/entities/auth"
+import * as Auth from "store/entities/auth"
 import { TAppState } from "store/entities"
 
 import { IProps, Register } from "./Register"
 import { LoginForm } from "../Login/LoginForm.scheme"
 
 export interface IStateProps {
-  fetching: ReturnType<typeof getFetching>
-  responseError: ReturnType<typeof getError>
+  fetching: ReturnType<typeof Auth.Selectors.getFetching>
+  responseError: ReturnType<typeof Auth.Selectors.getError>
 }
 export interface IDispatchProps {
-  register: typeof RegisterActions.request
+  register: typeof Auth.Actions.Register.request
 }
 
 export const RegisterContainer = connect<IStateProps, IDispatchProps, IProps, TAppState>(
   state => ({
-    fetching: getFetching(state),
-    responseError: getError(state),
+    fetching: Auth.Selectors.getFetching(state),
+    responseError: Auth.Selectors.getError(state),
   }),
   {
-    register: RegisterActions.request,
+    register: Auth.Actions.Register.request,
   },
 )(
   withFormik<IProps, LoginForm>({

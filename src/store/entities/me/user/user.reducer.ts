@@ -2,7 +2,7 @@ import { reducer, on } from "ts-action"
 import { UserModel } from "@ciclismurban/models"
 
 import * as Actions from "./user.actions"
-import { LogoutAction } from "../../auth"
+import { Actions as AuthActions } from "store/entities/auth"
 
 export interface IState {
   fetching: boolean
@@ -30,5 +30,5 @@ export default reducer(
     fetching: false,
     error: undefined,
   })),
-  on(LogoutAction, () => initialState),
+  on(AuthActions.Logout, () => initialState),
 )

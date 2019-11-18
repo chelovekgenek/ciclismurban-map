@@ -3,14 +3,7 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ParkingModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import {
-  SelectedActions,
-  getSelectedRoot,
-  ParkingsCreateActions,
-  ParkingsUpdateActions,
-  getParkingsFetching,
-  SelectedGetActions,
-} from "store/entities/locations"
+import { Parkings, Selected } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -19,30 +12,30 @@ import { ParkingFormValues } from "./ParkingForm.scheme"
 
 export type IStateProps = {
   parkings: {
-    fetching: ReturnType<typeof getParkingsFetching>
+    fetching: ReturnType<typeof Parkings.Selectors.getFetching>
   }
-  selected: ReturnType<typeof getSelectedRoot>
+  selected: ReturnType<typeof Selected.Selectors.getRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof ParkingsCreateActions.request
-  update: typeof ParkingsUpdateActions.request
-  getSelected: typeof SelectedGetActions.request
-  clearSelected: typeof SelectedActions.clear
+  create: typeof Parkings.Actions.Create.request
+  update: typeof Parkings.Actions.Update.request
+  getSelected: typeof Selected.Actions.Get.request
+  clearSelected: typeof Selected.Actions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     parkings: {
-      fetching: getParkingsFetching(state),
+      fetching: Parkings.Selectors.getFetching(state),
     },
-    selected: getSelectedRoot(state),
+    selected: Selected.Selectors.getRoot(state),
   }),
   {
-    create: ParkingsCreateActions.request,
-    update: ParkingsUpdateActions.request,
-    getSelected: SelectedGetActions.request,
-    clearSelected: SelectedActions.clear,
+    create: Parkings.Actions.Create.request,
+    update: Parkings.Actions.Update.request,
+    getSelected: Selected.Actions.Get.request,
+    clearSelected: Selected.Actions.clear,
   },
 )
 const hocWithFormik = withFormik<IProps, ParkingFormValues>({

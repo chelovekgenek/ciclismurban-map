@@ -3,14 +3,7 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ShopModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import {
-  SelectedActions,
-  getSelectedRoot,
-  SelectedGetActions,
-  getShopsFetching,
-  ShopsCreateActions,
-  ShopsUpdateActions,
-} from "store/entities/locations"
+import { Shops, Selected } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -19,30 +12,30 @@ import { ShopFormValues } from "./ShopForm.scheme"
 
 export type IStateProps = {
   shops: {
-    fetching: ReturnType<typeof getShopsFetching>
+    fetching: ReturnType<typeof Shops.Selectors.getFetching>
   }
-  selected: ReturnType<typeof getSelectedRoot>
+  selected: ReturnType<typeof Selected.Selectors.getRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof ShopsCreateActions.request
-  update: typeof ShopsUpdateActions.request
-  getSelected: typeof SelectedGetActions.request
-  clearSelected: typeof SelectedActions.clear
+  create: typeof Shops.Actions.Create.request
+  update: typeof Shops.Actions.Update.request
+  getSelected: typeof Selected.Actions.Get.request
+  clearSelected: typeof Selected.Actions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     shops: {
-      fetching: getShopsFetching(state),
+      fetching: Shops.Selectors.getFetching(state),
     },
-    selected: getSelectedRoot(state),
+    selected: Selected.Selectors.getRoot(state),
   }),
   {
-    create: ShopsCreateActions.request,
-    update: ShopsUpdateActions.request,
-    getSelected: SelectedGetActions.request,
-    clearSelected: SelectedActions.clear,
+    create: Shops.Actions.Create.request,
+    update: Shops.Actions.Update.request,
+    getSelected: Selected.Actions.Get.request,
+    clearSelected: Selected.Actions.clear,
   },
 )
 const hocWithFormik = withFormik<IProps, ShopFormValues>({

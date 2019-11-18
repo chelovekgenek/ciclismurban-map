@@ -2,7 +2,7 @@ import { FormikBag } from "formik"
 import { get } from "lodash-es"
 import { LocationModel } from "@ciclismurban/models"
 
-import { getSelectedRoot } from "store/entities/locations"
+import { Selectors as SelectedSelectors } from "store/entities/locations/selected"
 import { difference } from "./difference"
 import { validateFormik } from "./validator"
 import { ClassType } from "class-transformer/ClassTransformer"
@@ -10,7 +10,7 @@ import { ClassType } from "class-transformer/ClassTransformer"
 interface IProps {
   update: (payload: { uuid: string; payload: Object }) => void
   create: (payload: Object) => void
-  selected: ReturnType<typeof getSelectedRoot>
+  selected: ReturnType<typeof SelectedSelectors.getRoot>
 }
 export const handleLocationFormSubmit = (values: Object, { props }: FormikBag<IProps, Object>) => {
   const { data: selected } = props.selected

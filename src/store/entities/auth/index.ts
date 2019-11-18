@@ -1,3 +1,4 @@
-export * from "./actions"
-export * from "./selectors"
-export * from "./types"
+import * as Actions from "./auth.actions"
+import * as Selectors from "./auth.selectors"
+
+export { Actions, Selectors }

@@ -4,58 +4,58 @@ import { AxiosResponse } from "axios"
 
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
-import * as action from "./actions"
-import * as type from "./types"
-import * as api from "./api"
-import { MeGetActions } from "../me"
+import * as Actions from "./auth.actions"
+import * as Types from "./auth.types"
+import * as Facades from "./auth.facades"
+import { User } from "../me"
 
-export function* handleLogin({ payload }: ReturnType<typeof action.LoginActions.request>) {
+export function* handleLogin({ payload }: ReturnType<typeof Actions.Login.request>) {
   try {
-    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.login, payload)
-    yield put(action.LoginActions.success(data))
+    const { data }: AxiosResponse<Types.AuthResponseModel> = yield call(Facades.login, payload)
+    yield put(Actions.Login.success(data))
   } catch (e) {
-    yield put(action.LoginActions.failure(e.response.status))
+    yield put(Actions.Login.failure(e.response.status))
   }
 }
 
 export function* handleLoginByToken() {
   try {
-    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.loginByToken)
-    yield put(action.LoginByTokenActions.success(data))
+    const { data }: AxiosResponse<Types.AuthResponseModel> = yield call(Facades.loginByToken)
+    yield put(Actions.LoginByToken.success(data))
   } catch (e) {
-    yield put(action.LoginByTokenActions.failure())
+    yield put(Actions.LoginByToken.failure())
   }
 }
 
-export function* handleLoginByGoogle({ payload }: ReturnType<typeof action.LoginByGoogleActions.request>) {
+export function* handleLoginByGoogle({ payload }: ReturnType<typeof Actions.LoginByGoogle.request>) {
   try {
-    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.loginByGoogle, payload)
-    yield put(action.LoginByGoogleActions.success(data))
+    const { data }: AxiosResponse<Types.AuthResponseModel> = yield call(Facades.loginByGoogle, payload)
+    yield put(Actions.LoginByGoogle.success(data))
   } catch (e) {
-    yield put(action.LoginByGoogleActions.failure())
+    yield put(Actions.LoginByGoogle.failure())
   }
 }
 
-export function* handleLoginByFacebook({ payload }: ReturnType<typeof action.LoginByFacebookActions.request>) {
+export function* handleLoginByFacebook({ payload }: ReturnType<typeof Actions.LoginByFacebook.request>) {
   try {
-    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.loginByFacebook, payload)
-    yield put(action.LoginByFacebookActions.success(data))
+    const { data }: AxiosResponse<Types.AuthResponseModel> = yield call(Facades.loginByFacebook, payload)
+    yield put(Actions.LoginByFacebook.success(data))
   } catch (e) {
-    yield put(action.LoginByFacebookActions.failure())
+    yield put(Actions.LoginByFacebook.failure())
   }
 }
 
-export function* handleRegister({ payload }: ReturnType<typeof action.RegisterActions.request>) {
+export function* handleRegister({ payload }: ReturnType<typeof Actions.Register.request>) {
   try {
-    const { data }: AxiosResponse<type.AuthResponseModel> = yield call(api.register, payload)
-    yield put(action.RegisterActions.success(data))
+    const { data }: AxiosResponse<Types.AuthResponseModel> = yield call(Facades.register, payload)
+    yield put(Actions.Register.success(data))
   } catch (e) {
-    yield put(action.RegisterActions.failure(e.response.status))
+    yield put(Actions.Register.failure(e.response.status))
   }
 }
 
 export function* retreiveMe() {
-  yield put(MeGetActions.request())
+  yield put(User.Actions.Get.request())
 }
 
 export function* replaceToIndexRoute() {
@@ -63,28 +63,28 @@ export function* replaceToIndexRoute() {
 }
 
 export default function*() {
-  yield takeLatest(type.RegisterTypes.REQUEST, handleRegister)
-  yield takeLatest(type.LoginTypes.REQUEST, handleLogin)
-  yield takeLatest(type.LoginByTokenTypes.REQUEST, handleLoginByToken)
-  yield takeLatest(type.LoginByGoogleTypes.REQUEST, handleLoginByGoogle)
-  yield takeLatest(type.LoginByFacebookTypes.REQUEST, handleLoginByFacebook)
+  yield takeLatest(Types.Register.REQUEST, handleRegister)
+  yield takeLatest(Types.Login.REQUEST, handleLogin)
+  yield takeLatest(Types.LoginByToken.REQUEST, handleLoginByToken)
+  yield takeLatest(Types.LoginByGoogle.REQUEST, handleLoginByGoogle)
+  yield takeLatest(Types.LoginByFacebook.REQUEST, handleLoginByFacebook)
   yield takeLatest(
     [
-      type.LoginTypes.SUCCESS,
-      type.LoginByTokenTypes.SUCCESS,
-      type.LoginByGoogleTypes.SUCCESS,
-      type.LoginByFacebookTypes.SUCCESS,
-      type.RegisterTypes.SUCCESS,
+      Types.Login.SUCCESS,
+      Types.LoginByToken.SUCCESS,
+      Types.LoginByGoogle.SUCCESS,
+      Types.LoginByFacebook.SUCCESS,
+      Types.Register.SUCCESS,
     ],
     retreiveMe,
   )
   yield takeLatest(
     [
-      type.LogoutType,
-      type.LoginTypes.SUCCESS,
-      type.LoginByGoogleTypes.SUCCESS,
-      type.LoginByFacebookTypes.SUCCESS,
-      type.RegisterTypes.SUCCESS,
+      Types.Logout,
+      Types.Login.SUCCESS,
+      Types.LoginByGoogle.SUCCESS,
+      Types.LoginByFacebook.SUCCESS,
+      Types.Register.SUCCESS,
     ],
     replaceToIndexRoute,
   )

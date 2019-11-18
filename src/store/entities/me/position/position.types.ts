@@ -1,0 +1,10 @@
+export enum Polling {
+  START = "ME__POSITION__POLLING__START",
+  STOP = "ME__POSITION__POLLING__STOP",
+}
+
+export enum Get {
+  REQUEST = "ME__POSITION__GET__REQUEST",
+  SUCCESS = "ME__POSITION__GET__SUCCESS",
+  FAILURE = "ME__POSITION__GET__FAILURE",
+}

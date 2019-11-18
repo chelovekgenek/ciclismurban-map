@@ -1,14 +1,14 @@
 import React from "react"
 import { useSelector } from "react-redux"
 
-import { getAuthenticated } from "store/entities/auth"
+import { Selectors } from "store/entities/auth"
 
 interface IProps {
   children: React.ReactNode
 }
 
 export const Authentication: React.FC<IProps> = ({ children }) => {
-  const authenticated = useSelector(getAuthenticated)
+  const authenticated = useSelector(Selectors.getAuthenticated)
   if (!authenticated) {
     return null
   }

@@ -1,0 +1,4 @@
+export enum Types {
+  TOGGLE = "LOCATIONS__FILTERS__TOGGLE",
+  RESET = "LOCATIONS__FILTERS__RESET",
+}

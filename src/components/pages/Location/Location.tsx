@@ -3,14 +3,14 @@ import { RouteComponentProps } from "react-router"
 
 import { Layout } from "components/generic"
 import { Empty, Spinner, GoogleMap } from "components/generic/ui"
-import { TAcceptedEntity, ACCEPTED_ENTITIES } from "store/entities/locations"
+import { Types } from "store/entities/locations/selected"
 import { ROUTES_INDEX_PATH } from "constants/routes"
 
 import * as Styled from "./Location.styled"
 import { IStateProps, IDispatchProps } from "./Location.container"
 
 interface IParams {
-  entity: TAcceptedEntity
+  entity: Types.TAcceptedEntity
   id: string
 }
 
@@ -19,7 +19,7 @@ interface IProps extends RouteComponentProps<IParams>, IStateProps, IDispatchPro
 export const Location: React.FC<IProps> = ({ history, match, getSelected, selected, fetching, clearSelected }) => {
   useEffect(() => {
     const { entity, id } = match.params
-    if (!ACCEPTED_ENTITIES.includes(entity)) {
+    if (!Types.ACCEPTED_ENTITIES.includes(entity)) {
       return history.replace(ROUTES_INDEX_PATH)
     }
 

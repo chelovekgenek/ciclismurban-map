@@ -3,14 +3,7 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ServiceModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import {
-  SelectedActions,
-  getSelectedRoot,
-  getServicesFetching,
-  ServicesCreateActions,
-  ServicesUpdateActions,
-  SelectedGetActions,
-} from "store/entities/locations"
+import { Services, Selected } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -19,30 +12,30 @@ import { ServiceFormValues } from "./ServiceForm.scheme"
 
 export type IStateProps = {
   services: {
-    fetching: ReturnType<typeof getServicesFetching>
+    fetching: ReturnType<typeof Services.Selectors.getFetching>
   }
-  selected: ReturnType<typeof getSelectedRoot>
+  selected: ReturnType<typeof Selected.Selectors.getRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof ServicesCreateActions.request
-  update: typeof ServicesUpdateActions.request
-  getSelected: typeof SelectedGetActions.request
-  clearSelected: typeof SelectedActions.clear
+  create: typeof Services.Actions.Create.request
+  update: typeof Services.Actions.Update.request
+  getSelected: typeof Selected.Actions.Get.request
+  clearSelected: typeof Selected.Actions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     services: {
-      fetching: getServicesFetching(state),
+      fetching: Services.Selectors.getFetching(state),
     },
-    selected: getSelectedRoot(state),
+    selected: Selected.Selectors.getRoot(state),
   }),
   {
-    create: ServicesCreateActions.request,
-    update: ServicesUpdateActions.request,
-    getSelected: SelectedGetActions.request,
-    clearSelected: SelectedActions.clear,
+    create: Services.Actions.Create.request,
+    update: Services.Actions.Update.request,
+    getSelected: Selected.Actions.Get.request,
+    clearSelected: Selected.Actions.clear,
   },
 )
 const hocWithFormik = withFormik<IProps, ServiceFormValues>({

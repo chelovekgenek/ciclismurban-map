@@ -3,46 +3,39 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { EventModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import {
-  EventsCreateActions,
-  getEventsFetching,
-  SelectedActions,
-  getSelectedRoot,
-  EventsUpdateActions,
-  SelectedGetActions,
-} from "store/entities/locations"
-import { TAppState } from "store/entities"
+import { Events, Selected } from "store/entities/locations"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
+import { TAppState } from "store/entities"
 
 import { EventFormValues } from "./EventForm.helper"
 import { IProps, EventForm } from "./EventForm"
 
 export type IStateProps = {
   events: {
-    fetching: ReturnType<typeof getEventsFetching>
+    fetching: ReturnType<typeof Events.Selectors.getFetching>
   }
-  selected: ReturnType<typeof getSelectedRoot>
+  selected: ReturnType<typeof Selected.Selectors.getRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof EventsCreateActions.request
-  update: typeof EventsUpdateActions.request
-  getSelected: typeof SelectedGetActions.request
-  clearSelected: typeof SelectedActions.clear
+  create: typeof Events.Actions.Create.request
+  update: typeof Events.Actions.Update.request
+  getSelected: typeof Selected.Actions.Get.request
+  clearSelected: typeof Selected.Actions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     events: {
-      fetching: getEventsFetching(state),
+      fetching: Events.Selectors.getFetching(state),
     },
-    selected: getSelectedRoot(state),
+    selected: Selected.Selectors.getRoot(state),
   }),
   {
-    create: EventsCreateActions.request,
-    update: EventsUpdateActions.request,
-    getSelected: SelectedGetActions.request,
-    clearSelected: SelectedActions.clear,
+    create: Events.Actions.Create.request,
+    update: Events.Actions.Update.request,
+    getSelected: Selected.Actions.Get.request,
+    clearSelected: Selected.Actions.clear,
   },
 )
 const hocWithFormik = withFormik<IProps, EventFormValues>({

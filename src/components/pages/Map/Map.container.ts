@@ -1,22 +1,22 @@
 import { connect } from "react-redux"
 
-import { ParkingsGetActions, ServicesGetActions, ShopsGetActions, EventsGetActions } from "store/entities/locations"
+import { Events, Parkings, Services, Shops } from "store/entities/locations"
 
 import { Map } from "./Map"
 
 export interface IDispatchProps {
-  getEvents: typeof EventsGetActions.request
-  getParkings: typeof ParkingsGetActions.request
-  getServices: typeof ServicesGetActions.request
-  getShops: typeof ShopsGetActions.request
+  getEvents: typeof Events.Actions.Get.request
+  getParkings: typeof Parkings.Actions.Get.request
+  getServices: typeof Services.Actions.Get.request
+  getShops: typeof Shops.Actions.Get.request
 }
 
 export const MapContainer = connect<null, IDispatchProps, {}, null>(
   null,
   {
-    getEvents: EventsGetActions.request,
-    getParkings: ParkingsGetActions.request,
-    getServices: ServicesGetActions.request,
-    getShops: ShopsGetActions.request,
+    getEvents: Events.Actions.Get.request,
+    getParkings: Parkings.Actions.Get.request,
+    getServices: Services.Actions.Get.request,
+    getShops: Shops.Actions.Get.request,
   },
 )(Map)

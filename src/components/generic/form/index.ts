@@ -1,4 +1,5 @@
 export * from "./Input"
+export * from "./Select"
 export * from "./Textarea"
 export * from "./Upload"
 export * from "./GoogleMap"

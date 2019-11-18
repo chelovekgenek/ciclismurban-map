@@ -7,6 +7,9 @@ export class ProfileFormValues extends ProfileModel {
     if (props.avatar) {
       this.avatar = props.avatar
     }
+    if (props.status) {
+      this.status = props.status
+    }
     if (props.description) {
       this.description = props.description
     }

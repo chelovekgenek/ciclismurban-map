@@ -3,8 +3,7 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ShopModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import { Actions as ShopsActions, Selectors as ShopsSelectors } from "store/entities/locations/shops"
-import { Actions as SelectedActions, Selectors as SelectedSelectors } from "store/entities/locations/selected"
+import { Shops, Selected } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -13,30 +12,30 @@ import { ShopFormValues } from "./ShopForm.scheme"
 
 export type IStateProps = {
   shops: {
-    fetching: ReturnType<typeof ShopsSelectors.getFetching>
+    fetching: ReturnType<typeof Shops.Selectors.getFetching>
   }
-  selected: ReturnType<typeof SelectedSelectors.getRoot>
+  selected: ReturnType<typeof Selected.Selectors.getRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof ShopsActions.Create.request
-  update: typeof ShopsActions.Update.request
-  getSelected: typeof SelectedActions.Get.request
-  clearSelected: typeof SelectedActions.clear
+  create: typeof Shops.Actions.Create.request
+  update: typeof Shops.Actions.Update.request
+  getSelected: typeof Selected.Actions.Get.request
+  clearSelected: typeof Selected.Actions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     shops: {
-      fetching: ShopsSelectors.getFetching(state),
+      fetching: Shops.Selectors.getFetching(state),
     },
-    selected: SelectedSelectors.getRoot(state),
+    selected: Selected.Selectors.getRoot(state),
   }),
   {
-    create: ShopsActions.Create.request,
-    update: ShopsActions.Update.request,
-    getSelected: SelectedActions.Get.request,
-    clearSelected: SelectedActions.clear,
+    create: Shops.Actions.Create.request,
+    update: Shops.Actions.Update.request,
+    getSelected: Selected.Actions.Get.request,
+    clearSelected: Selected.Actions.clear,
   },
 )
 const hocWithFormik = withFormik<IProps, ShopFormValues>({

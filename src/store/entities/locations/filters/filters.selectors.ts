@@ -1,7 +1,7 @@
 import { createSelector } from "reselect"
 import { union } from "lodash-es"
 
-import { TAppState } from "store/entities/reducers"
+import { TAppState } from "store/entities/reducer"
 
 import * as LocationsSelectors from "../locations.selectors"
 

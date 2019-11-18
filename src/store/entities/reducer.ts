@@ -3,9 +3,9 @@ import { persistReducer } from "redux-persist"
 import { routerReducer as router } from "react-router-redux"
 import storage from "redux-persist/lib/storage"
 
-import locations from "./locations/reducer"
+import locations from "./locations/locations.reducer"
 import auth from "./auth/auth.reducer"
-import me from "./me/reducer"
+import me from "./me/me.reducer"
 
 const rootPersistConfig = {
   key: "root",

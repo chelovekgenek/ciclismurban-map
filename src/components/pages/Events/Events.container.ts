@@ -1,26 +1,25 @@
 import { connect } from "react-redux"
-import { Selectors as EventsSelectors } from "store/entities/locations/events"
-import { Actions as EventsActions } from "store/entities/locations/events"
+import { Selectors, Actions } from "store/entities/locations/events"
 import { TAppState } from "store/entities"
 
 import { Events } from "./Events"
 
 export interface IStateProps {
-  events: ReturnType<typeof EventsSelectors.getLocations>
-  fetching: ReturnType<typeof EventsSelectors.getFetching>
+  events: ReturnType<typeof Selectors.getLocations>
+  fetching: ReturnType<typeof Selectors.getFetching>
 }
 export interface IDispatchProps {
-  getEvents: typeof EventsActions.Get.request
-  deleteEvent: typeof EventsActions.Delete.request
+  getEvents: typeof Actions.Get.request
+  deleteEvent: typeof Actions.Delete.request
 }
 
 export const EventsContainer = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
-    events: EventsSelectors.getLocations(state),
-    fetching: EventsSelectors.getFetching(state),
+    events: Selectors.getLocations(state),
+    fetching: Selectors.getFetching(state),
   }),
   {
-    getEvents: EventsActions.Get.request,
-    deleteEvent: EventsActions.Delete.request,
+    getEvents: Actions.Get.request,
+    deleteEvent: Actions.Delete.request,
   },
 )(Events)

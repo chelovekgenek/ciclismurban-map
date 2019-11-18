@@ -1,6 +1,6 @@
 import { get } from "lodash-es"
 
-import { TAppState } from "store/entities/reducers"
+import { TAppState } from "store/entities/reducer"
 
 export const getRoot = (state: TAppState) => state.me.user
 export const getData = (state: TAppState) => getRoot(state).data

@@ -3,8 +3,7 @@ import { withFormik } from "formik"
 import { withRouter } from "react-router-dom"
 import { ParkingModel, LocationExposeGroup } from "@ciclismurban/models"
 
-import { Actions as ParkingsActions, Selectors as ParkingsSelectors } from "store/entities/locations/parkings"
-import { Selectors as SelectedSelectors, Actions as SelectedActions } from "store/entities/locations/selected"
+import { Parkings, Selected } from "store/entities/locations"
 import { TAppState } from "store/entities"
 import { handleLocationFormSubmit, getHandlerLocationFormValidate } from "helpers"
 
@@ -13,30 +12,30 @@ import { ParkingFormValues } from "./ParkingForm.scheme"
 
 export type IStateProps = {
   parkings: {
-    fetching: ReturnType<typeof ParkingsSelectors.getFetching>
+    fetching: ReturnType<typeof Parkings.Selectors.getFetching>
   }
-  selected: ReturnType<typeof SelectedSelectors.getRoot>
+  selected: ReturnType<typeof Selected.Selectors.getRoot>
 }
 
 export interface IDispatchProps {
-  create: typeof ParkingsActions.Create.request
-  update: typeof ParkingsActions.Update.request
-  getSelected: typeof SelectedActions.Get.request
-  clearSelected: typeof SelectedActions.clear
+  create: typeof Parkings.Actions.Create.request
+  update: typeof Parkings.Actions.Update.request
+  getSelected: typeof Selected.Actions.Get.request
+  clearSelected: typeof Selected.Actions.clear
 }
 
 const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     parkings: {
-      fetching: ParkingsSelectors.getFetching(state),
+      fetching: Parkings.Selectors.getFetching(state),
     },
-    selected: SelectedSelectors.getRoot(state),
+    selected: Selected.Selectors.getRoot(state),
   }),
   {
-    create: ParkingsActions.Create.request,
-    update: ParkingsActions.Update.request,
-    getSelected: SelectedActions.Get.request,
-    clearSelected: SelectedActions.clear,
+    create: Parkings.Actions.Create.request,
+    update: Parkings.Actions.Update.request,
+    getSelected: Selected.Actions.Get.request,
+    clearSelected: Selected.Actions.clear,
   },
 )
 const hocWithFormik = withFormik<IProps, ParkingFormValues>({

@@ -74,7 +74,7 @@
     "serve": "^11.2.0",
     "styled-components": "^4.3.2",
     "ts-action": "11.0.0",
-    "typescript": "3.5.3"
+    "typescript": "3.7.2"
   },
   "devDependencies": {
     "husky": "^3.0.1",

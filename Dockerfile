@@ -1,4 +1,4 @@
-FROM node:10.15.3
+FROM node:10.15.3-alpine
 
 ARG CONFIG
 
@@ -9,10 +9,8 @@ COPY . .
 ADD ./config/$CONFIG ./.env
 
 RUN \
-  yarn install --silent &&\
-  yarn build &&\
-  rm -rf node_modules &&\
   yarn install --production=true --silent &&\
+  yarn build &&\
   rm -rf `yarn cache dir`
 
 EXPOSE 80/tcp

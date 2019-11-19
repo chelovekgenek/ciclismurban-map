@@ -34,10 +34,39 @@ exports[`pages/ProfileForm should match snapshot 1`] = `
   }
 >
   <Form>
-    <Upload
-      label="Изображение"
-      name="avatar"
-    />
+    <Row
+      gutter={0}
+    >
+      <Col
+        span={6}
+      >
+        <Upload
+          name="avatar"
+        />
+      </Col>
+      <Col
+        offset={1}
+        span={6}
+      >
+        <styled.h3>
+          test@example.com
+        </styled.h3>
+        <Select
+          name="status"
+        >
+          <Option
+            value="need_help"
+          >
+            Нужна помощь!
+          </Option>
+          <Option
+            value="looking_for_company"
+          >
+            Ищу компанию!
+          </Option>
+        </Select>
+      </Col>
+    </Row>
     <Textarea
       autosize={
         Object {

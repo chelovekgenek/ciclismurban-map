@@ -13,6 +13,7 @@ import { ProfileFormValues } from "./ProfileForm.scheme"
 export interface IStateProps {
   fetching: ReturnType<typeof User.Selectors.getFetching>
   profile: ReturnType<typeof User.Selectors.getProfile>
+  email: ReturnType<typeof User.Selectors.getEmail>
 }
 export interface IDispatchProps {
   save: typeof User.Actions.UpdateProfile.request
@@ -22,6 +23,7 @@ const hocConnect = connect<IStateProps, IDispatchProps, {}, TAppState>(
   state => ({
     fetching: User.Selectors.getFetching(state),
     profile: User.Selectors.getProfile(state),
+    email: User.Selectors.getEmail(state),
   }),
   {
     save: User.Actions.UpdateProfile.request,

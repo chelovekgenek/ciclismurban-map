@@ -18,6 +18,7 @@ describe("pages/ProfileForm", () => {
         fetching={false}
         profile={user.profile}
         save={jest.fn() as any}
+        email={user.email}
         {...props}
       />,
     )

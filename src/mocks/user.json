@@ -1,12 +1,28 @@
 {
-  "uuid": "e906f10a-dfe3-4cf4-9197-67b9de5ba91f",
+  "uuid": "5f3f8dfe-25cd-4538-8930-9266fe222524",
   "email": "test@example.com",
+  "permissions": [
+    "event__create",
+    "event__update",
+    "event__delete",
+    "parking__create",
+    "parking__update",
+    "parking__delete",
+    "service__create",
+    "service__update",
+    "service__delete",
+    "shop__create",
+    "shop__update",
+    "shop__delete"
+  ],
   "profile": {
-    "avatar": "url-to-user-avatar",
-    "description": "description",
-    "telegram": "telegram-id",
-    "facebook": "facebook-id"
+    "avatar": "https://ciclismurban.s3.eu-central-1.amazonaws.com/files/f732cbad-43c2-4a91-a11b-8930ad8a54c6.jpg",
+    "status": "looking_for_company",
+    "description": "gull description",
+    "facebook": "aaaaaaa",
+    "telegram": "privet"
   },
-  "createdAt": "2019-10-31T14:54:30.015Z",
-  "updatedAt": "2019-10-31T14:54:30.015Z"
+  "position": { "lat": 52.320367999999995, "lng": 4.9473707 },
+  "createdAt": "2019-11-12T10:37:42.009Z",
+  "updatedAt": "2019-11-20T21:29:09.705Z"
 }

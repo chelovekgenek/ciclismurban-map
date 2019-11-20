@@ -1,4 +1,4 @@
-import { takeLatest, put, take, race, call, delay } from "redux-saga/effects"
+import { takeLatest, put, take, race, call, delay, select } from "redux-saga/effects"
 import { PointModel } from "@ciclismurban/models"
 
 import { Filters } from "store/entities/locations"
@@ -6,6 +6,7 @@ import { Filters } from "store/entities/locations"
 import * as Actions from "./position.actions"
 import * as Types from "./position.types"
 import * as Facades from "./position.facades"
+import * as User from "../user"
 
 export function* handlePolling() {
   while (true) {
@@ -16,8 +17,12 @@ export function* handlePolling() {
 
 export function* handleGet() {
   try {
-    const data: PointModel = yield call(Facades.getCoordinates)
-    yield put(Actions.Get.success(data))
+    const point: PointModel = yield call(Facades.getCoordinates)
+    yield put(Actions.Get.success(point))
+    const userp: ReturnType<typeof User.Selectors.getPosition> = yield select(User.Selectors.getPosition)
+    if (userp && (userp.lat !== point.lat || userp.lng !== point.lng)) {
+      yield put(User.Actions.UpdatePosition.request(point))
+    }
   } catch (e) {
     yield put(Actions.Get.failure())
     if (e.code === 1) {

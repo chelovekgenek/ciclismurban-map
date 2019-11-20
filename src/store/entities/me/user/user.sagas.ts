@@ -3,10 +3,11 @@ import { AxiosResponse } from "axios"
 import { UserModel } from "@ciclismurban/models"
 import { extend } from "lodash-es"
 
+import { uploadFile } from "store/commons"
+
 import * as Types from "./user.types"
 import * as Actions from "./user.actions"
 import * as Facades from "./user.facades"
-import { uploadFile } from "../../../commons"
 
 export function* handleGet() {
   try {
@@ -29,7 +30,17 @@ export function* handleUpdateProfile({ payload }: ReturnType<typeof Actions.Upda
   }
 }
 
+export function* handleUpdatePosition({ payload }: ReturnType<typeof Actions.UpdatePosition.request>) {
+  try {
+    const { data }: AxiosResponse<UserModel> = yield call(Facades.updatePosition, payload)
+    yield put(Actions.UpdatePosition.success(data))
+  } catch (e) {
+    yield put(Actions.UpdatePosition.failure())
+  }
+}
+
 export default function* watcher() {
   yield takeLatest(Types.Get.REQUEST, handleGet)
   yield takeLatest(Types.UpdateProfile.REQUEST, handleUpdateProfile)
+  yield takeLatest(Types.UpdatePosition.REQUEST, handleUpdatePosition)
 }

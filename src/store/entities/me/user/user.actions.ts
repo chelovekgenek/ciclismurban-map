@@ -1,5 +1,5 @@
 import { action, payload } from "ts-action"
-import { ProfileModel } from "@ciclismurban/models"
+import { ProfileModel, PointModel } from "@ciclismurban/models"
 
 import * as Types from "./user.types"
 import { IState } from "./user.reducer"
@@ -16,4 +16,10 @@ export const UpdateProfile = {
   request: action(Types.UpdateProfile.REQUEST, payload<Partial<ProfileModel>>()),
   success: action(Types.UpdateProfile.SUCCESS, payload<TState["data"]>()),
   failure: action(Types.UpdateProfile.FAILURE),
+}
+
+export const UpdatePosition = {
+  request: action(Types.UpdatePosition.REQUEST, payload<PointModel>()),
+  success: action(Types.UpdatePosition.SUCCESS, payload<TState["data"]>()),
+  failure: action(Types.UpdatePosition.FAILURE),
 }

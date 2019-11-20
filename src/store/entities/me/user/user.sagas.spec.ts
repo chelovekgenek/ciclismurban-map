@@ -35,7 +35,7 @@ describe("auth.saga", () => {
         .run())
   })
   describe("handleUpdateProfile", () => {
-    const action = Actions.UpdateProfile.request(user.profile)
+    const action = Actions.UpdateProfile.request(user.profile as any)
     it("should make request and mutate reducer accordingly, if response is successful", async () => {
       const mockResponse = {
         data: user,
@@ -44,7 +44,7 @@ describe("auth.saga", () => {
         .withReducer(userReducer)
         .provide([
           [call(uploadFile, user.profile.avatar), undefined],
-          [call(Facades.updateProfile, user.profile), mockResponse],
+          [call(Facades.updateProfile as any, user.profile), mockResponse],
         ])
         .put(Actions.UpdateProfile.success(mockResponse.data as any))
         .hasFinalState({
@@ -63,5 +63,29 @@ describe("auth.saga", () => {
         .put(Actions.UpdateProfile.failure())
         .hasFinalState({ ...meInitialState, error: undefined })
         .run())
+    describe("handleUpdatePosition", () => {
+      const action = Actions.UpdatePosition.request(user.position)
+      it("should make request and mutate reducer accordingly, if response is successful", async () => {
+        const mockResponse = {
+          data: user,
+        }
+        return expectSaga(Sagas.handleUpdatePosition, action)
+          .withReducer(userReducer)
+          .provide([[call(Facades.updatePosition, user.position), mockResponse]])
+          .put(Actions.UpdatePosition.success(mockResponse.data as any))
+          .hasFinalState({
+            ...meInitialState,
+            data: mockResponse.data,
+          })
+          .run()
+      })
+      it("should make request and mutate reducer accordingly, if response is failure", async () =>
+        expectSaga(Sagas.handleUpdatePosition, action)
+          .withReducer(userReducer)
+          .provide([{ call: wrapCall(Facades.updatePosition, () => new Promise((_r, reject) => reject())) }])
+          .put(Actions.UpdatePosition.failure())
+          .hasFinalState({ ...meInitialState, error: undefined })
+          .run())
+    })
   })
 })

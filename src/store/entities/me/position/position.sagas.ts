@@ -7,6 +7,7 @@ import * as Actions from "./position.actions"
 import * as Types from "./position.types"
 import * as Facades from "./position.facades"
 import * as User from "../user"
+import * as Auth from "../../auth"
 
 export function* handlePolling() {
   while (true) {
@@ -20,7 +21,10 @@ export function* handleGet() {
     const point: PointModel = yield call(Facades.getCoordinates)
     yield put(Actions.Get.success(point))
     const userp: ReturnType<typeof User.Selectors.getPosition> = yield select(User.Selectors.getPosition)
-    if (userp && (userp.lat !== point.lat || userp.lng !== point.lng)) {
+    const authenticated: ReturnType<typeof Auth.Selectors.getAuthenticated> = yield select(
+      Auth.Selectors.getAuthenticated,
+    )
+    if (authenticated && userp && (userp.lat !== point.lat || userp.lng !== point.lng)) {
       yield put(User.Actions.UpdatePosition.request(point))
     }
   } catch (e) {

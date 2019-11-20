@@ -28,7 +28,8 @@ describe("me/position/saga", () => {
     })
     it("should make request, mutate state accordingly and push additional action, if response is successful and it's differ from user position", async () => {
       const mockResponse = { lat: 47.020123, lng: 28.829422 }
-      const initialState = set(cloneDeep(initialAppState), "me.user.data", user)
+      let initialState = set(cloneDeep(initialAppState), "me.user.data", user)
+      initialState = set(cloneDeep(initialState), "auth.authenticated", true)
       let finalState = set(cloneDeep(initialState), "me.position.data", mockResponse)
       finalState = set(cloneDeep(finalState), "me.user.fetching", true)
       return expectSaga(Sagas.handleGet)

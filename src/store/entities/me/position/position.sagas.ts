@@ -24,7 +24,7 @@ export function* handleGet() {
     const authenticated: ReturnType<typeof Auth.Selectors.getAuthenticated> = yield select(
       Auth.Selectors.getAuthenticated,
     )
-    if (authenticated && userp && (userp.lat !== point.lat || userp.lng !== point.lng)) {
+    if (authenticated && (!userp || userp.lat !== point.lat || userp.lng !== point.lng)) {
       yield put(User.Actions.UpdatePosition.request(point))
     }
   } catch (e) {

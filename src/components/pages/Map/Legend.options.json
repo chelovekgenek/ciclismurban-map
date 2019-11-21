@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Мое местоположение",
+    "value": "current"
+  },
+  {
+    "label": "События",
+    "value": "events"
+  },
+  {
+    "label": "Парковки",
+    "value": "parkings"
+  },
+  {
+    "label": "Сервисы",
+    "value": "services"
+  },
+  {
+    "label": "Магазины",
+    "value": "shops"
+  }
+]

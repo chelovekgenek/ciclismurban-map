@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from "react"
 
 import * as Styled from "./Legend.styled"
 import { IStateProps, IDispatchProps } from "./Legend.container"
+import menuItems from "./Legend.options.json"
 
 interface IProps extends IStateProps, IDispatchProps {}
 
@@ -12,32 +13,7 @@ export const Legend: React.FC<IProps> = ({ filters, toggle }) => {
     },
     [toggle],
   )
-  const options = useMemo(
-    () =>
-      [
-        {
-          label: "Мое местоположение",
-          value: "current",
-        },
-        {
-          label: "События",
-          value: "events",
-        },
-        {
-          label: "Парковки",
-          value: "parkings",
-        },
-        {
-          label: "Сервисы",
-          value: "services",
-        },
-        {
-          label: "Магазины",
-          value: "shops",
-        },
-      ].map(item => ({ ...item, onChange: handleChange })),
-    [handleChange],
-  )
+  const options = useMemo(() => menuItems.map(item => ({ ...item, onChange: handleChange })), [handleChange])
   const value = useMemo(() => Object.keys(filters).filter(item => filters[item as keyof typeof filters]), [filters])
   return (
     <Styled.Container>
